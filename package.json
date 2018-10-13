@@ -12,6 +12,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@reactions/component": "2.0.2",
     "formik": "1.3.0",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.11",
