@@ -1,50 +1,74 @@
+import React from 'react'
+import 'isomorphic-unfetch'
 import Head from 'next/head'
-import io from 'socket.io-client'
-
-import { FormData } from 'Components/FormData'
+import { Header } from 'Components/Header'
+import { LanguageProvider, LanguageContext } from 'Components/SwitcherLang'
+import { ProofForm } from 'Components/ProofForm'
 import { EthereumProvider } from 'Components/EthereumProvider'
+import { toast, ToastContainer } from 'Components/Toast'
+import { theme } from 'Common/Core'
 
-const socket = io('http://localhost:3000/')
-
-const onSubmit = async ({ values, accounts, web3 }) => {
+const onSubmit = async ({ values, api, accounts, web3, getTranslation }) => {
   const message = {
-    id: (new Date()).getTime(),
-    value: JSON.stringify(values),
+    id: new Date().getTime(),
+    value: JSON.stringify(values)
   }
 
   const hash = web3.sha3(message)
-  console.log('web3.eth.sign: ', web3.eth.sign)
-  console.log('accounts.addresses[0]: ', accounts.addresses[0])
-  console.log('hash: ', hash)
   const address = accounts.addresses[0]
   web3.eth.sign(address, hash, (err, res) => {
     if (err) {
-      alert('Sign error!')
+      api.setSubmitting(false)
+      toast.error(getTranslation('poofForm.signedError'), {
+        position: toast.POSITION.BOTTOM_LEFT
+      })
     }
 
     if (res) {
-      socket.emit('message', { address, message: res })
+      api.resetForm()
+      api.setSubmitting(false)
+      toast.success(getTranslation('poofForm.signedOK'), {
+        position: toast.POSITION.BOTTOM_LEFT
+      })
+      // console.log('message', { address, message: res })
     }
   })
-} 
+}
 
-export default () => (
-  <EthereumProvider
-      contracts={[]}
-    >
-      {({ accounts = {}, deployedContracts = {}, web3, monitorErrors }) => {
+const Index = () => (
+  <div>
+    <Head>
+      <title>Karbon14 | Demo</title>
+    </Head>
 
+    <EthereumProvider contracts={[]}>
+      {({ accounts = {}, web3 }) => {
         return (
-          <div>
-            <Head>
-              <title>Karbon14 | Demo | Users</title>
-              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
-            <div> 
-              <FormData onSubmit={values => onSubmit({ values, accounts, web3 })} />
-            </div>
-        </div>
-      )
-    }}
-  </EthereumProvider>
+          <LanguageProvider>
+            <LanguageContext.Consumer>
+              {({ getTranslation, selectedLanguage }) => (
+                <div>
+                  <Header
+                    getTranslation={getTranslation}
+                    selectedLanguage={selectedLanguage}
+                  />
+                  <ProofForm
+                    getTranslation={getTranslation}
+                    selectedLanguage={selectedLanguage}
+                    onSubmit={(values, api) =>
+                      onSubmit({ values, api, accounts, web3, getTranslation })
+                    }
+                  />
+                </div>
+              )}
+            </LanguageContext.Consumer>
+          </LanguageProvider>
+        )
+      }}
+    </EthereumProvider>
+
+    <ToastContainer theme={theme} hideProgressBar />
+  </div>
 )
+
+export default Index

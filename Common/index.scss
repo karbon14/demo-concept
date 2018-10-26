@@ -1,0 +1,39 @@
+@import 'Common/normalize.scss';
+@import 'Common/fonts.scss';
+@import 'Common/fa.scss';
+@import 'Common/toastify.scss';
+
+html,
+body {
+  font-family: "san_francisco_textregular";
+  font-style: normal;
+  font-weight: normal;
+  background-color: #fff;
+  color: #586378;
+  min-width: 100%;
+  min-height: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.15;
+}
+
+body {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,9 @@
+{
+  "email": "Enter your email",
+  "invalidValue": "Required value",
+  "requiredValue": "Invalid value",
+  "resetLabel": "Reset data",
+  "submitLabel": "Send to notary",
+  "signedOK": "Proof data signed OK!",
+  "signedError": "Proof data sign Error!"
+}

@@ -1,0 +1,9 @@
+{
+  "email": "Tu correo electrónico",
+  "invalidValue": "Valor requerido",
+  "requiredValue": "Valor inválido",
+  "resetLabel": "Reestablecer",
+  "submitLabel": "Enviar al notario",
+  "signedOK": "¡Datos de la Prueba firmados OK!",
+  "signedError": "¡Error firmando Datos de la Prueba!"
+}
