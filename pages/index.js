@@ -7,12 +7,15 @@ import { ProofForm } from 'Components/ProofForm'
 import { EthereumProvider } from 'Components/EthereumProvider'
 import { toast, ToastContainer } from 'Components/Toast'
 import { theme } from 'Common/Core'
+import { Signalhub } from 'Providers'
 
-const onSubmit = async ({ values, api, accounts, web3, getTranslation }) => {
+const onSubmit = async ({ values, api, accounts, web3, getTranslation, channel, broadcast }) => {
   const message = {
     id: new Date().getTime(),
     value: JSON.stringify(values)
   }
+
+  broadcast(channel, message)
 
   const hash = web3.sha3(message)
   const address = accounts.addresses[0]
@@ -40,34 +43,38 @@ const Index = () => (
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
-
-    <EthereumProvider contracts={[]}>
-      {({ accounts = {}, web3 }) => {
-        return (
-          <LanguageProvider>
-            <LanguageContext.Consumer>
-              {({ getTranslation, selectedLanguage }) => (
-                <div>
-                  <Header
-                    getTranslation={getTranslation}
-                    selectedLanguage={selectedLanguage}
-                  />
-                  <ProofForm
-                    getTranslation={getTranslation}
-                    selectedLanguage={selectedLanguage}
-                    onSubmit={(values, api) =>
-                      onSubmit({ values, api, accounts, web3, getTranslation })
-                    }
-                  />
-                </div>
-              )}
-            </LanguageContext.Consumer>
-          </LanguageProvider>
-        )
-      }}
-    </EthereumProvider>
-
+    <Signalhub.Provider>
+    <Signalhub.Consumer>
+      {({ messages, channel, broadcast }) => (
+        <EthereumProvider contracts={[]}>
+          {({ accounts = {}, web3 }) => {
+            return (
+              <LanguageProvider>
+                <LanguageContext.Consumer>
+                  {({ getTranslation, selectedLanguage }) => (
+                    <div>
+                      <Header
+                        getTranslation={getTranslation}
+                        selectedLanguage={selectedLanguage}
+                      />
+                      <ProofForm
+                        getTranslation={getTranslation}
+                        selectedLanguage={selectedLanguage}
+                        onSubmit={(values, api) =>
+                          onSubmit({ values, api, accounts, web3, getTranslation, channel, broadcast })
+                        }
+                      />
+                    </div>
+                  )}
+                </LanguageContext.Consumer>
+              </LanguageProvider>
+            )
+          }}
+      </EthereumProvider>
+      )}
+    </Signalhub.Consumer>
     <ToastContainer theme={theme} hideProgressBar />
+    </Signalhub.Provider>
   </div>
 )
 
