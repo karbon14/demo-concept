@@ -1,5 +1,3 @@
-import { Signalhub  } from './Signalhub'
+import { Signalhub } from './Signalhub'
 
-export {
-  Signalhub,
-}
+export { Signalhub }

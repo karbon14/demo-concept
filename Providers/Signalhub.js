@@ -1,5 +1,6 @@
 import React from 'react'
 import signalhub from 'signalhub'
+import PropTypes from 'prop-types'
 
 const SignalhubContext = React.createContext()
 
@@ -17,23 +18,28 @@ class Provider extends React.Component {
       broadcast: this.hub.broadcast.bind(this.hub),
       channel: this.channel,
       appName: this.appName,
+      messages: []
     }
   }
 
   componentDidMount() {
-    this.hub.subscribe(this.channel).on('data', (message) => {
-      console.log("message ",message)
+    this.hub.subscribe(this.channel).on('data', message => {
+      // console.log('message ', message)
+      this.setState({ messages: [...this.state.messages, message] })
     })
   }
 
   render() {
-
     return (
       <SignalhubContext.Provider value={this.state}>
         {this.props.children}
       </SignalhubContext.Provider>
     )
   }
+}
+
+Provider.propTypes = {
+  children: PropTypes.node
 }
 
 export const Signalhub = {

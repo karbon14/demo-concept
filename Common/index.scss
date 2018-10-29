@@ -37,3 +37,7 @@ body {
 a {
   text-decoration: none;
 }
+
+:global(.contentWrapper) {
+  display: flex;
+}
