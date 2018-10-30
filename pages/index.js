@@ -8,7 +8,7 @@ import { EthereumProvider } from 'Components/EthereumProvider'
 import { toast, ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
 import { theme } from 'Common/Core'
-import { Signalhub } from 'Providers'
+import { Signalhub, Ipfs } from 'Providers'
 
 const onSubmit = async ({
   values,
@@ -47,11 +47,23 @@ const onSubmit = async ({
   })
 }
 
+const addFile = (e, addData) => {
+  e.preventDefault()
+  addData()
+}
+
 const Index = () => (
   <div>
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
+    <Ipfs.Provider>
+      <Ipfs.Consumer>
+        {({ addData }) => (
+          <button onClick={(e) => addFile(e, addData)} style={{position:'absolute', top:'200px'}}>hola</button>
+        )}
+      </Ipfs.Consumer>
+    </Ipfs.Provider>
     <Signalhub.Provider>
       <Signalhub.Consumer>
         {({ messages, channel, broadcast }) => (
