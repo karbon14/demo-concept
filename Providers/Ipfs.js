@@ -17,17 +17,10 @@ class Provider extends React.Component {
   addData(data = {}, callback = () => {}) {
     const buffer = ipfs.Buffer(JSON.stringify(data))
 
-    ipfs.files.add(buffer, function (err, file) {
-      if (err) {
-        callback(err)
-      }
-
-      callback(file)
-    })
+    ipfs.files.add(buffer, (err, file) => callback(err, file))
   }
 
   render() {
-
     return (
       <IpfsContext.Provider value={this.state}>
         {this.props.children}

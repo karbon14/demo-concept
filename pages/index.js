@@ -47,23 +47,12 @@ const onSubmit = async ({
   })
 }
 
-const addFile = (e, addData) => {
-  e.preventDefault()
-  addData()
-}
-
 const Index = () => (
   <div>
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
-    <Ipfs.Provider>
-      <Ipfs.Consumer>
-        {({ addData }) => (
-          <button onClick={(e) => addFile(e, addData)} style={{position:'absolute', top:'200px'}}>hola</button>
-        )}
-      </Ipfs.Consumer>
-    </Ipfs.Provider>
+
     <Signalhub.Provider>
       <Signalhub.Consumer>
         {({ messages, channel, broadcast }) => (
@@ -108,20 +97,27 @@ const Index = () => (
                             ]}
                           />
 
-                          <ProofForm
-                            getTranslation={getTranslation}
-                            onSubmit={(values, api) =>
-                              onSubmit({
-                                values,
-                                api,
-                                accounts,
-                                web3,
-                                getTranslation,
-                                channel,
-                                broadcast
-                              })
-                            }
-                          />
+                          <Ipfs.Provider>
+                            <Ipfs.Consumer>
+                              {({ addData }) => (
+                                <ProofForm
+                                  getTranslation={getTranslation}
+                                  onSubmit={(values, api) =>
+                                    onSubmit({
+                                      values,
+                                      api,
+                                      accounts,
+                                      web3,
+                                      getTranslation,
+                                      channel,
+                                      broadcast,
+                                      addData
+                                    })
+                                  }
+                                />
+                              )}
+                            </Ipfs.Consumer>
+                          </Ipfs.Provider>
                         </div>
                       </div>
                     )}
