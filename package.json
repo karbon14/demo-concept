@@ -6,7 +6,13 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "truffle:compile": "rimraf build && truffle compile --verbose-rpc",
+    "truffle:test": "NODE_ENV=test truffle test",
+    "truffle:migrate": "truffle migrate",
+    "truffle:ropsten": "rimraf build && npm run migrate -- --network=ropsten",
+    "truffle:development": "rimraf build && npm run migrate -- --network=development",
+    "ganache": "ganache-cli"
   },
   "lint-staged": {
     "*.js": [
@@ -70,9 +76,12 @@
     "eslint-config-prettier": "3.1.0",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "7.11.1",
+    "ganache-cli": "6.1.8",
     "husky": "1.1.2",
     "lint-staged": "7.3.0",
     "node-sass": "4.9.4",
-    "prettier": "1.14.3"
+    "prettier": "1.14.3",
+    "truffle": "4.1.14",
+    "truffle-hdwallet-provider": "0.0.6"
   }
 }
