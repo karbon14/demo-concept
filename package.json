@@ -28,6 +28,7 @@
     "@react-core/theme-provider": "0.1.42",
     "@react-core/toast": "0.1.42",
     "@reactions/component": "2.0.2",
+    "classnames": "2.2.6",
     "css-loader": "1.0.0",
     "file-loader": "2.0.0",
     "font-awesome": "4.7.0",

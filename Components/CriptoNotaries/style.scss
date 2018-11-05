@@ -22,27 +22,6 @@ section {
       padding: 38px 54px;
       min-width: 456px;
       margin-top: 20px;
-
-      .line {
-        display: flex;
-        width: 100%;
-
-        .item {
-          width: 50%;
-        }
-      }
-
-      .actions {
-        display: flex;
-        flex-direction: row;
-        margin-top: 20px;
-        justify-content: flex-end;
-
-        :global(button) {
-          margin-left: 20px;
-          min-width: 176px;
-        }
-      }
     }
   }
 }

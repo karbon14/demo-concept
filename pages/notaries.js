@@ -3,60 +3,23 @@ import 'isomorphic-unfetch'
 import Head from 'next/head'
 import { Header } from 'Components/Header'
 import { LanguageProvider, LanguageContext } from 'Components/SwitcherLang'
-import { ProofForm } from 'Components/ProofForm'
+import { CriptoNotaries } from 'Components/CriptoNotaries'
 import { EthereumProvider } from 'Components/EthereumProvider'
-import { toast, ToastContainer } from 'Components/Toast'
+import { ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
 import { theme } from 'Common/Core'
 import { Signalhub } from 'Providers'
 
-const onSubmit = async ({
-  values,
-  api,
-  accounts,
-  web3,
-  getTranslation,
-  channel,
-  broadcast
-}) => {
-  const message = {
-    id: new Date().getTime(),
-    value: JSON.stringify(values)
-  }
-
-  const hash = web3.sha3(message)
-  const address = accounts.addresses[0]
-
-  web3.eth.sign(address, hash, (err, res) => {
-    if (err) {
-      api.setSubmitting(false)
-      toast.error(getTranslation('poofForm.signedError'), {
-        position: toast.POSITION.BOTTOM_LEFT
-      })
-    }
-
-    if (res) {
-      api.resetForm()
-      api.setSubmitting(false)
-      toast.success(getTranslation('poofForm.signedOK'), {
-        position: toast.POSITION.BOTTOM_LEFT
-      })
-
-      broadcast(channel, { address, message: res })
-    }
-  })
-}
-
-const Index = () => (
+const Notaries = () => (
   <div>
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
     <Signalhub.Provider>
       <Signalhub.Consumer>
-        {({ messages, channel, broadcast }) => (
+        {({ messages }) => (
           <EthereumProvider contracts={[]}>
-            {({ accounts = {}, web3 }) => {
+            {() => {
               return (
                 <LanguageProvider>
                   <LanguageContext.Consumer>
@@ -73,8 +36,7 @@ const Index = () => (
                               {
                                 name: getTranslation('navMenu.newProof'),
                                 icon: require('/static/icons/plus.svg'),
-                                route: '/',
-                                selected: true
+                                route: '/'
                               },
                               {
                                 name: getTranslation('navMenu.pastProof'),
@@ -84,7 +46,8 @@ const Index = () => (
                               {
                                 name: getTranslation('navMenu.notaries'),
                                 icon: require('/static/icons/explore.svg'),
-                                route: '/notaries'
+                                route: '/notaries',
+                                selected: true
                               },
                               {
                                 name: `${getTranslation('navMenu.messages')} (${
@@ -96,20 +59,7 @@ const Index = () => (
                             ]}
                           />
 
-                          <ProofForm
-                            getTranslation={getTranslation}
-                            onSubmit={(values, api) =>
-                              onSubmit({
-                                values,
-                                api,
-                                accounts,
-                                web3,
-                                getTranslation,
-                                channel,
-                                broadcast
-                              })
-                            }
-                          />
+                          <CriptoNotaries getTranslation={getTranslation} />
                         </div>
                       </div>
                     )}
@@ -125,4 +75,4 @@ const Index = () => (
   </div>
 )
 
-export default Index
+export default Notaries

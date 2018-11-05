@@ -1,5 +1,9 @@
 {
+  "title": "Nueva Prueba de Vida",
+  "firstName": "Ingresa tu nombre",
+  "lastName": "Ingresa tu apellido",
   "email": "Tu correo electrónico",
+  "adress": "Tu dirección",
   "invalidValue": "Valor requerido",
   "requiredValue": "Valor inválido",
   "resetLabel": "Reestablecer",

@@ -1,5 +1,9 @@
 {
+  "title": "New Proof of Life",
+  "firstName": "Enter your first name",
+  "lastName": "Enter your last name",
   "email": "Enter your email",
+  "adress": "Enter your adress",
   "invalidValue": "Required value",
   "requiredValue": "Invalid value",
   "resetLabel": "Reset data",
