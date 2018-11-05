@@ -8,7 +8,7 @@ import { EthereumProvider } from 'Components/EthereumProvider'
 import { toast, ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
 import { theme } from 'Common/Core'
-import { Signalhub } from 'Providers'
+import { Signalhub, Ipfs } from 'Providers'
 
 const onSubmit = async ({
   values,
@@ -52,6 +52,7 @@ const Index = () => (
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
+
     <Signalhub.Provider>
       <Signalhub.Consumer>
         {({ messages, channel, broadcast }) => (
@@ -96,20 +97,27 @@ const Index = () => (
                             ]}
                           />
 
-                          <ProofForm
-                            getTranslation={getTranslation}
-                            onSubmit={(values, api) =>
-                              onSubmit({
-                                values,
-                                api,
-                                accounts,
-                                web3,
-                                getTranslation,
-                                channel,
-                                broadcast
-                              })
-                            }
-                          />
+                          <Ipfs.Provider>
+                            <Ipfs.Consumer>
+                              {({ addData }) => (
+                                <ProofForm
+                                  getTranslation={getTranslation}
+                                  onSubmit={(values, api) =>
+                                    onSubmit({
+                                      values,
+                                      api,
+                                      accounts,
+                                      web3,
+                                      getTranslation,
+                                      channel,
+                                      broadcast,
+                                      addData
+                                    })
+                                  }
+                                />
+                              )}
+                            </Ipfs.Consumer>
+                          </Ipfs.Provider>
                         </div>
                       </div>
                     )}
