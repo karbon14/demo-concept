@@ -10,10 +10,11 @@ section {
       min-height: 20px;
     }
 
-    form {
+    .card {
       padding: 0 80px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       background: rgb(255,255,255);
       box-shadow: rgba(63,63,68,0.05) 0px 0px 0px 1px, rgba(63,63,68,0.15) 0px 1px 3px 0px;
       overflow: initial;
@@ -21,7 +22,13 @@ section {
       border-radius: 3px;
       padding: 38px 54px;
       min-width: 456px;
+      position: relative;
       margin-top: 20px;
+      min-height: 625px;
+
+      :global(section:not(:first-of-type)) {
+        margin-top: 70px;
+      }
     }
   }
 }

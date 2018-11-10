@@ -10,7 +10,7 @@ section {
       min-height: 20px;
     }
 
-    form {
+    .card {
       padding: 0 80px;
       display: flex;
       flex-direction: column;
@@ -21,7 +21,9 @@ section {
       border-radius: 3px;
       padding: 38px 54px;
       min-width: 456px;
+      position: relative;
       margin-top: 20px;
+      min-height: 625px;
     }
   }
 }

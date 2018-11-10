@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 const ProofLife = artifacts.require('ProofLife')
 const assert = require('assert')
 
-contract('ProofLife', ([ owner, scribe, anotherScribe ]) => {
+contract('ProofLife', ([owner, scribe, anotherScribe]) => {
   it('should set and get the scribe', async () => {
     const instance = await ProofLife.deployed()
     const address = scribe
@@ -76,3 +77,4 @@ contract('ProofLife', ([ owner, scribe, anotherScribe ]) => {
     assert.deepEqual(parseInt(scribeCount), 0)
   })
 })
+/* eslint-enable no-undef */
