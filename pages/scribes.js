@@ -21,9 +21,9 @@ import {
 const getScribe = async ({ deployedContracts, scribe, state, setState }) => {
   const { ProofLife = {} } = deployedContracts
   // Get Each Scribe Data
-  await ProofLife.getScribe(scribe, (err, res) => {
-    if (!err && res?.length) {
-      const [firstName, lastName] = res
+  await ProofLife.getScribe(scribe, (err, res = []) => {
+    if (!err) {
+      const [firstName = '', lastName = ''] = res
 
       setState({
         scribes: [
@@ -42,11 +42,11 @@ const getScribe = async ({ deployedContracts, scribe, state, setState }) => {
 const updateUI = async ({ deployedContracts, state, setState }) => {
   const { ProofLife = {} } = deployedContracts
   // Get Data
-  await ProofLife.getScribes((err, res) => {
-    if (!err && res?.length) {
-      res.map(scribe => {
+  await ProofLife.getScribes((err, res = []) => {
+    if (!err) {
+      res.map(scribe =>
         getScribe({ deployedContracts, scribe, state, setState })
-      })
+      )
     }
   })
 }
