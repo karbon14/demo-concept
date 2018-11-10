@@ -4,6 +4,8 @@
   "lastName": "Ingresa tu apellido",
   "email": "Tu correo electrónico",
   "adress": "Tu dirección",
+  "country": "Selecciona tu país",
+  "state": "Selecciona tu estado/provincia",
   "invalidValue": "Valor requerido",
   "requiredValue": "Valor inválido",
   "resetLabel": "Reestablecer",

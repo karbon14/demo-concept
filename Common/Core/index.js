@@ -1,5 +1,6 @@
 import Text from './Components/Text.scss'
 import Toast from './Components/Toast.scss'
+import Select from './Components/Select.scss'
 import Button from './Components/Button.scss'
 import TabView from './Components/TabView.scss'
 import Checkbox from './Components/Checkbox.scss'
@@ -9,6 +10,7 @@ import TextField from './Components/TextField.scss'
 export const theme = {
   Text: () => Text,
   Toast: () => Toast,
+  Select: () => Select,
   Button: () => Button,
   TabView: () => TabView,
   Checkbox: () => Checkbox,

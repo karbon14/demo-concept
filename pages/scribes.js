@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual'
 import Component from '@reactions/component'
 import { Header } from 'Components/Header'
 import { LanguageProvider, LanguageContext } from 'Components/SwitcherLang'
-import { ProofsHistory } from 'Components/ProofsHistory'
+import { CryptoScribes } from 'Components/CryptoScribes'
 import { EthereumProvider } from 'Components/EthereumProvider'
 import { ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
@@ -18,15 +18,40 @@ import {
   networks as ProofLifeNetworks
 } from 'build/contracts/ProofLife.json'
 
-const updateUI = async ({ deployedContracts, setState }) => {
+const getScribe = async ({ deployedContracts, scribe, state, setState }) => {
   const { ProofLife = {} } = deployedContracts
-  // Get Data
-  await ProofLife.getScribes((err, res) => {
-    !err && setState({ scribes: res })
+  // Get Each Scribe Data
+  await ProofLife.getScribe(scribe, (err, res) => {
+    if (!err && res?.length) {
+      const [firstName, lastName] = res
+
+      setState({
+        scribes: [
+          ...state.scribes,
+          {
+            address: scribe,
+            firstName,
+            lastName
+          }
+        ]
+      })
+    }
   })
 }
 
-const History = () => (
+const updateUI = async ({ deployedContracts, state, setState }) => {
+  const { ProofLife = {} } = deployedContracts
+  // Get Data
+  await ProofLife.getScribes((err, res) => {
+    if (!err && res?.length) {
+      res.map(scribe => {
+        getScribe({ deployedContracts, scribe, state, setState })
+      })
+    }
+  })
+}
+
+const Notaries = () => (
   <div>
     <Head>
       <title>Karbon14 | Demo</title>
@@ -53,14 +78,19 @@ const History = () => (
                   scribes: []
                 }}
                 deployedContracts={deployedContracts}
-                didUpdate={({ props, prevProps, setState }) => {
+                didUpdate={({ props, prevProps, state, setState }) => {
                   if (
                     !isEqual(
                       props.deployedContracts,
                       prevProps.deployedContracts
                     )
                   )
-                    updateUI({ deployedContracts, accounts, setState })
+                    updateUI({
+                      deployedContracts,
+                      accounts,
+                      state,
+                      setState
+                    })
                 }}
                 render={({ state }) => (
                   <LanguageProvider>
@@ -83,15 +113,15 @@ const History = () => (
                                 {
                                   name: getTranslation('navMenu.pastProof'),
                                   icon: require('/static/icons/calendar.svg'),
-                                  route: '/history',
-                                  selected: true
+                                  route: '/history'
                                 },
                                 {
                                   name: `${getTranslation(
                                     'navMenu.scribes'
                                   )} (${state.scribes.length})`,
                                   icon: require('/static/icons/explore.svg'),
-                                  route: '/scribes'
+                                  route: '/scribes',
+                                  selected: true
                                 },
                                 {
                                   name: `${getTranslation(
@@ -103,7 +133,10 @@ const History = () => (
                               ]}
                             />
 
-                            <ProofsHistory getTranslation={getTranslation} />
+                            <CryptoScribes
+                              getTranslation={getTranslation}
+                              scribes={state.scribes}
+                            />
                           </div>
                         </div>
                       )}
@@ -120,9 +153,9 @@ const History = () => (
   </div>
 )
 
-History.propTypes = {
+Notaries.propTypes = {
   process: PropTypes.object,
   deployedContracts: PropTypes.array
 }
 
-export default History
+export default Notaries

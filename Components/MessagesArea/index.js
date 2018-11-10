@@ -7,7 +7,7 @@ const MessagesArea = ({ getTranslation }) => (
     <div className="container">
       <h3>{getTranslation('messagesArea.title')}</h3>
 
-      <form />
+      <div className="card" />
     </div>
     <style jsx>{style}</style>
   </section>

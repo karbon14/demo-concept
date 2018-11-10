@@ -7,7 +7,7 @@ const ProofsHistory = ({ getTranslation }) => (
     <div className="container">
       <h3>{getTranslation('proofsHistory.title')}</h3>
 
-      <form />
+      <div className="card" />
     </div>
     <style jsx>{style}</style>
   </section>
