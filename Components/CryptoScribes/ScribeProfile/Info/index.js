@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { toast } from '@react-core/toast'
+import { toast } from 'Components/Toast'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import style from './style.scss'
 
