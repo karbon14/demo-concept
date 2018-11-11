@@ -32,18 +32,6 @@ section {
           width: 50%;
         }
       }
-
-      .actions {
-        display: flex;
-        flex-direction: row;
-        margin-top: 20px;
-        justify-content: flex-end;
-
-        :global(button) {
-          margin-left: 20px;
-          min-width: 176px;
-        }
-      }
     }
   }
 }

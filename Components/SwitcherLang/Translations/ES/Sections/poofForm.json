@@ -9,6 +9,7 @@
   "invalidValue": "Valor requerido",
   "requiredValue": "Valor inválido",
   "resetLabel": "Reestablecer",
+  "nextFormLabel": "Siguiente",
   "submitLabel": "Enviar al notario",
   "signedOK": "¡Datos de la Prueba firmados OK!",
   "signedError": "¡Error firmando Datos de la Prueba!"

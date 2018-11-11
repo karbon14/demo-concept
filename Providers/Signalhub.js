@@ -10,7 +10,7 @@ class Provider extends React.Component {
     super()
 
     this.broadcast = () => {}
-    this.signalUrls = ['http://localhost:8080']
+    this.signalUrls = ['http://192.168.0.201:8080']
     this.appName = 'appName'
     this.channel = 'karbon14'
     this.hub = signalhub(this.appName, this.signalUrls)
