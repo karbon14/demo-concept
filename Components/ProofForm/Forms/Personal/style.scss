@@ -1,12 +1,16 @@
-.form__container {
+form {
   width: 100%;
 
-  .line {
-    display: flex;
+  .form__container {
     width: 100%;
 
-    .item {
-      width: 50%;
+    .line {
+      display: flex;
+      width: 100%;
+
+      .item {
+        width: 50%;
+      }
     }
   }
 }

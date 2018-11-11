@@ -5,16 +5,7 @@ import classnames from 'classnames'
 import { theme } from 'Common/Core'
 import { Button } from '@react-core/button'
 
-const SwitcherForm = ({
-  forms,
-  activeForm,
-  disabledReset,
-  disabledSubmit,
-  onReset,
-  onBack,
-  onSubmit,
-  getTranslation
-}) => (
+const SwitcherForm = ({ forms, activeForm }) => (
   <section>
     <div className="top__content">
       <div className="current__container">
@@ -26,12 +17,37 @@ const SwitcherForm = ({
       </div>
 
       {forms.map(({ id, child }) => (
-        <div key={id} className={classnames({ hidden: id !== activeForm })}>
+        <div
+          key={id}
+          className={classnames({
+            active: id === activeForm,
+            hidden: id !== activeForm
+          })}
+        >
           {child}
         </div>
       ))}
     </div>
+    <style jsx>{style}</style>
+  </section>
+)
 
+SwitcherForm.propTypes = {
+  forms: PropTypes.array,
+  activeForm: PropTypes.number
+}
+
+const FormActions = ({
+  formsNumber,
+  activeForm,
+  disabledReset,
+  disabledSubmit,
+  onReset,
+  onBack,
+  onSubmit,
+  getTranslation
+}) => (
+  <section className="bottom">
     <div className="actions__container">
       <Button
         theme={theme}
@@ -53,7 +69,7 @@ const SwitcherForm = ({
         <Button
           theme={theme}
           label={getTranslation(
-            activeForm === forms.length
+            activeForm === formsNumber
               ? 'poofForm.submitLabel'
               : 'poofForm.nextFormLabel'
           )}
@@ -67,8 +83,8 @@ const SwitcherForm = ({
   </section>
 )
 
-SwitcherForm.propTypes = {
-  forms: PropTypes.array,
+FormActions.propTypes = {
+  formsNumber: PropTypes.number,
   activeForm: PropTypes.number,
   disabledReset: PropTypes.bool,
   disabledSubmit: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
@@ -78,4 +94,4 @@ SwitcherForm.propTypes = {
   getTranslation: PropTypes.func
 }
 
-export { SwitcherForm }
+export { SwitcherForm, FormActions }
