@@ -7,7 +7,7 @@ import { theme } from 'Common/Core'
 import { Select } from 'Components/Select'
 import { TextField } from '@react-core/textfield'
 
-const Personal = ({ initialValues, onSubmit, getTranslation, formActions }) => {
+const Personal = ({ onSubmit, getTranslation, formActions }) => {
   const countries = getTranslation('countries') || []
   const states = getTranslation('states') || []
 
@@ -21,8 +21,7 @@ const Personal = ({ initialValues, onSubmit, getTranslation, formActions }) => {
         email: '',
         adress: '',
         country: '',
-        state: '',
-        ...initialValues
+        state: ''
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string()
@@ -43,7 +42,7 @@ const Personal = ({ initialValues, onSubmit, getTranslation, formActions }) => {
         ),
         state: Yup.string().required(getTranslation('poofForm.requiredValue'))
       })}
-      onSubmit={values => onSubmit(values)}
+      onSubmit={(values, api) => onSubmit(values, api)}
     >
       {api => (
         <form onSubmit={api.handleSubmit}>
@@ -169,7 +168,6 @@ const Personal = ({ initialValues, onSubmit, getTranslation, formActions }) => {
 }
 
 Personal.propTypes = {
-  initialValues: PropTypes.object,
   onSubmit: PropTypes.func,
   getTranslation: PropTypes.func,
   formActions: PropTypes.any

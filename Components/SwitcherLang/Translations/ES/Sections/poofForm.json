@@ -6,6 +6,7 @@
   "adress": "Tu dirección",
   "country": "Selecciona tu país",
   "state": "Selecciona tu estado/provincia",
+  "id": "Tu ID/Número de Documento",
   "invalidValue": "Valor requerido",
   "requiredValue": "Valor inválido",
   "resetLabel": "Reestablecer",

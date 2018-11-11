@@ -10,7 +10,7 @@ const SwitcherForm = ({ forms, activeForm }) => (
     <div className="top__content">
       <div className="current__container">
         {forms.map(({ id }) => (
-          <span className={classnames({ active: id === activeForm })} key={id}>
+          <span className={classnames({ active: id <= activeForm })} key={id}>
             {id}
           </span>
         ))}

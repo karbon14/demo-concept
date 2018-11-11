@@ -6,6 +6,7 @@
   "adress": "Enter your adress",
   "country": "Select your country",
   "state": "Select your state/province",
+  "id": "Enter your ID/Document Number",
   "invalidValue": "Required value",
   "requiredValue": "Invalid value",
   "resetLabel": "Reset data",

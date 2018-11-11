@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import Component from '@reactions/component'
 import style from './style.scss'
 import { SwitcherForm, FormActions } from './SwitcherForm'
-import { Personal } from './Forms'
+import { Personal, Identification, Service } from './Forms'
 
 const ProofForm = ({ getTranslation }) => (
   <Component
     initialState={{
       activeForm: 1,
       formsData: {
-        personal: {}
+        personal: {},
+        identification: {},
+        service: {}
       }
     }}
     render={({ state, setState }) => (
@@ -25,16 +27,17 @@ const ProofForm = ({ getTranslation }) => (
                   id: 1,
                   child: (
                     <Personal
-                      initialValues={state.formsData.personal}
-                      onSubmit={values =>
+                      onSubmit={(values, api) => {
                         setState({
-                          formsData: { ...state.formsData, personal: values }
+                          formsData: { ...state.formsData, personal: values },
+                          activeForm: state.activeForm + 1
                         })
-                      }
+                        api.setSubmitting(false)
+                      }}
                       getTranslation={getTranslation}
                       formActions={api => (
                         <FormActions
-                          formsNumber={5}
+                          formsNumber={3}
                           activeForm={state.activeForm}
                           disabledReset={!api.dirty || api.isSubmitting}
                           disabledSubmit={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
@@ -42,17 +45,84 @@ const ProofForm = ({ getTranslation }) => (
                           onBack={() => {
                             setState({ activeForm: state.activeForm - 1 })
                           }}
-                          onSubmit={() => {
-                            setState({ activeForm: state.activeForm + 1 })
-                          }}
+                          onSubmit={api.submitForm}
                           getTranslation={getTranslation}
                         />
                       )}
                     />
                   )
                 },
-                { id: 2, child: <p>Second</p> },
-                { id: 3, child: <p>Third</p> }
+                {
+                  id: 2,
+                  child: (
+                    <Identification
+                      onSubmit={(values, api) => {
+                        setState({
+                          formsData: {
+                            ...state.formsData,
+                            identification: values
+                          },
+                          activeForm: state.activeForm + 1
+                        })
+                        api.setSubmitting(false)
+                      }}
+                      getTranslation={getTranslation}
+                      formActions={api => (
+                        <FormActions
+                          formsNumber={3}
+                          activeForm={state.activeForm}
+                          disabledReset={!api.dirty || api.isSubmitting}
+                          disabledSubmit={
+                            !api.dirty ||
+                            api.isSubmitting ||
+                            Object.keys(api.errors).length
+                          }
+                          onReset={api.handleReset}
+                          onBack={() => {
+                            setState({ activeForm: state.activeForm - 1 })
+                          }}
+                          onSubmit={api.submitForm}
+                          getTranslation={getTranslation}
+                        />
+                      )}
+                    />
+                  )
+                },
+                {
+                  id: 3,
+                  child: (
+                    <Service
+                      onSubmit={(values, api) => {
+                        setState({
+                          formsData: {
+                            ...state.formsData,
+                            service: values
+                          }
+                        })
+                        api.setSubmitting(false)
+                      }}
+                      getTranslation={getTranslation}
+                      formActions={api => (
+                        <FormActions
+                          formsNumber={3}
+                          activeForm={state.activeForm}
+                          disabledReset={!api.dirty || api.isSubmitting}
+                          disabledSubmit={
+                            !api.dirty ||
+                            api.isSubmitting ||
+                            Object.keys(api.errors).length
+                          }
+                          onReset={api.handleReset}
+                          onBack={() => {
+                            setState({ activeForm: state.activeForm - 1 })
+                          }}
+                          onSubmit={api.submitForm}
+                          getTranslation={getTranslation}
+                        />
+                      )}
+                    />
+                  )
+                }
               ]}
               activeForm={state.activeForm}
             />
