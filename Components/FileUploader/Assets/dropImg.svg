@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="92px" height="45px" viewBox="0 0 92 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="31" height="30.9746939"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="31" height="30.9746939" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="0" y="0" width="31" height="30.9746939"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="31" height="30.9746939" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="0" y="0" width="44" height="43.9640816"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="43.9640816" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4" transform="translate(-735.000000, -160.000000)">
+            <g id="Group-7" transform="translate(543.000000, 133.000000)">
+                <g id="Group-12">
+                    <g id="Group-5" transform="translate(192.000000, 27.000000)">
+                        <g id="Group">
+                            <g id="Thumbnail" opacity="0.6" transform="translate(18.983546, 25.983546) rotate(-15.000000) translate(-18.983546, -25.983546) translate(3.483546, 10.483546)">
+                                <g id="Group-10">
+                                    <use id="Rectangle-4" stroke-opacity="0.554913949" stroke="#D3DBE2" mask="url(#mask-2)" stroke-width="2" fill="#FBFBFB" xlink:href="#path-1"></use>
+                                    <ellipse id="Oval" fill="#D8D8D8" cx="9.7254902" cy="11.78" rx="1.82352941" ry="1.86"></ellipse>
+                                    <polygon id="Path-2" fill="#D8D8D8" points="7.94737129 20.5038538 9.91640002 16.0889721 11.6224288 18.2696656 14.341123 13.5660702 16.7952748 16.13696 19.9651565 10.4893413 23.7767272 20.5038538"></polygon>
+                                </g>
+                            </g>
+                            <g id="Thumbnail" opacity="0.6" transform="translate(72.983546, 25.983546) scale(-1, 1) rotate(-15.000000) translate(-72.983546, -25.983546) translate(57.483546, 10.483546)">
+                                <g id="Group-10">
+                                    <use id="Rectangle-4" stroke-opacity="0.554913949" stroke="#D3DBE2" mask="url(#mask-4)" stroke-width="2" fill="#FBFBFB" xlink:href="#path-3"></use>
+                                    <ellipse id="Oval" fill="#D8D8D8" cx="9.7254902" cy="11.78" rx="1.82352941" ry="1.86"></ellipse>
+                                    <polygon id="Path-2" fill="#D8D8D8" points="7.94737129 20.5038538 9.91640002 16.0889721 11.6224288 18.2696656 14.341123 13.5660702 16.7952748 16.13696 19.9651565 10.4893413 23.7767272 20.5038538"></polygon>
+                                </g>
+                            </g>
+                            <g id="Thumbnail" transform="translate(24.000000, 0.000000)">
+                                <g id="Group-10">
+                                    <use id="Rectangle-4" stroke-opacity="0.554913949" stroke="#D3DBE2" mask="url(#mask-6)" stroke-width="2" fill="#FBFBFB" xlink:href="#path-5"></use>
+                                    <ellipse id="Oval" fill="#D8D8D8" cx="13.8039216" cy="16.72" rx="2.58823529" ry="2.64"></ellipse>
+                                    <polygon id="Path-2" fill="#D8D8D8" points="11.2801399 29.1022441 14.0748904 22.8359604 16.4963506 25.9311383 20.3551423 19.2550674 23.8384545 22.9040722 28.3376415 14.8880974 33.7476128 29.1022441"></polygon>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
