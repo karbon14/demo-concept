@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ipfsAPI from 'ipfs-api'
+import { noop } from 'lodash'
 
-const IpfsContext = React.createContext()
+const IpfsContext = React.createContext({ addData: noop })
 const ipfs = ipfsAPI('ipfs.infura.io', '5001', { protocol: 'https' })
 
 class Provider extends React.Component {
@@ -9,7 +11,7 @@ class Provider extends React.Component {
     super()
 
     this.state = {
-      add: this.add,
+      addData: this.addData,
       get: this.get
     }
   }
@@ -21,12 +23,12 @@ class Provider extends React.Component {
   }
 
   render() {
-    return (
-      <IpfsContext.Provider value={this.state}>
-        {this.props.children}
-      </IpfsContext.Provider>
-    )
+    return <IpfsContext.Provider value={this.state}>{this.props.children}</IpfsContext.Provider>
   }
+}
+
+Provider.propTypes = {
+  children: PropTypes.node
 }
 
 export const Ipfs = {

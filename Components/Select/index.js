@@ -10,8 +10,7 @@ const Select = ({ options, defaultLabel, theme, ...rest }) => (
     render={({ style }) => (
       <div className={classNames({ disabled: rest.disabled })}>
         <select {...rest}>
-          {!rest.value &&
-            defaultLabel && <option value={null}>{defaultLabel}</option>}
+          {!rest.value && defaultLabel && <option value={null}>{defaultLabel}</option>}
           {options.map(({ label, key, ...rest }) => (
             <option key={key} {...rest}>
               {label}

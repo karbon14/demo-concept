@@ -11,16 +11,8 @@ const ScribeProfile = ({ scribe, getTranslation }) => (
 
     <div className="info__container">
       <div className="double">
-        <Info
-          value={scribe?.firstName}
-          label={getTranslation('cryptoScribes.firstName')}
-          className="double"
-        />
-        <Info
-          value={scribe?.lastName}
-          label={getTranslation('cryptoScribes.lastName')}
-          className="double"
-        />
+        <Info value={scribe?.firstName} label={getTranslation('cryptoScribes.firstName')} className="double" />
+        <Info value={scribe?.lastName} label={getTranslation('cryptoScribes.lastName')} className="double" />
       </div>
 
       <Info

@@ -14,11 +14,7 @@ const CryptoScribes = ({ scribes, getTranslation }) => {
 
         <div className="card">
           {scribes.map((scribe, index) => (
-            <ScribeProfile
-              key={index}
-              scribe={scribe}
-              getTranslation={getTranslation}
-            />
+            <ScribeProfile key={index} scribe={scribe} getTranslation={getTranslation} />
           ))}
         </div>
       </div>

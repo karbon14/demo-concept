@@ -1,12 +1,17 @@
 import React from 'react'
-import get from 'lodash/get'
+import { get, noop } from 'lodash'
 import PropTypes from 'prop-types'
 import Component from '@reactions/component'
 import ReactHtmlParser from 'react-html-parser'
 import { Dropdown } from './Dropdown'
 import { Langs } from './Translations'
 
-const LanguageContext = React.createContext({})
+const LanguageContext = React.createContext({
+  getTranslation: noop,
+  langs: [],
+  selectedLanguage: '',
+  selectedTanslation: {}
+})
 
 const LanguageProvider = ({ children }) => (
   <Component

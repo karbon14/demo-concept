@@ -34,9 +34,7 @@ const ProofForm = ({ getTranslation, onSubmit }) => (
         adress: Yup.string()
           .typeError(getTranslation('poofForm.invalidValue'))
           .required(getTranslation('poofForm.requiredValue')),
-        country: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        ),
+        country: Yup.string().required(getTranslation('poofForm.requiredValue')),
         state: Yup.string().required(getTranslation('poofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
@@ -61,9 +59,7 @@ const ProofForm = ({ getTranslation, onSubmit }) => (
                     onKeyUp={new Function()}
                     onChange={api.handleChange}
                     onBlur={api.handleBlur}
-                    data-invalid={
-                      api.touched.firstName && !!api.errors.firstName
-                    }
+                    data-invalid={api.touched.firstName && !!api.errors.firstName}
                   />
                 </div>
 
@@ -168,11 +164,7 @@ const ProofForm = ({ getTranslation, onSubmit }) => (
                   theme={theme}
                   label={getTranslation('poofForm.submitLabel')}
                   type="button"
-                  disabled={
-                    !api.dirty ||
-                    api.isSubmitting ||
-                    Object.keys(api.errors).length
-                  }
+                  disabled={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
                   onClick={api.submitForm}
                 />
               </div>

@@ -1,4 +1,5 @@
 import { Signalhub } from './Signalhub'
 import { Ipfs } from './Ipfs'
+import { RouterNext } from './RouterNext'
 
-export { Signalhub, Ipfs }
+export { Signalhub, Ipfs, RouterNext }

@@ -8,15 +8,10 @@ import { Header } from 'Components/Header'
 import { LanguageProvider, LanguageContext } from 'Components/SwitcherLang'
 import { CryptoScribes } from 'Components/CryptoScribes'
 import { EthereumProvider } from 'Components/EthereumProvider'
-import { ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
-import { theme } from 'Common/Core'
-import { Signalhub } from 'Providers'
+import { Signalhub, RouterNext } from 'Providers'
 
-import {
-  abi as ProofLifeABI,
-  networks as ProofLifeNetworks
-} from 'build/contracts/ProofLife.json'
+import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
 
 const getScribe = async ({ deployedContracts, scribe, state, setState }) => {
   const { ProofLife = {} } = deployedContracts
@@ -44,9 +39,7 @@ const updateUI = async ({ deployedContracts, state, setState }) => {
   // Get Data
   await ProofLife.getScribes((err, res = []) => {
     if (!err) {
-      res.map(scribe =>
-        getScribe({ deployedContracts, scribe, state, setState })
-      )
+      res.map(scribe => getScribe({ deployedContracts, scribe, state, setState }))
     }
   })
 }
@@ -56,100 +49,86 @@ const Notaries = () => (
     <Head>
       <title>Karbon14 | Demo</title>
     </Head>
-    <Signalhub.Provider>
-      <Signalhub.Consumer>
-        {({ messages }) => (
-          <EthereumProvider
-            contracts={
-              process.env.NETWORK
-                ? [
-                    {
-                      name: 'ProofLife',
-                      ABI: ProofLifeABI,
-                      address: ProofLifeNetworks[process.env.NETWORK]?.address
-                    }
-                  ]
-                : []
-            }
-          >
-            {({ accounts = {}, deployedContracts = {} }) => (
-              <Component
-                initialState={{
-                  scribes: []
-                }}
-                deployedContracts={deployedContracts}
-                didUpdate={({ props, prevProps, state, setState }) => {
-                  if (
-                    !isEqual(
-                      props.deployedContracts,
-                      prevProps.deployedContracts
-                    )
-                  )
-                    updateUI({
-                      deployedContracts,
-                      accounts,
-                      state,
-                      setState
-                    })
-                }}
-                render={({ state }) => (
-                  <LanguageProvider>
-                    <LanguageContext.Consumer>
-                      {({ getTranslation, selectedLanguage }) => (
-                        <div>
-                          <Header
-                            getTranslation={getTranslation}
-                            selectedLanguage={selectedLanguage}
-                          />
+    <RouterNext.Consumer>
+      {() => (
+        <Signalhub.Consumer>
+          {({ messages }) => (
+            <EthereumProvider
+              contracts={
+                process.env.NETWORK
+                  ? [
+                      {
+                        name: 'ProofLife',
+                        ABI: ProofLifeABI,
+                        address: ProofLifeNetworks[process.env.NETWORK]?.address
+                      }
+                    ]
+                  : []
+              }
+            >
+              {({ accounts = {}, deployedContracts = {} }) => (
+                <Component
+                  initialState={{
+                    scribes: []
+                  }}
+                  deployedContracts={deployedContracts}
+                  didUpdate={({ props, prevProps, state, setState }) => {
+                    if (!isEqual(props.deployedContracts, prevProps.deployedContracts))
+                      updateUI({
+                        deployedContracts,
+                        accounts,
+                        state,
+                        setState
+                      })
+                  }}
+                  render={({ state }) => (
+                    <LanguageProvider>
+                      <LanguageContext.Consumer>
+                        {({ getTranslation, selectedLanguage }) => (
+                          <div>
+                            <Header getTranslation={getTranslation} selectedLanguage={selectedLanguage} />
 
-                          <div className="contentWrapper">
-                            <NavMenu
-                              items={[
-                                {
-                                  name: getTranslation('navMenu.newProof'),
-                                  icon: require('/static/icons/plus.svg'),
-                                  route: '/'
-                                },
-                                {
-                                  name: getTranslation('navMenu.pastProof'),
-                                  icon: require('/static/icons/calendar.svg'),
-                                  route: '/history'
-                                },
-                                {
-                                  name: `${getTranslation(
-                                    'navMenu.scribes'
-                                  )} (${state.scribes.length})`,
-                                  icon: require('/static/icons/explore.svg'),
-                                  route: '/scribes',
-                                  selected: true
-                                },
-                                {
-                                  name: `${getTranslation(
-                                    'navMenu.messages'
-                                  )} (${messages.length})`,
-                                  icon: require('/static/icons/messages.svg'),
-                                  route: '/messages'
-                                }
-                              ]}
-                            />
+                            <div className="contentWrapper">
+                              <NavMenu
+                                items={[
+                                  {
+                                    name: getTranslation('navMenu.newProof'),
+                                    icon: require('/static/icons/plus.svg'),
+                                    route: '/'
+                                  },
+                                  {
+                                    name: getTranslation('navMenu.pastProof'),
+                                    icon: require('/static/icons/calendar.svg'),
+                                    route: '/history'
+                                  },
+                                  {
+                                    name: `${getTranslation('navMenu.scribes')} (${state.scribes.length})`,
+                                    icon: require('/static/icons/explore.svg'),
+                                    route: '/scribes',
+                                    selected: true
+                                  },
+                                  {
+                                    name: `${getTranslation('navMenu.messages')} (${messages.length})`,
+                                    icon: require('/static/icons/messages.svg'),
+                                    route: '/proof-request'
+                                  }
+                                ]}
+                              />
 
-                            <CryptoScribes
-                              getTranslation={getTranslation}
-                              scribes={state.scribes}
-                            />
+                              <CryptoScribes getTranslation={getTranslation} scribes={state.scribes} />
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </LanguageContext.Consumer>
-                  </LanguageProvider>
-                )}
-              />
-            )}
-          </EthereumProvider>
-        )}
-      </Signalhub.Consumer>
-      <ToastContainer theme={theme} hideProgressBar />
-    </Signalhub.Provider>
+                        )}
+                      </LanguageContext.Consumer>
+                    </LanguageProvider>
+                  )}
+                />
+              )}
+            </EthereumProvider>
+          )}
+        </Signalhub.Consumer>
+      )}
+    </RouterNext.Consumer>
   </div>
 )
 

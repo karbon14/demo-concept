@@ -6,11 +6,9 @@ import isEqual from 'lodash/isEqual'
 import Component from '@reactions/component'
 import { Header } from 'Components/Header'
 import { LanguageProvider, LanguageContext } from 'Components/SwitcherLang'
-import { ProofsHistory } from 'Components/ProofsHistory'
+import { MessagesArea } from 'Components/MessagesArea'
 import { EthereumProvider } from 'Components/EthereumProvider'
-import { ToastContainer } from 'Components/Toast'
 import { NavMenu } from 'Components/NavMenu'
-import { theme } from 'Common/Core'
 import { Signalhub, RouterNext } from 'Providers'
 
 import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
@@ -23,7 +21,7 @@ const updateUI = async ({ deployedContracts, setState }) => {
   })
 }
 
-const History = () => (
+const ProofRequest = () => (
   <div>
     <Head>
       <title>Karbon14 | Demo</title>
@@ -73,8 +71,7 @@ const History = () => (
                                   {
                                     name: getTranslation('navMenu.pastProof'),
                                     icon: require('/static/icons/calendar.svg'),
-                                    route: '/history',
-                                    selected: true
+                                    route: '/history'
                                   },
                                   {
                                     name: `${getTranslation('navMenu.scribes')} (${state.scribes.length})`,
@@ -84,12 +81,13 @@ const History = () => (
                                   {
                                     name: `${getTranslation('navMenu.messages')} (${messages.length})`,
                                     icon: require('/static/icons/messages.svg'),
-                                    route: '/proof-request'
+                                    route: '/proof-request',
+                                    selected: true
                                   }
                                 ]}
                               />
 
-                              <ProofsHistory getTranslation={getTranslation} />
+                              <MessagesArea getTranslation={getTranslation} />
                             </div>
                           </div>
                         )}
@@ -102,14 +100,13 @@ const History = () => (
           )}
         </Signalhub.Consumer>
       )}
-      <ToastContainer theme={theme} hideProgressBar />
     </RouterNext.Consumer>
   </div>
 )
 
-History.propTypes = {
+ProofRequest.propTypes = {
   process: PropTypes.object,
   deployedContracts: PropTypes.array
 }
 
-export default History
+export default ProofRequest
