@@ -5,6 +5,7 @@ import { Header } from 'Components/Header'
 
 export const Dashboard = ({
   children,
+  routerNext,
   language: { getTranslation, selectedLanguage },
   signalHub: { messages },
   proofLifeContract: { scribes }
@@ -19,22 +20,25 @@ export const Dashboard = ({
             name: getTranslation('navMenu.newProof'),
             icon: require('/static/icons/plus.svg'),
             route: '/',
-            selected: true
+            selected: routerNext.currentRoute === '/'
           },
           {
             name: getTranslation('navMenu.pastProof'),
             icon: require('/static/icons/calendar.svg'),
-            route: '/history'
+            route: '/history',
+            selected: routerNext.currentRoute === '/history'
           },
           {
             name: `${getTranslation('navMenu.scribes')} (${scribes.length})`,
             icon: require('/static/icons/explore.svg'),
-            route: '/scribes'
+            route: '/scribes',
+            selected: routerNext.currentRoute === '/scribes'
           },
           {
             name: `${getTranslation('navMenu.messages')} (${messages.length})`,
             icon: require('/static/icons/messages.svg'),
-            route: '/proof-request'
+            route: '/proof-request',
+            selected: routerNext.currentRoute === '/proof-request'
           }
         ]}
       />
@@ -49,5 +53,6 @@ Dashboard.propTypes = {
   process: PropTypes.object,
   language: PropTypes.object,
   signalHub: PropTypes.object,
-  proofLifeContract: PropTypes.object
+  proofLifeContract: PropTypes.object,
+  routerNext: PropTypes.object
 }

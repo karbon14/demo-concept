@@ -50,8 +50,15 @@ const onSubmit = async ({ values, api, accounts, web3, language, signalHub }) =>
   })
 }
 
-const Index = ({ language, signalHub, proofLifeContract, ethereum: { accounts, web3 }, ipfs: { addData } }) => (
-  <Dashboard language={language} signalHub={signalHub} proofLifeContract={proofLifeContract}>
+const Index = ({
+  language,
+  signalHub,
+  proofLifeContract,
+  routerNext,
+  ethereum: { accounts, web3 },
+  ipfs: { addData }
+}) => (
+  <Dashboard language={language} signalHub={signalHub} proofLifeContract={proofLifeContract} routerNext={routerNext}>
     <ProofForm
       getTranslation={language.getTranslation}
       onSubmit={(values, api) =>
@@ -75,7 +82,8 @@ Index.propTypes = {
   signalHub: PropTypes.object,
   ethereum: PropTypes.object,
   ipfs: PropTypes.object,
-  proofLifeContract: PropTypes.object
+  proofLifeContract: PropTypes.object,
+  routerNext: PropTypes.object
 }
 
 export default Index

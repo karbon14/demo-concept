@@ -28,4 +28,8 @@ CryptoScribes.propTypes = {
   getTranslation: PropTypes.func
 }
 
+CryptoScribes.defaultProps = {
+  scribes: []
+}
+
 export { CryptoScribes }

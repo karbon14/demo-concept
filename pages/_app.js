@@ -10,11 +10,41 @@ import ReactionComponent from '@reactions/component'
 import { isEqual } from 'lodash'
 import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
 
+const getScribe = async (address, ProofLife) => {
+  return new Promise(resolve => {
+    ProofLife.getScribe(address, (err, res = []) => {
+      if (!err) {
+        const [firstName = '', lastName = ''] = res
+
+        resolve({
+          address,
+          firstName,
+          lastName
+        })
+      }
+    })
+  })
+}
+
+const mapScribe = scribes => scribes.map(scribe => ({ address: scribe, firstName: '', lastName: '' }))
+
 const updateUI = async ({ deployedContracts, setState }) => {
   const { ProofLife = {} } = deployedContracts
-  // Get Data
-  await ProofLife.getScribes((err, res) => {
-    !err && setState({ scribes: res })
+
+  ProofLife.getScribes(async (err, res) => {
+    if (!err) {
+      const scribes = mapScribe(res)
+      setState({ scribes })
+
+      const scribesWithDetails = []
+
+      for (let x = 0; x < scribes.length; x++) {
+        const scribeWithDetail = await getScribe(scribes[x].address, ProofLife)
+        scribesWithDetails.push(scribeWithDetail)
+      }
+
+      setState({ scribes: scribesWithDetails })
+    }
   })
 }
 
@@ -38,11 +68,11 @@ export default class Karbon14 extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
 
-    return { pageProps, pathname: router.pathname }
+    return { pageProps, pathname: router.pathname, env: process.env }
   }
 
   render() {
-    const { Component, pageProps, pathname } = this.props
+    const { Component, pageProps, pathname, env } = this.props
 
     return (
       <Container>
@@ -61,7 +91,7 @@ export default class Karbon14 extends App {
                           {({ getTranslation, selectedLanguage }) => (
                             <Signalhub.Consumer>
                               {({ messages, channel, broadcast }) => (
-                                <EthereumProvider contracts={getProofLifeContract(process.env.NETWORK)}>
+                                <EthereumProvider contracts={getProofLifeContract(env.NETWORK)}>
                                   {({ accounts = {}, deployedContracts = {}, web3 }) => (
                                     <ReactionComponent
                                       initialState={{
