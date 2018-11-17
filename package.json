@@ -17,7 +17,9 @@
     "truffle:migrate": "truffle migrate",
     "truffle:ropsten": "rimraf build && npm run migrate -- --network=ropsten",
     "truffle:development": "rimraf build && npm run migrate -- --network=development",
-    "ganache": "ganache-cli"
+    "ganache": "ganache-cli",
+    "lint": "eslint --ext .js ./",
+    "lint:fix": "eslint --ext .js ./ --fix"
   },
   "lint-staged": {
     "*.js": [

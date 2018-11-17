@@ -14,10 +14,7 @@ export default class Error extends React.Component {
       <div>
         <Head>
           <title>Error {this.props.statusCode}</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <ErrorComponent statusCode={this.props.statusCode} />
       </div>

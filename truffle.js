@@ -10,20 +10,12 @@ module.exports = {
       network_id: '*' // Match any network id
     },
     ropsten: {
-      provider: () =>
-        new HDWalletProvider(
-          ROPSTEN_MNEMONIC,
-          `https://ropsten.infura.io/v3/${INFURA_API_KEY}`
-        ),
+      provider: () => new HDWalletProvider(ROPSTEN_MNEMONIC, `https://ropsten.infura.io/v3/${INFURA_API_KEY}`),
       gas: 4698712,
       network_id: '3'
     },
     live: {
-      provider: () =>
-        new HDWalletProvider(
-          ROPSTEN_MNEMONIC,
-          `https://mainnet.infura.io/v3/${INFURA_API_KEY}`
-        ),
+      provider: () => new HDWalletProvider(ROPSTEN_MNEMONIC, `https://mainnet.infura.io/v3/${INFURA_API_KEY}`),
       gas: 4698712,
       network_id: '1'
     },

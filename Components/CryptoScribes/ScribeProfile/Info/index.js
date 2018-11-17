@@ -14,21 +14,11 @@ const getEtherscanScanURL = () => {
   return etherscanURLs[process.env.NETWORK]
 }
 
-const Info = ({
-  value,
-  label,
-  copiedValueMsg = '',
-  className = '',
-  isLink = false
-}) => (
+const Info = ({ value, label, copiedValueMsg = '', className = '', isLink = false }) => (
   <div className={`side ${className}`}>
     <div>
       {isLink ? (
-        <a
-          rel="noopener noreferrer"
-          target="_blank"
-          href={`${getEtherscanScanURL()}/address/${value}`}
-        >
+        <a rel="noopener noreferrer" target="_blank" href={`${getEtherscanScanURL()}/address/${value}`}>
           {value}
         </a>
       ) : (

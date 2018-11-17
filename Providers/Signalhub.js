@@ -1,8 +1,9 @@
 import React from 'react'
 import signalhub from 'signalhub'
 import PropTypes from 'prop-types'
+import { noop } from 'lodash'
 
-const SignalhubContext = React.createContext()
+const SignalhubContext = React.createContext({ messages: [], appName: '', channel: '', broadcast: noop })
 
 class Provider extends React.Component {
   constructor() {
@@ -30,16 +31,13 @@ class Provider extends React.Component {
   }
 
   render() {
-    return (
-      <SignalhubContext.Provider value={this.state}>
-        {this.props.children}
-      </SignalhubContext.Provider>
-    )
+    return <SignalhubContext.Provider value={this.state}>{this.props.children}</SignalhubContext.Provider>
   }
 }
 
 Provider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  messages: PropTypes.arrayOf(PropTypes.object)
 }
 
 export const Signalhub = {
