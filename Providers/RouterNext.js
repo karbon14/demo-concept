@@ -4,7 +4,7 @@ import Router from 'next/router'
 
 const RouterContext = React.createContext({ currentRoute: '', eventRoute: '' })
 
-class Provider extends React.Component {
+const RouterNextProvider = class extends React.Component {
   constructor(props) {
     super(props)
 
@@ -26,16 +26,13 @@ class Provider extends React.Component {
   callback = eventRoute => (url, err) => this.setState({ currentRoute: url, eventRoute, err })
 
   render() {
-    return <RouterContext.Provider value={this.state}>{this.props.children}</RouterContext.Provider>
+    return <RouterContext.Consumer>{context => this.props.children({ context, ...this.state })}</RouterContext.Consumer>
   }
 }
 
-Provider.propTypes = {
-  children: PropTypes.node,
+RouterNextProvider.propTypes = {
+  children: PropTypes.any,
   pathname: PropTypes.string
 }
 
-export const RouterNext = {
-  Consumer: RouterContext.Consumer,
-  Provider
-}
+export { RouterNextProvider }

@@ -51,23 +51,28 @@ const onSubmit = async ({ values, api, accounts, web3, language, signalHub }) =>
 }
 
 const Index = ({
-  language,
+  translations,
   signalHub,
   proofLifeContract,
   routerNext,
   ethereum: { accounts, web3 },
   ipfs: { addData }
 }) => (
-  <Dashboard language={language} signalHub={signalHub} proofLifeContract={proofLifeContract} routerNext={routerNext}>
+  <Dashboard
+    translations={translations}
+    signalHub={signalHub}
+    proofLifeContract={proofLifeContract}
+    routerNext={routerNext}
+  >
     <ProofForm
-      getTranslation={language.getTranslation}
+      getTranslation={translations.getTranslation}
       onSubmit={(values, api) =>
         onSubmit({
           values,
           api,
           accounts,
           web3,
-          language,
+          translations,
           signalHub,
           addData
         })
@@ -77,8 +82,7 @@ const Index = ({
 )
 
 Index.propTypes = {
-  process: PropTypes.object,
-  language: PropTypes.object,
+  translations: PropTypes.object,
   signalHub: PropTypes.object,
   ethereum: PropTypes.object,
   ipfs: PropTypes.object,

@@ -3,14 +3,14 @@ import signalhub from 'signalhub'
 import PropTypes from 'prop-types'
 import { noop } from 'lodash'
 
-const SignalhubContext = React.createContext({ messages: [], appName: '', channel: '', broadcast: noop })
+const SignalHubContext = React.createContext({ messages: [], appName: '', channel: '', broadcast: noop })
 
-class Provider extends React.Component {
+const SignalHubProvider = class extends React.Component {
   constructor() {
     super()
 
     this.broadcast = () => {}
-    this.signalUrls = ['http://192.168.0.201:8080']
+    this.signalUrls = ['http://localhost:8080']
     this.appName = 'appName'
     this.channel = 'karbon14'
     this.hub = signalhub(this.appName, this.signalUrls)
@@ -31,16 +31,16 @@ class Provider extends React.Component {
   }
 
   render() {
-    return <SignalhubContext.Provider value={this.state}>{this.props.children}</SignalhubContext.Provider>
+    return (
+      <SignalHubContext.Consumer>
+        {context => this.props.children({ context, ...this.state })}
+      </SignalHubContext.Consumer>
+    )
   }
 }
 
-Provider.propTypes = {
-  children: PropTypes.node,
-  messages: PropTypes.arrayOf(PropTypes.object)
+SignalHubProvider.propTypes = {
+  children: PropTypes.func
 }
 
-export const Signalhub = {
-  Consumer: SignalhubContext.Consumer,
-  Provider
-}
+export { SignalHubProvider }
