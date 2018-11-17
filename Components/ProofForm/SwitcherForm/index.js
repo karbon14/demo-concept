@@ -50,31 +50,21 @@ const FormActions = ({
   <section className="bottom">
     <div className="actions__container">
       <div className="back">
-        <Button
-          theme={theme}
-          type="button"
-          icon="fa-chevron-left"
-          disabled={activeForm === 1}
-          onClick={onBack}
-        />
+        <Button theme={theme} type="button" icon="fa-chevron-left" disabled={activeForm === 1} onClick={onBack} />
       </div>
 
       <div className="right">
         <Button
           theme={theme}
           label={getTranslation('poofForm.resetLabel')}
-          type="primary"
+          type="secondary"
           disabled={disabledReset}
           onClick={onReset}
         />
 
         <Button
           theme={theme}
-          label={getTranslation(
-            activeForm === formsNumber
-              ? 'poofForm.submitLabel'
-              : 'poofForm.nextFormLabel'
-          )}
+          label={getTranslation(activeForm === formsNumber ? 'poofForm.submitLabel' : 'poofForm.nextFormLabel')}
           type="button"
           disabled={disabledSubmit}
           onClick={onSubmit}

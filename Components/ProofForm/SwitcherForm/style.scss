@@ -90,6 +90,15 @@ section {
         min-width: 176px;
       }
 
+      :global(button.secondary) {
+        &:not(:disabled):not(:hover) {
+          color: #16a3fe;
+        }
+
+        &::after {
+          background: #e5e9f2;
+        }
+      }
     }
   }
 }

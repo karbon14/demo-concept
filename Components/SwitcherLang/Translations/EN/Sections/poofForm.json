@@ -21,6 +21,6 @@
   "nextFormLabel": "Next",
   "submitLabel": "Send to scribe",
   "selectScribe": "Select scribe and send the form",
-  "signedOK": "Proof data signed OK!",
-  "signedError": "Proof data sign Error!"
+  "submitOK": "Proof data signed and sended OK!",
+  "submitError": "Proof data submit Error!"
 }
