@@ -74,6 +74,13 @@ section {
     margin-top: 20px;
     justify-content: space-between;
 
+    .back {
+      :global(button) {
+        min-width: 40px;
+        padding: 0;
+      }
+    }
+
     .right {
       display: flex;
       justify-content: flex-end;

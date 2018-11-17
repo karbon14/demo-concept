@@ -1,0 +1,47 @@
+form {
+  width: 100%;
+
+  .form__container {
+    width: 100%;
+
+    label {
+      user-select: none;
+      color: #7ab9ff;
+      line-height: 1.15;
+      font-size: 120%;
+      margin-bottom: 20px;
+    }
+
+    .scribe {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+
+      :global(section) {
+        padding: 0 20px;
+        margin-left: 20px;
+        margin-top: 0px;
+
+        :global(.picture) {
+          display: none;
+        }
+
+        :global(.info__container) {
+          margin-top: 20px;
+        }
+      }
+
+      &.selected {
+        :global(section) {
+          background-color: #e5e9f2;
+        }
+      }
+    }
+  }
+
+  :global(.actions__container) {
+    :global(.right div:first-child) {
+      display: none !important;
+    }
+  }
+}

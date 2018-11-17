@@ -49,13 +49,15 @@ const FormActions = ({
 }) => (
   <section className="bottom">
     <div className="actions__container">
-      <Button
-        theme={theme}
-        type="menu"
-        icon="fa-chevron-left"
-        disabled={activeForm === 1}
-        onClick={onBack}
-      />
+      <div className="back">
+        <Button
+          theme={theme}
+          type="button"
+          icon="fa-chevron-left"
+          disabled={activeForm === 1}
+          onClick={onBack}
+        />
+      </div>
 
       <div className="right">
         <Button

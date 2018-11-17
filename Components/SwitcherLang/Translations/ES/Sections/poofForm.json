@@ -20,6 +20,7 @@
   "resetLabel": "Reestablecer",
   "nextFormLabel": "Siguiente",
   "submitLabel": "Enviar al notario",
+  "selectScribe": "Selecciona la escribanía y envía el formulario",
   "signedOK": "¡Datos de la Prueba firmados OK!",
   "signedError": "¡Error firmando Datos de la Prueba!"
 }

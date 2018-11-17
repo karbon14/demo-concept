@@ -19,7 +19,8 @@
   "requiredValue": "Invalid value",
   "resetLabel": "Reset data",
   "nextFormLabel": "Next",
-  "submitLabel": "Send to notary",
+  "submitLabel": "Send to scribe",
+  "selectScribe": "Select scribe and send the form",
   "signedOK": "Proof data signed OK!",
   "signedError": "Proof data sign Error!"
 }

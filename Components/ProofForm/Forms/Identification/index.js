@@ -61,7 +61,7 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
                     )
                   }}
                   preview={
-                    api.values.idImageUrl
+                    api.values.idImage
                       ? {
                           name:
                             (api.values.idImage && api.values.idImage.name) ||
@@ -89,7 +89,7 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
                     )
                   }}
                   preview={
-                    api.values.userImageUrl
+                    api.values.userImage
                       ? {
                           name:
                             (api.values.userImage &&
