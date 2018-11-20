@@ -1,0 +1,20 @@
+{
+  "title": "Pendientes de aprovación",
+  "receivedMsg": "Nueva Prueba pendiente de aprovación",
+  "userAddress": "Dirección del Usuario",
+  "signInformation": "Información de la Firma y la Dirección",
+  "personalInformation": "Información personal del usuario",
+  "idInformation": "Información del ID/Documento",
+  "serviceInformation": "Información de un Servicio/Factura",
+  "hash": "Hash",
+  "signedHash": "Hash Firmado",
+  "signVerificationOk": " Firma verificada OK entre Hash Firmado y Dirección",
+  "signVerificationError": " Firma verificada erroneamente entre Hash Firmado y Dirección",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "email": "Correo electrónico",
+  "country": "País",
+  "state": "Estado/provincia",
+  "address": "Dirección",
+  "id": "ID/Número de Documento"
+}

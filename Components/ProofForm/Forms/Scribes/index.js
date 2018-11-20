@@ -8,29 +8,16 @@ import { Checkbox } from '@react-core/checkbox'
 import { ScribeProfile } from 'Components/CryptoScribes/ScribeProfile'
 import style from './style.scss'
 
-const Scribes = ({
-  scribes = [
-    {
-      firstName: 'Team',
-      lastName: 'Karbon',
-      address: '0xcdd79fb57a701463d11c4d34007553c3d5afdcee'
-    }
-  ],
-  onSubmit,
-  getTranslation,
-  formActions
-}) => {
+const Scribes = ({ scribes, onSubmit, getTranslation, formActions }) => {
   return (
     <Formik
       validateOnChange
       validateOnSubmit
       initialValues={{
-        selectedScibe: ''
+        selectedScribe: ''
       }}
       validationSchema={Yup.object().shape({
-        selectedScibe: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        )
+        selectedScribe: Yup.string().required(getTranslation('poofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
     >
@@ -44,7 +31,7 @@ const Scribes = ({
                 key={index}
                 className={classnames({
                   scribe: true,
-                  selected: scribe.address === api.values.selectedScibe
+                  selected: scribe.address === api.values.selectedScribe
                 })}
               >
                 <Checkbox
@@ -57,17 +44,11 @@ const Scribes = ({
                     const { checked } = target
                     api.resetForm()
                     api.setFieldValue([scribe.address], checked)
-                    api.setFieldValue(
-                      'selectedScibe',
-                      checked ? scribe.address : ''
-                    )
+                    api.setFieldValue('selectedScribe', checked ? scribe.address : '')
                   }}
                 />
 
-                <ScribeProfile
-                  scribe={scribe}
-                  getTranslation={getTranslation}
-                />
+                <ScribeProfile scribe={scribe} getTranslation={getTranslation} />
               </div>
             ))}
           </div>

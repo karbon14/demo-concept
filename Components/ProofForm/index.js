@@ -6,7 +6,7 @@ import { Utils } from './Utils'
 import { SwitcherForm, FormActions } from './SwitcherForm'
 import { Personal, Identification, Service, Scribes } from './Forms'
 
-const ProofForm = ({ getTranslation }) => (
+const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
   <Utils>
     {({ blobToBase64, prepareData, onSendToScribe }) => (
       <Component
@@ -124,20 +124,37 @@ const ProofForm = ({ getTranslation }) => (
                       id: 4,
                       child: (
                         <Scribes
-                          onSubmit={(values, api) => {
+                          scribes={scribes}
+                          onSubmit={async (values, api) => {
                             const formsData = {
                               ...state.formsData,
                               scribes: values
                             }
                             setState({ formsData })
-                            prepareData({
+                            const successMsg = getTranslation('poofForm.submitOK')
+                            const errorMsg = getTranslation('poofForm.submitError')
+
+                            const proof = await prepareData({
                               formsData,
                               api,
                               blobToBase64,
                               onSendToScribe,
-                              successMsg: getTranslation('poofForm.submitOK'),
-                              errorMsg: getTranslation('poofForm.submitError')
+                              errorMsg
                             })
+
+                            if (proof) {
+                              const { proofFormData, selectedScribe } = proof
+                              onSendToScribe({
+                                proofFormData,
+                                selectedScribe,
+                                api,
+                                signalHub,
+                                accounts,
+                                web3,
+                                successMsg,
+                                errorMsg
+                              })
+                            }
                           }}
                           getTranslation={getTranslation}
                           formActions={api => (
@@ -171,7 +188,15 @@ const ProofForm = ({ getTranslation }) => (
 )
 
 ProofForm.propTypes = {
-  getTranslation: PropTypes.func
+  getTranslation: PropTypes.func,
+  scribes: PropTypes.array,
+  signalHub: PropTypes.object,
+  accounts: PropTypes.object,
+  web3: PropTypes.object
+}
+
+ProofForm.defaultProps = {
+  scribes: []
 }
 
 export { ProofForm }

@@ -22,8 +22,4 @@ Scribes.propTypes = {
   routerNext: PropTypes.object
 }
 
-Scribes.defaultProps = {
-  proofLifeContract: { scribes: [] }
-}
-
 export default Scribes

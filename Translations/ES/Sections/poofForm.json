@@ -3,7 +3,7 @@
   "firstName": "Ingresa tu nombre",
   "lastName": "Ingresa tu apellido",
   "email": "Tu correo electrónico",
-  "adress": "Tu dirección",
+  "address": "Tu dirección",
   "country": "Selecciona tu país",
   "state": "Selecciona tu estado/provincia",
   "id": "Tu ID/Número de Documento",

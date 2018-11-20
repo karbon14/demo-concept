@@ -22,7 +22,7 @@ const IpfsProvider = class extends React.Component {
   }
 
   render() {
-    return <IpfsContext.Consumer>{context => this.props.children({ context, ...this.state })}</IpfsContext.Consumer>
+    return <IpfsContext.Consumer>{context => this.props.children({ ...context, ...this.state })}</IpfsContext.Consumer>
   }
 }
 

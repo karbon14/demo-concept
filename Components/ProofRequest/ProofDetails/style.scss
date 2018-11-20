@@ -1,0 +1,40 @@
+.details {
+  width: 100%;
+
+  .info {
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+
+    p {
+      word-wrap: break-word;
+
+      &.value {
+        color: #1641b5; 
+      }
+
+      i {
+        &.fa-check {
+          color: #14a200;
+        }
+
+        &.fa-times {
+          color: #fe0000;
+        }
+      }
+    }
+  }
+
+  .double {
+    display: flex;
+
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+
+    .info {
+      margin-top: 0px;
+      width: 50%;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Pending Approval",
+  "receivedMsg": "New Pending Approval Proof",
+  "userAddress": "User Address",
+  "signInformation": "Signature and Address information",
+  "personalInformation": "User personal information",
+  "idInformation": "ID/Document information",
+  "serviceInformation": "Service/Bill information",
+  "hash": "Hash",
+  "signedHash": "Signed Hash",
+  "signVerificationOk": " Sign verification OK between Signed Hash and Address",
+  "signVerificationError": " Sign verification FAIL between signed Hash and Address",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "email": "Email",
+  "country": "Country",
+  "state": "State/Province",
+  "address": "Address",
+  "id": "ID/Document Number"
+}

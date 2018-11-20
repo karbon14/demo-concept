@@ -3,7 +3,7 @@
   "firstName": "Enter your first name",
   "lastName": "Enter your last name",
   "email": "Enter your email",
-  "adress": "Enter your adress",
+  "address": "Enter your address",
   "country": "Select your country",
   "state": "Select your state/province",
   "id": "Enter your ID/Document Number",
