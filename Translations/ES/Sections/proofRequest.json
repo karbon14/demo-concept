@@ -16,5 +16,7 @@
   "country": "País",
   "state": "Estado/provincia",
   "address": "Dirección",
-  "id": "ID/Número de Documento"
+  "id": "ID/Número de Documento",
+  "reject": "Rechazar",
+  "approve": "Aprobar"
 }

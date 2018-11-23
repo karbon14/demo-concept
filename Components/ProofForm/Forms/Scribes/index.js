@@ -17,14 +17,14 @@ const Scribes = ({ scribes, onSubmit, getTranslation, formActions }) => {
         selectedScribe: ''
       }}
       validationSchema={Yup.object().shape({
-        selectedScribe: Yup.string().required(getTranslation('poofForm.requiredValue'))
+        selectedScribe: Yup.string().required(getTranslation('proofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
     >
       {api => (
         <form onSubmit={api.handleSubmit}>
           <div className="form__container">
-            <label>{getTranslation('poofForm.selectScribe')}</label>
+            <label>{getTranslation('proofForm.selectScribe')}</label>
 
             {scribes.map((scribe, index) => (
               <div

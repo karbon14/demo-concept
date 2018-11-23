@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ethUtil from 'ethereumjs-util'
 import Component from '@reactions/component'
+import { theme } from 'Common/Core'
+import { Button } from '@react-core/button'
 import { Accordion } from './Accordion'
 import style from './style.scss'
 
-const ProofDetails = ({ active, getTranslation }) => (
+const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, getTranslation }) => (
   <Component
     initialState={{
       proof: {},
@@ -135,6 +137,42 @@ const ProofDetails = ({ active, getTranslation }) => (
             }
           ]}
         />
+
+        <section className="bottom">
+          <div className="actions__container">
+            <Button
+              theme={theme}
+              label={getTranslation('proofRequest.reject')}
+              type="secondary"
+              disabled={false}
+              onClick={() =>
+                onReject({
+                  signalHub,
+                  proof: state.proof,
+                  errorMsg: getTranslation('proofRequest.rejectErrorMsg'),
+                  successMsg: getTranslation('proofRequest.rejectSuccessMsg')
+                })
+              }
+            />
+
+            <Button
+              theme={theme}
+              label={getTranslation('proofRequest.approve')}
+              type="button"
+              disabled={false}
+              onClick={() =>
+                onApprove({
+                  proof: state.proof,
+                  signalHub,
+                  accounts,
+                  web3,
+                  errorMsg: getTranslation('proofRequest.approveErrorMsg'),
+                  successMsg: getTranslation('proofRequest.approveSuccessMsg')
+                })
+              }
+            />
+          </div>
+        </section>
         <style jsx>{style}</style>
       </div>
     )}
@@ -143,6 +181,11 @@ const ProofDetails = ({ active, getTranslation }) => (
 
 ProofDetails.propTypes = {
   active: PropTypes.object,
+  signalHub: PropTypes.object,
+  accounts: PropTypes.object,
+  web3: PropTypes.object,
+  onReject: PropTypes.func,
+  onApprove: PropTypes.func,
   getTranslation: PropTypes.func
 }
 

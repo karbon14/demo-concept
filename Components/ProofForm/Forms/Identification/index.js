@@ -21,14 +21,10 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
-          .typeError(getTranslation('poofForm.invalidValue'))
-          .required(getTranslation('poofForm.requiredValue')),
-        idImage: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        ),
-        userImage: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        )
+          .typeError(getTranslation('proofForm.invalidValue'))
+          .required(getTranslation('proofForm.requiredValue')),
+        idImage: Yup.string().required(getTranslation('proofForm.requiredValue')),
+        userImage: Yup.string().required(getTranslation('proofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
     >
@@ -38,7 +34,7 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
             <TextField
               type="text"
               name="id"
-              label={getTranslation('poofForm.id')}
+              label={getTranslation('proofForm.id')}
               placeholder={api.errors.id}
               theme={theme}
               value={api.values.id}
@@ -51,21 +47,16 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
             <div className="line">
               <div className="item">
                 <FileUploader
-                  label={getTranslation('poofForm.idImage')}
-                  dropLabel={getTranslation('poofForm.idImageDrop')}
+                  label={getTranslation('proofForm.idImage')}
+                  dropLabel={getTranslation('proofForm.idImageDrop')}
                   onUpload={async files => {
                     api.setFieldValue('idImage', files[0])
-                    api.setFieldValue(
-                      'idImageUrl',
-                      URL.createObjectURL(files[0])
-                    )
+                    api.setFieldValue('idImageUrl', URL.createObjectURL(files[0]))
                   }}
                   preview={
                     api.values.idImage
                       ? {
-                          name:
-                            (api.values.idImage && api.values.idImage.name) ||
-                            api.values.idImageUrl,
+                          name: (api.values.idImage && api.values.idImage.name) || api.values.idImageUrl,
                           url: api.values.idImageUrl,
                           onClear: () => {
                             api.setFieldValue('idImage', null)
@@ -79,22 +70,16 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
 
               <div className="item">
                 <FileUploader
-                  label={getTranslation('poofForm.userImage')}
-                  dropLabel={getTranslation('poofForm.userImageDrop')}
+                  label={getTranslation('proofForm.userImage')}
+                  dropLabel={getTranslation('proofForm.userImageDrop')}
                   onUpload={async files => {
                     api.setFieldValue('userImage', files[0])
-                    api.setFieldValue(
-                      'userImageUrl',
-                      URL.createObjectURL(files[0])
-                    )
+                    api.setFieldValue('userImageUrl', URL.createObjectURL(files[0]))
                   }}
                   preview={
                     api.values.userImage
                       ? {
-                          name:
-                            (api.values.userImage &&
-                              api.values.userImage.name) ||
-                            api.values.userImageUrl,
+                          name: (api.values.userImage && api.values.userImage.name) || api.values.userImageUrl,
                           url: api.values.userImageUrl,
                           onClear: () => {
                             api.setFieldValue('userImage', null)

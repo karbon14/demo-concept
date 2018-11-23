@@ -16,5 +16,11 @@
   "country": "Country",
   "state": "State/Province",
   "address": "Address",
-  "id": "ID/Document Number"
+  "id": "ID/Document Number",
+  "reject": "Reject",
+  "approve": "Approve",
+  "rejectErrorMsg": "Error rejecting Proof Request!",
+  "rejectSuccessMsg": "Proof Request rejected OK!",
+  "approveErrorMsg": "Error approving Proof Request!",
+  "approveSuccessMsg": "Proof Request approved OK!"
 }

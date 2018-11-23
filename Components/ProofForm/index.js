@@ -22,7 +22,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
         render={({ state, setState }) => (
           <section>
             <div className="container">
-              <h3>{getTranslation('poofForm.title')}</h3>
+              <h3>{getTranslation('proofForm.title')}</h3>
 
               <div className="card">
                 <SwitcherForm
@@ -131,8 +131,8 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                               scribes: values
                             }
                             setState({ formsData })
-                            const successMsg = getTranslation('poofForm.submitOK')
-                            const errorMsg = getTranslation('poofForm.submitError')
+                            const successMsg = getTranslation('proofForm.submitOK')
+                            const errorMsg = getTranslation('proofForm.submitError')
 
                             const proof = await prepareData({
                               formsData,
