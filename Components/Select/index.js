@@ -8,9 +8,19 @@ const Select = ({ options, defaultLabel, theme, ...rest }) => (
     theme={theme}
     componentName={'Select'}
     render={({ style }) => (
-      <div className={classNames({ disabled: rest.disabled })}>
+      <div
+        className={classNames({
+          disabled: rest.disabled,
+          unselected: rest.value === ''
+        })}
+      >
         <select {...rest}>
-          {!rest.value && defaultLabel && <option value={null}>{defaultLabel}</option>}
+          {!rest.value &&
+            defaultLabel && (
+              <option className="empty" value={null}>
+                {defaultLabel}
+              </option>
+            )}
           {options.map(({ label, key, ...rest }) => (
             <option key={key} {...rest}>
               {label}

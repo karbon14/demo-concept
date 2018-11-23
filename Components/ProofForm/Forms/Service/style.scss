@@ -1,0 +1,30 @@
+form {
+  width: 100%;
+
+  .form__container {
+    width: 100%;
+
+    :global(.fileUploader) {
+      :global(.droppable),
+      :global(.preview) {
+        height: 250px;
+      }
+    }
+
+    p {
+      margin-top: 5px;
+      padding-left: 5px;
+    }
+
+    ul {
+      margin-top: 10px;
+      list-style-type: disc;
+      padding-left: 20px;
+
+      :global(li) {
+        margin-left: 25px !important;
+        margin: 5px 10px;
+      }
+    }
+  }
+}

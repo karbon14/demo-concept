@@ -34,6 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "@react-core/button": "0.1.42",
+    "@react-core/checkbox": "0.1.42",
     "@react-core/tabview": "0.1.42",
     "@react-core/textarea": "0.1.42",
     "@react-core/textfield": "0.1.42",
@@ -54,6 +55,7 @@
     "next": "6.1.2",
     "prop-types": "15.6.2",
     "react": "16.5.2",
+    "react-adopt": "0.6.0",
     "react-apollo": "2.2.4",
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.5.2",

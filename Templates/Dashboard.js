@@ -6,12 +6,17 @@ import { Header } from 'Components/Header'
 export const Dashboard = ({
   children,
   routerNext,
-  language: { getTranslation, selectedLanguage },
+  translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
   signalHub: { messages },
   proofLifeContract: { scribes }
 }) => (
   <div>
-    <Header getTranslation={getTranslation} selectedLanguage={selectedLanguage} />
+    <Header
+      langs={langs}
+      toggleSelected={toggleSelected}
+      selectedLanguage={selectedLanguage}
+      registerTranslations={registerTranslations}
+    />
 
     <div className="contentWrapper">
       <NavMenu
@@ -50,8 +55,7 @@ export const Dashboard = ({
 
 Dashboard.propTypes = {
   children: PropTypes.node,
-  process: PropTypes.object,
-  language: PropTypes.object,
+  translations: PropTypes.object,
   signalHub: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object

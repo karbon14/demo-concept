@@ -6,7 +6,7 @@ import { noop } from 'lodash'
 const IpfsContext = React.createContext({ addData: noop })
 const ipfs = ipfsAPI('ipfs.infura.io', '5001', { protocol: 'https' })
 
-class Provider extends React.Component {
+const IpfsProvider = class extends React.Component {
   constructor() {
     super()
 
@@ -18,20 +18,16 @@ class Provider extends React.Component {
 
   addData(data = {}, callback = () => {}) {
     const buffer = ipfs.Buffer(JSON.stringify(data))
-
     ipfs.files.add(buffer, (err, file) => callback(err, file))
   }
 
   render() {
-    return <IpfsContext.Provider value={this.state}>{this.props.children}</IpfsContext.Provider>
+    return <IpfsContext.Consumer>{context => this.props.children({ context, ...this.state })}</IpfsContext.Consumer>
   }
 }
 
-Provider.propTypes = {
-  children: PropTypes.node
+IpfsProvider.propTypes = {
+  children: PropTypes.any
 }
 
-export const Ipfs = {
-  Consumer: IpfsContext.Consumer,
-  Provider
-}
+export { IpfsProvider }

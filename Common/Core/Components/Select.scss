@@ -18,11 +18,7 @@ div {
     border-radius: 0px;
     background: transparent;
     cursor: pointer;
-    color: #7ab9ff;
-
-    &::placeholder {
-      color: #7ab9ff;
-    }
+    color: black;
 
     &:disabled {
       cursor: initial;
@@ -32,5 +28,11 @@ div {
 
   &.disabled {
     border-bottom: 1px solid #e5e9f2;
+  }
+
+  &.unselected {
+    select {
+      color: #7ab9ff;
+    }
   }
 }
