@@ -1,24 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Dashboard } from 'Templates'
-import { MessagesArea } from 'Components/MessagesArea'
+import { ProofRequest } from 'Components/ProofRequest'
 
-const ProofRequest = ({ translations, signalHub, proofLifeContract, routerNext }) => (
+const Request = ({
+  translations,
+  signalHub,
+  proofLifeContract,
+  routerNext,
+  signalHub: { messages },
+  ethereum: { accounts, web3 }
+}) => (
   <Dashboard
     translations={translations}
     signalHub={signalHub}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
   >
-    <MessagesArea getTranslation={translations.getTranslation} />
+    <ProofRequest
+      query={routerNext.query}
+      messages={messages}
+      signalHub={signalHub}
+      accounts={accounts}
+      web3={web3}
+      getTranslation={translations.getTranslation}
+    />
   </Dashboard>
 )
 
-ProofRequest.propTypes = {
+Request.propTypes = {
   translations: PropTypes.object,
   signalHub: PropTypes.object,
+  ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object
 }
 
-export default ProofRequest
+export default Request

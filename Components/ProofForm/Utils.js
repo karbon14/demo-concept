@@ -18,11 +18,11 @@ const Utils = ({ children }) =>
         reader.onloadend = () => resolve(reader.result)
       })
     },
-    prepareData: async ({ formsData, api, blobToBase64, onSendToScribe, successMsg = '', errorMsg = '' }) => {
+    prepareData: async ({ formsData, api, blobToBase64, errorMsg }) => {
       const { personal, identification, service, scribes } = formsData
       const { id, idImage, userImage } = identification
       const { serviceImage } = service
-      const { selectedScibe } = scribes
+      const { selectedScribe } = scribes
 
       try {
         const idImageBase64 = await blobToBase64(idImage)
@@ -37,18 +37,34 @@ const Utils = ({ children }) =>
           serviceImageBase64
         }
 
-        onSendToScribe({ proofFormData, selectedScibe, api, successMsg, errorMsg })
+        return { proofFormData, selectedScribe }
       } catch (e) {
         api.setSubmitting(false)
         toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onSendToScribe: async ({ proofFormData, selectedScibe, api, successMsg, errorMsg }) => {
-      console.log('proofFormData: ', proofFormData)
-      console.log('selectedScibe: ', selectedScibe)
+    onSendToScribe: async ({ proofFormData, selectedScribe, api, signalHub, accounts, web3, successMsg, errorMsg }) => {
+      const { channel, broadcast } = signalHub
+      const proofData = { id: new Date().getTime(), values: JSON.stringify(proofFormData) }
+      const message = JSON.stringify(proofData)
 
-      api.setSubmitting(false)
-      toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+      const hash = web3.sha3(message)
+      const address = accounts.addresses[0]
+
+      web3.eth.sign(address, hash, (err, res) => {
+        if (err) {
+          api.setSubmitting(false)
+          toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+        }
+
+        if (res) {
+          api.setSubmitting(false)
+          toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+
+          const signedHash = res
+          broadcast(channel, { selectedScribe, proof: { address, signedHash, message } })
+        }
+      })
     }
   })
 

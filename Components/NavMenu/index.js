@@ -7,16 +7,19 @@ import style from './style.scss'
 const NavMenu = ({ items }) => (
   <div className="nav-menu">
     <ul>
-      {items.map((item, index) => (
-        <Link href={item.route} key={index}>
-          <li>
-            <a className={classNames({ selected: item.selected })}>
-              <img src={item.icon} alt={item.name} />
-              <span>{item.name}</span>
-            </a>
-          </li>
-        </Link>
-      ))}
+      {items.map(
+        (item, index) =>
+          item.hidden ? null : (
+            <Link href={item.route} key={index}>
+              <li>
+                <a className={classNames({ selected: item.selected })}>
+                  <img src={item.icon} alt={item.name} />
+                  <span>{item.name}</span>
+                </a>
+              </li>
+            </Link>
+          )
+      )}
     </ul>
     <style jsx>{style}</style>
   </div>

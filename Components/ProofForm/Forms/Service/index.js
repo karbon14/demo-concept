@@ -15,9 +15,7 @@ const Service = ({ onSubmit, getTranslation, formActions }) => {
         serviceImageUrl: ''
       }}
       validationSchema={Yup.object().shape({
-        serviceImage: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        )
+        serviceImage: Yup.string().required(getTranslation('proofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
     >
@@ -25,22 +23,16 @@ const Service = ({ onSubmit, getTranslation, formActions }) => {
         <form onSubmit={api.handleSubmit}>
           <div className="form__container">
             <FileUploader
-              label={getTranslation('poofForm.serviceImage')}
-              dropLabel={getTranslation('poofForm.serviceImageDrop')}
+              label={getTranslation('proofForm.serviceImage')}
+              dropLabel={getTranslation('proofForm.serviceImageDrop')}
               onUpload={async files => {
                 api.setFieldValue('serviceImage', files[0])
-                api.setFieldValue(
-                  'serviceImageUrl',
-                  URL.createObjectURL(files[0])
-                )
+                api.setFieldValue('serviceImageUrl', URL.createObjectURL(files[0]))
               }}
               preview={
                 api.values.serviceImageUrl
                   ? {
-                      name:
-                        (api.values.serviceImage &&
-                          api.values.serviceImage.name) ||
-                        api.values.serviceImageUrl,
+                      name: (api.values.serviceImage && api.values.serviceImage.name) || api.values.serviceImageUrl,
                       url: api.values.serviceImageUrl,
                       onClear: () => {
                         api.setFieldValue('serviceImage', null)
@@ -51,8 +43,8 @@ const Service = ({ onSubmit, getTranslation, formActions }) => {
               }
             />
 
-            <p>{getTranslation('poofForm.serviceDisclaimer', true)}</p>
-            <ul>{getTranslation('poofForm.serviceDisclaimer2', true)}</ul>
+            <p>{getTranslation('proofForm.serviceDisclaimer', true)}</p>
+            <ul>{getTranslation('proofForm.serviceDisclaimer2', true)}</ul>
           </div>
 
           {formActions(api)}

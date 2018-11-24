@@ -19,28 +19,27 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
         firstName: '',
         lastName: '',
         email: '',
-        adress: '',
+        address: '',
         country: '',
+        countryName: '',
         state: ''
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string()
-          .typeError(getTranslation('poofForm.invalidValue'))
-          .required(getTranslation('poofForm.requiredValue')),
+          .typeError(getTranslation('proofForm.invalidValue'))
+          .required(getTranslation('proofForm.requiredValue')),
         lastName: Yup.string()
-          .typeError(getTranslation('poofForm.invalidValue'))
-          .required(getTranslation('poofForm.requiredValue')),
+          .typeError(getTranslation('proofForm.invalidValue'))
+          .required(getTranslation('proofForm.requiredValue')),
         email: Yup.string()
           .email()
-          .typeError(getTranslation('poofForm.invalidValue'))
-          .required(getTranslation('poofForm.requiredValue')),
-        adress: Yup.string()
-          .typeError(getTranslation('poofForm.invalidValue'))
-          .required(getTranslation('poofForm.requiredValue')),
-        country: Yup.string().required(
-          getTranslation('poofForm.requiredValue')
-        ),
-        state: Yup.string().required(getTranslation('poofForm.requiredValue'))
+          .typeError(getTranslation('proofForm.invalidValue'))
+          .required(getTranslation('proofForm.requiredValue')),
+        address: Yup.string()
+          .typeError(getTranslation('proofForm.invalidValue'))
+          .required(getTranslation('proofForm.requiredValue')),
+        country: Yup.string().required(getTranslation('proofForm.requiredValue')),
+        state: Yup.string().required(getTranslation('proofForm.requiredValue'))
       })}
       onSubmit={(values, api) => onSubmit(values, api)}
     >
@@ -52,7 +51,7 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
                 <TextField
                   type="text"
                   name="firstName"
-                  label={getTranslation('poofForm.firstName')}
+                  label={getTranslation('proofForm.firstName')}
                   placeholder={api.errors.firstName}
                   theme={theme}
                   value={api.values.firstName}
@@ -67,7 +66,7 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
                 <TextField
                   type="text"
                   name="lastName"
-                  label={getTranslation('poofForm.lastName')}
+                  label={getTranslation('proofForm.lastName')}
                   placeholder={api.errors.lastName}
                   theme={theme}
                   value={api.values.lastName}
@@ -82,7 +81,7 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
             <TextField
               type="text"
               name="email"
-              label={getTranslation('poofForm.email')}
+              label={getTranslation('proofForm.email')}
               placeholder={api.errors.email}
               theme={theme}
               value={api.values.email}
@@ -94,15 +93,15 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
 
             <TextField
               type="email"
-              name="adress"
-              label={getTranslation('poofForm.adress')}
-              placeholder={api.errors.adress}
+              name="address"
+              label={getTranslation('proofForm.address')}
+              placeholder={api.errors.address}
               theme={theme}
-              value={api.values.adress}
+              value={api.values.address}
               onKeyUp={new Function()}
               onChange={api.handleChange}
               onBlur={api.handleBlur}
-              data-invalid={api.touched.adress && !!api.errors.adress}
+              data-invalid={api.touched.address && !!api.errors.address}
             />
 
             <div className="line">
@@ -112,7 +111,7 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
                   theme={theme}
                   value={api.values.country}
                   data-invalid={api.touched.country && !!api.errors.country}
-                  defaultLabel={getTranslation('poofForm.country')}
+                  defaultLabel={getTranslation('proofForm.country')}
                   options={countries.map(e => ({
                     label: e.name,
                     key: e.code,
@@ -126,9 +125,12 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
                       value: e.code ? e.code : e.name
                     }))
 
+                    const country = countries.find(_ => _.code === e.target.value)
+
                     api.setValues({
                       ...api.values,
                       country: e.target.value,
+                      countryName: country.name,
                       state: countryStates.length ? countryStates[0].key : ''
                     })
                   }}
@@ -141,7 +143,7 @@ const Personal = ({ onSubmit, getTranslation, formActions }) => {
                   theme={theme}
                   value={api.values.state}
                   data-invalid={api.touched.state && !!api.errors.state}
-                  defaultLabel={getTranslation('poofForm.state')}
+                  defaultLabel={getTranslation('proofForm.state')}
                   options={
                     api.values.country && states[api.values.country]
                       ? states[api.values.country].map(e => ({

@@ -25,7 +25,7 @@ const getProofLifeContract = (network = []) => {
 
 const mapScribe = scribes => scribes.map(scribe => ({ address: scribe, firstName: '', lastName: '' }))
 
-const updateUI = async ({ deployedContracts, setState }) => {
+const updateUI = async ({ deployedContracts, accounts, setState }) => {
   const { ProofLife = {} } = deployedContracts
 
   ProofLife.getScribes(async (err, res) => {
@@ -39,7 +39,15 @@ const updateUI = async ({ deployedContracts, setState }) => {
         scribesWithDetails.push(scribeWithDetail)
       }
 
-      setState({ scribes: scribesWithDetails })
+      const scribeData = scribes.find(_ => _.address === accounts.addresses[0]) || {}
+      const isScribe = scribeData.address ? true : false
+
+      setState({
+        scribes: scribesWithDetails,
+        isScribe,
+        scribeData,
+        contractDataLoaded: true
+      })
     }
   })
 }
@@ -48,11 +56,11 @@ export default class Karbon14 extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
     if (Component.getInitialProps) pageProps = await Component.getInitialProps(ctx)
-    return { pageProps, pathname: router.pathname, env: process.env }
+    return { pageProps, pathname: router.pathname, env: process.env, query: router.query }
   }
 
   render() {
-    const { Component, pageProps, pathname, env } = this.props
+    const { Component, pageProps, pathname, env, query } = this.props
 
     return (
       <Container>
@@ -67,11 +75,24 @@ export default class Karbon14 extends App {
             return (
               <React.Fragment>
                 <ReactionComponent
-                  initialState={{ scribes: [] }}
+                  initialState={{
+                    scribes: [],
+                    isScribe: undefined,
+                    scribeData: {},
+                    contractDataLoaded: false
+                  }}
                   deployedContracts={deployedContracts}
                   didUpdate={({ props, prevProps, setState }) => {
-                    if (!isEqual(props.deployedContracts, prevProps.deployedContracts))
+                    if (!isEqual(props.deployedContracts, prevProps.deployedContracts)) {
                       updateUI({ deployedContracts, accounts, setState, web3 })
+
+                      // Set signalHub listener
+                      const receivedMsg = translations.getTranslation('proofRequest.receivedMsg')
+                      signalHub.setReceivedMsg(receivedMsg)
+                      signalHub.subscribe(signalHub.channel).on('data', message => {
+                        if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
+                      })
+                    }
                   }}
                   render={({ state }) => {
                     const proofLifeContract = { ...state }
@@ -79,7 +100,7 @@ export default class Karbon14 extends App {
                     const currentProps = {
                       translations,
                       ethereum,
-                      routerNext,
+                      routerNext: { pathname, query, ...routerNext },
                       signalHub,
                       proofLifeContract,
                       ipfs,

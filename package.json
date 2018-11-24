@@ -56,7 +56,6 @@
     "prop-types": "15.6.2",
     "react": "16.5.2",
     "react-adopt": "0.6.0",
-    "react-apollo": "2.2.4",
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.5.2",
     "react-html-parser": "2.0.2",

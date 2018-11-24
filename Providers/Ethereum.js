@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Component from '@reactions/component'
-import { noop } from 'lodash'
 
 const deployContract = async (web3, contract) => {
   return web3.eth.contract(contract.ABI).at(contract.address)
 }
 
-const EthereumContext = React.createContext({ web3: noop })
+const EthereumContext = React.createContext({ web3: {} })
 
 const EthereumProvider = ({ contracts = [], children }) => (
   <EthereumContext.Consumer>
@@ -15,7 +14,7 @@ const EthereumProvider = ({ contracts = [], children }) => (
       <Component
         initialState={{
           connected: false,
-          web3: noop,
+          web3: {},
           accounts: { loading: true, addresses: [] },
           monitorErrors: [],
           contracts,

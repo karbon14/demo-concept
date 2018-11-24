@@ -56,7 +56,7 @@ const FormActions = ({
       <div className="right">
         <Button
           theme={theme}
-          label={getTranslation('poofForm.resetLabel')}
+          label={getTranslation('proofForm.resetLabel')}
           type="secondary"
           disabled={disabledReset}
           onClick={onReset}
@@ -64,7 +64,7 @@ const FormActions = ({
 
         <Button
           theme={theme}
-          label={getTranslation(activeForm === formsNumber ? 'poofForm.submitLabel' : 'poofForm.nextFormLabel')}
+          label={getTranslation(activeForm === formsNumber ? 'proofForm.submitLabel' : 'proofForm.nextFormLabel')}
           type="button"
           disabled={disabledSubmit}
           onClick={onSubmit}
