@@ -13,19 +13,20 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
       proof: {},
       message: {},
       values: {},
-      signed: false
+      signed: false,
+      hash: undefined
     }}
     didMount={({ setState }) => {
       const { proof = {} } = active
-      const { address, hash, signedHash } = proof
+      const { address, signedHash } = proof
+      const hash = web3.sha3(proof.message)
       let message = {}
       let values = {}
       let signed = false
 
-      if (hash && signedHash) {
+      if (signedHash) {
         message = JSON.parse(proof.message)
         values = JSON.parse(message.values)
-
         try {
           const r = ethUtil.toBuffer(signedHash.slice(0, 66))
           const s = ethUtil.toBuffer('0x' + signedHash.slice(66, 130))
@@ -40,7 +41,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
         }
       }
 
-      setState({ proof, message, values, signed })
+      setState({ proof, hash, message, values, signed })
       // console.log('message: ', message)
       // console.log('values', values)
     }}
@@ -60,7 +61,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
 
                   <div className="info">
                     <p>{getTranslation('proofRequest.hash')}</p>
-                    <p className="value">{state.proof.hash}</p>
+                    <p className="value">{state.hash}</p>
                   </div>
 
                   <div className="info">

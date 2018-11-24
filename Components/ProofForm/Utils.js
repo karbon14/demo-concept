@@ -62,7 +62,7 @@ const Utils = ({ children }) =>
           toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
 
           const signedHash = res
-          broadcast(channel, { selectedScribe, proof: { address, hash, signedHash, message } })
+          broadcast(channel, { selectedScribe, proof: { address, signedHash, message } })
         }
       })
     }

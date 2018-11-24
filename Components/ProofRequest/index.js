@@ -28,15 +28,17 @@ const ProofRequest = ({ messages, signalHub, accounts, web3, query, getTranslati
 
             <div className="card">
               {query.user ? (
-                <ProofDetails
-                  active={messages.find(_ => _.proof.address === query.user)}
-                  getTranslation={getTranslation}
-                  signalHub={signalHub}
-                  accounts={accounts}
-                  web3={web3}
-                  onReject={onReject}
-                  onApprove={onApprove}
-                />
+                web3.sha3 ? (
+                  <ProofDetails
+                    active={messages.find(_ => _.proof.address === query.user)}
+                    getTranslation={getTranslation}
+                    signalHub={signalHub}
+                    accounts={accounts}
+                    web3={web3}
+                    onReject={onReject}
+                    onApprove={onApprove}
+                  />
+                ) : null
               ) : (
                 <MessageList messages={messages} label={getTranslation('proofRequest.userAddress')} />
               )}

@@ -18,5 +18,9 @@
   "address": "Dirección",
   "id": "ID/Número de Documento",
   "reject": "Rechazar",
-  "approve": "Aprobar"
+  "approve": "Aprobar",
+  "rejectErrorMsg": "Error al rechazar Prueba pendiente!",
+  "rejectSuccessMsg": "Prueba pendiente rechazada OK!",
+  "approveErrorMsg": "Error al aprobar Prueba pendiente!",
+  "approveSuccessMsg": "Prueba pendiente aprobada OK!"
 }

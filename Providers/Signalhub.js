@@ -29,16 +29,15 @@ const SignalHubProvider = class extends React.Component {
     this.state = {
       broadcast: this.hub.broadcast.bind(this.hub),
       subscribe: this.hub.subscribe.bind(this.hub),
-      channel: this.channels,
+      channel: this.channel,
       appName: this.appName,
       messages: [
         {
           selectedScribe: '0xcdd79fb57a701463d11c4d34007553c3d5afdcee',
           proof: {
             address: '0xeb7691764d1802a108aecb3f0ff7a1f2fc16a5fd',
-            hash: '0x5f69777196dde767d2b0c008dea6a4a20cfa877f56d1ee227b256253d5b34dfb',
             signedHash:
-              '0x9d907cc350b365c02224f6845b3712bd364190b7ac117b21bf4f67a0dd230f9209ba7aa0595639e8f3496604224ef4e519d651f7596df796d0336290c8a06a111c',
+              '0x7d53457994301a85a8b9b17096a1ce52901ce7be4c740f61da6ac29ac65ce95f58d3d31a07ce6f3279a0f26a4b45f709c0f5dcf2ab0915b90415db4efa281ecc1b',
             message: JSON.stringify({ id: 1542638874769, values })
           }
         },
@@ -46,7 +45,6 @@ const SignalHubProvider = class extends React.Component {
           selectedScribe: '0xcdd79fb57a701463d11c4d34007553c3d5afdcee',
           proof: {
             address: '0xeb7691764d1802a108aecb3f0ff7a1f2fc16a5fe',
-            hash: '0x5f69777196dde767d2b0c008dea6a4a20cfa877f56d1ee227b256253d5b34dfb',
             signedHash:
               '0x9d907cc350b365c02224f6845b3712bd364190b7ac117b21bf4f67a0dd230f9209ba7aa0595639e8f3496604224ef4e519d651f7596df796d0336290c8a06a111c',
             message: JSON.stringify({ id: 1542638874769, values })
