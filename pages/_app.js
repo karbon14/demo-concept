@@ -1,6 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
+import Router from 'next/router'
 import { Providers } from 'Providers'
 import { ToastContainer } from 'Components/Toast'
 import { theme } from 'Common/Core'
@@ -79,19 +80,38 @@ export default class Karbon14 extends App {
                     scribes: [],
                     isScribe: undefined,
                     scribeData: {},
-                    contractDataLoaded: false
+                    contractDataLoaded: false,
+                    web3Updater: false
                   }}
                   deployedContracts={deployedContracts}
-                  didUpdate={({ props, prevProps, setState }) => {
-                    if (!isEqual(props.deployedContracts, prevProps.deployedContracts)) {
-                      updateUI({ deployedContracts, accounts, setState, web3 })
-
+                  accounts={accounts}
+                  didUpdate={({ props, prevProps, state, prevState, setState }) => {
+                    if (state.contractDataLoaded !== prevState.contractDataLoaded) {
                       // Set signalHub listener
                       const receivedMsg = translations.getTranslation('proofRequest.receivedMsg')
                       signalHub.setReceivedMsg(receivedMsg)
                       signalHub.subscribe(signalHub.channel).on('data', message => {
                         if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
                       })
+                    }
+
+                    if (!isEqual(props.accounts, prevProps.accounts)) {
+                      // Update UI if Metamask Account is changed
+                      if (deployedContracts.ProofLife) updateUI({ deployedContracts, accounts, setState, web3 })
+                    }
+
+                    if (
+                      state.contractDataLoaded !== prevState.contractDataLoaded ||
+                      state.isScribe !== prevState.isScribe
+                    ) {
+                      // Verify route for Metamask Account
+                      // If no correct, redidect to a valid one
+                      const isScribeRoute = routerNext.currentRoute.indexOf('proof-request') !== -1
+                      if (state.isScribe && !isScribeRoute) {
+                        Router.push('/proof-request', '/proof-request', { shallow: true })
+                      } else if (!state.isScribe && isScribeRoute) {
+                        Router.push('/', '/', { shallow: true })
+                      }
                     }
                   }}
                   render={({ state }) => {

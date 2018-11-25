@@ -18,7 +18,21 @@ const EthereumProvider = ({ contracts = [], children }) => (
           accounts: { loading: true, addresses: [] },
           monitorErrors: [],
           contracts,
-          deployedContracts: {}
+          deployedContracts: {},
+          getAccounts: ({ setState }) => {
+            window.web3.eth.getAccounts((err, addresses) => {
+              const accounts = { loading: false, addresses, locked: !addresses.length }
+              setState({ accounts })
+            })
+          },
+          getContracts: ({ state, setState }) => {
+            let deployedContracts = {}
+            state.contracts.map(async c => {
+              const contract = await deployContract(window.web3, c)
+              deployedContracts = { ...deployedContracts, [c.name]: contract }
+              setState({ deployedContracts })
+            })
+          }
         }}
         didMount={({ state, setState }) => {
           if (window.web3) {
@@ -51,20 +65,12 @@ const EthereumProvider = ({ contracts = [], children }) => (
             setState({ ...web3State })
 
             // Deploy Contracts
-            let deployedContracts = {}
-            state.contracts.map(async c => {
-              const contract = await deployContract(window.web3, c)
-              deployedContracts = { ...deployedContracts, [c.name]: contract }
-            })
+            state.getContracts({ state, setState })
 
             // Get available Accounts
-            window.web3.eth.getAccounts((err, addresses) => {
-              const accounts = {
-                loading: false,
-                addresses,
-                locked: !addresses.length
-              }
-              setState({ accounts, deployedContracts })
+            state.getAccounts({ setState })
+            window.web3.currentProvider.publicConfigStore.on('update', async () => {
+              state.getAccounts({ setState })
             })
           } else {
             setState({
@@ -72,7 +78,7 @@ const EthereumProvider = ({ contracts = [], children }) => (
             })
           }
         }}
-        render={({ state }) => {
+        render={({ state, setState }) => {
           const { connected, web3, accounts, monitorErrors, contracts, deployedContracts } = state
           return children({
             connected,
@@ -80,7 +86,9 @@ const EthereumProvider = ({ contracts = [], children }) => (
             accounts,
             monitorErrors,
             contracts,
-            deployedContracts
+            deployedContracts,
+            getContracts: () => state.getContracts({ state, setState }),
+            getAccounts: () => state.getAccounts({ setState })
           })
         }}
       />
