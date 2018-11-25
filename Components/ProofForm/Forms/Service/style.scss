@@ -3,6 +3,8 @@ form {
 
   .form__container {
     width: 100%;
+    max-height: calc(100% - 60px);
+    overflow-y: scroll;
 
     :global(.fileUploader) {
       :global(.droppable),

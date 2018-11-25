@@ -3,6 +3,8 @@ form {
 
   .form__container {
     width: 100%;
+    max-height: calc(100% - 60px);
+    overflow-y: scroll;
 
     label {
       user-select: none;
@@ -21,6 +23,9 @@ form {
         padding: 0 20px;
         margin-left: 20px;
         margin-top: 0px;
+        width: calc(100% - 50px);
+        min-height: 130px;
+        border-bottom: 1px solid rgba(63,63,68,0.10);
 
         :global(.picture) {
           display: none;

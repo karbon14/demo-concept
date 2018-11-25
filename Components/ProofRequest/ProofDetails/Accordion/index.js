@@ -22,7 +22,13 @@ const Accordion = ({ openStates, options }) => (
               {option.label}
             </button>
 
-            <div className="panel" style={{ display: state.openStates[index] ? 'block' : 'none' }}>
+            <div
+              className="panel"
+              style={{
+                display: state.openStates[index] ? 'block' : 'none',
+                width: state.openStates[index] ? 'initial' : '0'
+              }}
+            >
               {option.child}
             </div>
           </React.Fragment>

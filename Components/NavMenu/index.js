@@ -13,9 +13,10 @@ const NavMenu = ({ items }) => (
             <Link href={item.route} key={index}>
               <li>
                 <a className={classNames({ selected: item.selected })}>
-                  <img src={item.icon} alt={item.name} />
+                  <img src={item.selected ? item.iconSelected : item.icon} alt={item.name} />
                   <span>{item.name}</span>
                 </a>
+                {item.notifications ? <span className="badge">{item.notifications}</span> : null}
               </li>
             </Link>
           )
