@@ -18,11 +18,9 @@ const Utils = ({ children }) =>
         toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onApprove: async ({ proof, signalHub, accounts, web3, successMsg, errorMsg }) => {
+    onApprove: async ({ proof, hash, signalHub, accounts, web3, successMsg, errorMsg }) => {
       const { removeMessage } = signalHub
       const address = accounts.addresses[0]
-      const { message } = proof
-      const hash = web3.sha3(message)
 
       web3.eth.sign(address, hash, (err, res) => {
         if (err) {

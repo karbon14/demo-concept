@@ -9,13 +9,14 @@ const Request = ({
   proofLifeContract,
   routerNext,
   signalHub: { messages },
-  ethereum: { accounts, web3 }
+  ethereum: { accounts, web3, network }
 }) => (
   <Dashboard
     translations={translations}
     signalHub={signalHub}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
+    network={network}
   >
     <ProofRequest
       query={routerNext.query}

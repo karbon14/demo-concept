@@ -15,6 +15,7 @@ const EthereumProvider = ({ contracts = [], children }) => (
         initialState={{
           connected: false,
           web3: {},
+          network: undefined,
           accounts: { loading: true, addresses: [] },
           monitorErrors: [],
           contracts,
@@ -72,6 +73,12 @@ const EthereumProvider = ({ contracts = [], children }) => (
             window.web3.currentProvider.publicConfigStore.on('update', async () => {
               state.getAccounts({ setState })
             })
+
+            // Get network by netId
+            window.web3.version.getNetwork((err, netId) => {
+              const networks = { '1': 'Mainnet', '2': 'Morden', '3': 'Ropsten', '4': 'Rinkevy', '42': 'Kovan' }
+              if (!err && netId) setState({ network: networks[netId] })
+            })
           } else {
             setState({
               monitorErrors: [...state.monitorErrors, 'Not found web3']
@@ -79,10 +86,11 @@ const EthereumProvider = ({ contracts = [], children }) => (
           }
         }}
         render={({ state, setState }) => {
-          const { connected, web3, accounts, monitorErrors, contracts, deployedContracts } = state
+          const { connected, web3, network, accounts, monitorErrors, contracts, deployedContracts } = state
           return children({
             connected,
             web3,
+            network,
             accounts,
             monitorErrors,
             contracts,

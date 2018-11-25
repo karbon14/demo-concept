@@ -8,7 +8,8 @@ export const Dashboard = ({
   routerNext,
   translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
   signalHub: { messages },
-  proofLifeContract: { scribes, isScribe, contractDataLoaded }
+  proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded },
+  network
 }) => (
   <div>
     <Header
@@ -16,6 +17,11 @@ export const Dashboard = ({
       toggleSelected={toggleSelected}
       selectedLanguage={selectedLanguage}
       registerTranslations={registerTranslations}
+      isScribe={isScribe}
+      scribeData={scribeData}
+      accountsAddress={accountsAddress}
+      contractDataLoaded={contractDataLoaded}
+      network={network}
     />
 
     <div className="contentWrapper">
@@ -72,5 +78,6 @@ Dashboard.propTypes = {
   translations: PropTypes.object,
   signalHub: PropTypes.object,
   proofLifeContract: PropTypes.object,
-  routerNext: PropTypes.object
+  routerNext: PropTypes.object,
+  network: PropTypes.string
 }

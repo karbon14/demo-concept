@@ -40,13 +40,14 @@ const updateUI = async ({ deployedContracts, accounts, setState }) => {
         scribesWithDetails.push(scribeWithDetail)
       }
 
-      const scribeData = scribes.find(_ => _.address === accounts.addresses[0]) || {}
+      const scribeData = scribesWithDetails.find(_ => _.address === accounts.addresses[0]) || {}
       const isScribe = scribeData.address ? true : false
 
       setState({
         scribes: scribesWithDetails,
         isScribe,
         scribeData,
+        accountsAddress: accounts.addresses[0],
         contractDataLoaded: true
       })
     }

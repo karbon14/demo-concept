@@ -150,6 +150,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
                 onReject({
                   signalHub,
                   proof: state.proof,
+                  hash: state.hash,
                   errorMsg: getTranslation('proofRequest.rejectErrorMsg'),
                   successMsg: getTranslation('proofRequest.rejectSuccessMsg')
                 })

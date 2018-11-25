@@ -9,7 +9,7 @@ const Index = ({
   signalHub,
   routerNext,
   proofLifeContract,
-  ethereum: { accounts, web3 },
+  ethereum: { accounts, web3, network },
   proofLifeContract: { scribes }
 }) => (
   <Dashboard
@@ -17,6 +17,7 @@ const Index = ({
     signalHub={signalHub}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
+    network={network}
   >
     <ProofForm
       getTranslation={translations.getTranslation}
