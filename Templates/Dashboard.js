@@ -8,7 +8,8 @@ export const Dashboard = ({
   routerNext,
   translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
   signalHub: { messages },
-  proofLifeContract: { scribes, isScribe, contractDataLoaded }
+  proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded },
+  network
 }) => (
   <div>
     <Header
@@ -16,6 +17,11 @@ export const Dashboard = ({
       toggleSelected={toggleSelected}
       selectedLanguage={selectedLanguage}
       registerTranslations={registerTranslations}
+      isScribe={isScribe}
+      scribeData={scribeData}
+      accountsAddress={accountsAddress}
+      contractDataLoaded={contractDataLoaded}
+      network={network}
     />
 
     <div className="contentWrapper">
@@ -26,6 +32,7 @@ export const Dashboard = ({
                 {
                   name: getTranslation('navMenu.newProof'),
                   icon: require('/static/icons/plus.svg'),
+                  iconSelected: require('/static/icons/plus_selected.svg'),
                   route: '/',
                   selected: routerNext.currentRoute === '/',
                   hidden: isScribe
@@ -33,6 +40,7 @@ export const Dashboard = ({
                 {
                   name: getTranslation('navMenu.pastProof'),
                   icon: require('/static/icons/calendar.svg'),
+                  iconSelected: require('/static/icons/calendar_selected.svg'),
                   route: '/history',
                   selected: routerNext.currentRoute === '/history',
                   hidden: isScribe
@@ -40,16 +48,20 @@ export const Dashboard = ({
                 {
                   name: `${getTranslation('navMenu.scribes')} (${scribes.length})`,
                   icon: require('/static/icons/explore.svg'),
+                  iconSelected: require('/static/icons/explore_selected.svg'),
                   route: '/scribes',
                   selected: routerNext.currentRoute === '/scribes',
-                  hidden: isScribe
+                  hidden: isScribe,
+                  notifications: scribes.length
                 },
                 {
                   name: `${getTranslation('navMenu.proofRequest')} (${messages.length})`,
                   icon: require('/static/icons/pending.svg'),
+                  iconSelected: require('/static/icons/pending_selected.svg'),
                   route: '/proof-request',
                   selected: routerNext.currentRoute.indexOf('proof-request') !== -1,
-                  hidden: !isScribe
+                  hidden: !isScribe,
+                  notifications: messages.length
                 }
               ]
             : []
@@ -66,5 +78,6 @@ Dashboard.propTypes = {
   translations: PropTypes.object,
   signalHub: PropTypes.object,
   proofLifeContract: PropTypes.object,
-  routerNext: PropTypes.object
+  routerNext: PropTypes.object,
+  network: PropTypes.string
 }

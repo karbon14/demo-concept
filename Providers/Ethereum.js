@@ -15,10 +15,25 @@ const EthereumProvider = ({ contracts = [], children }) => (
         initialState={{
           connected: false,
           web3: {},
+          network: undefined,
           accounts: { loading: true, addresses: [] },
           monitorErrors: [],
           contracts,
-          deployedContracts: {}
+          deployedContracts: {},
+          getAccounts: ({ setState }) => {
+            window.web3.eth.getAccounts((err, addresses) => {
+              const accounts = { loading: false, addresses, locked: !addresses.length }
+              setState({ accounts })
+            })
+          },
+          getContracts: ({ state, setState }) => {
+            let deployedContracts = {}
+            state.contracts.map(async c => {
+              const contract = await deployContract(window.web3, c)
+              deployedContracts = { ...deployedContracts, [c.name]: contract }
+              setState({ deployedContracts })
+            })
+          }
         }}
         didMount={({ state, setState }) => {
           if (window.web3) {
@@ -51,20 +66,18 @@ const EthereumProvider = ({ contracts = [], children }) => (
             setState({ ...web3State })
 
             // Deploy Contracts
-            let deployedContracts = {}
-            state.contracts.map(async c => {
-              const contract = await deployContract(window.web3, c)
-              deployedContracts = { ...deployedContracts, [c.name]: contract }
-            })
+            state.getContracts({ state, setState })
 
             // Get available Accounts
-            window.web3.eth.getAccounts((err, addresses) => {
-              const accounts = {
-                loading: false,
-                addresses,
-                locked: !addresses.length
-              }
-              setState({ accounts, deployedContracts })
+            state.getAccounts({ setState })
+            window.web3.currentProvider.publicConfigStore.on('update', async () => {
+              state.getAccounts({ setState })
+            })
+
+            // Get network by netId
+            window.web3.version.getNetwork((err, netId) => {
+              const networks = { '1': 'Mainnet', '2': 'Morden', '3': 'Ropsten', '4': 'Rinkevy', '42': 'Kovan' }
+              if (!err && netId) setState({ network: networks[netId] })
             })
           } else {
             setState({
@@ -72,15 +85,18 @@ const EthereumProvider = ({ contracts = [], children }) => (
             })
           }
         }}
-        render={({ state }) => {
-          const { connected, web3, accounts, monitorErrors, contracts, deployedContracts } = state
+        render={({ state, setState }) => {
+          const { connected, web3, network, accounts, monitorErrors, contracts, deployedContracts } = state
           return children({
             connected,
             web3,
+            network,
             accounts,
             monitorErrors,
             contracts,
-            deployedContracts
+            deployedContracts,
+            getContracts: () => state.getContracts({ state, setState }),
+            getAccounts: () => state.getAccounts({ setState })
           })
         }}
       />
