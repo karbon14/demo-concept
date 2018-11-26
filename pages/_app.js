@@ -89,10 +89,16 @@ export default class Karbon14 extends App {
                   didUpdate={({ props, prevProps, state, prevState, setState }) => {
                     if (state.contractDataLoaded !== prevState.contractDataLoaded) {
                       // Set signalHub listener
-                      const receivedMsg = translations.getTranslation('proofRequest.receivedMsg')
-                      signalHub.setReceivedMsg(receivedMsg)
                       signalHub.subscribe(signalHub.channel).on('data', message => {
-                        if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
+                        if (state.isScribe) {
+                          // If is a scribe
+                          signalHub.setReceivedMsg(translations.getTranslation('proofRequest.receivedMsg'))
+                          if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
+                        } else {
+                          // If is not a scribe
+                          signalHub.setReceivedMsg(translations.getTranslation('incomingProof.receivedMsg'))
+                          if (message.approvedUser === accounts.addresses[0]) signalHub.saveMessage(message)
+                        }
                       })
                     }
 
@@ -125,6 +131,7 @@ export default class Karbon14 extends App {
                       signalHub,
                       proofLifeContract,
                       ipfs,
+                      env,
                       ...pageProps
                     }
                     return <Component {...currentProps} />

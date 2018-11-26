@@ -1,0 +1,8 @@
+{
+  "title": "Incoming approved Proofs",
+  "receivedMsg": "New approved Proof received",
+  "scriveAddress": "Scribe Address",
+  "save": "Save",
+  "saveErrorMsg": "Error saving approved Proof!",
+  "saveSuccessMsg": "Approved Proof saved OK!"
+}

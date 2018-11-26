@@ -1,17 +1,16 @@
 import React from 'react'
-import 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
-import { ProofForm } from 'Components/ProofForm'
 import { Dashboard } from 'Templates'
+import { IncomingProof } from 'Components/IncomingProof'
 
-const Index = ({
+const Request = ({
   translations,
   signalHub,
-  routerNext,
   proofLifeContract,
-  ethereum: { accounts, web3, network },
-  proofLifeContract: { scribes },
-  env
+  routerNext,
+  signalHub: { messages },
+  ethereum: { web3, network, deployedContracts },
+  ipfs
 }) => (
   <Dashboard
     translations={translations}
@@ -20,24 +19,25 @@ const Index = ({
     routerNext={routerNext}
     network={network}
   >
-    <ProofForm
-      getTranslation={translations.getTranslation}
+    <IncomingProof
+      query={routerNext.query}
+      messages={messages}
       signalHub={signalHub}
-      accounts={accounts}
       web3={web3}
-      scribes={scribes}
-      env={env}
+      ipfs={ipfs}
+      deployedContracts={deployedContracts}
+      getTranslation={translations.getTranslation}
     />
   </Dashboard>
 )
 
-Index.propTypes = {
+Request.propTypes = {
   translations: PropTypes.object,
   signalHub: PropTypes.object,
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
-  env: PropTypes.object
+  ipfs: PropTypes.object
 }
 
-export default Index
+export default Request

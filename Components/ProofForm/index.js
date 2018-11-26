@@ -6,14 +6,13 @@ import { Utils } from './Utils'
 import { SwitcherForm, FormActions } from './SwitcherForm'
 import { Personal, Identification, Service, Scribes } from './Forms'
 
-const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
+const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3, env }) => (
   <Utils>
     {({ blobToBase64, prepareData, onSendToScribe }) => (
       <Component
         initialState={{
           activeForm: 1,
           formsData: {
-            personal: {},
             identification: {},
             service: {},
             scribes: {}
@@ -31,6 +30,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                       id: 1,
                       child: (
                         <Personal
+                          env={env}
                           onSubmit={(values, api) => {
                             setState({
                               formsData: { ...state.formsData, personal: values },
@@ -39,20 +39,24 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                             api.setSubmitting(false)
                           }}
                           getTranslation={getTranslation}
-                          formActions={api => (
-                            <FormActions
-                              formsNumber={4}
-                              activeForm={state.activeForm}
-                              disabledReset={!api.dirty || api.isSubmitting}
-                              disabledSubmit={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
-                              onReset={api.handleReset}
-                              onBack={() => {
-                                setState({ activeForm: state.activeForm - 1 })
-                              }}
-                              onSubmit={api.submitForm}
-                              getTranslation={getTranslation}
-                            />
-                          )}
+                          formActions={api => {
+                            const dirty = env.MOCKED ? true : api.dirty
+
+                            return (
+                              <FormActions
+                                formsNumber={4}
+                                activeForm={state.activeForm}
+                                disabledReset={!api.dirty || api.isSubmitting}
+                                disabledSubmit={!dirty || api.isSubmitting || Object.keys(api.errors).length}
+                                onReset={api.handleReset}
+                                onBack={() => {
+                                  setState({ activeForm: state.activeForm - 1 })
+                                }}
+                                onSubmit={api.submitForm}
+                                getTranslation={getTranslation}
+                              />
+                            )
+                          }}
                         />
                       )
                     },
@@ -60,6 +64,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                       id: 2,
                       child: (
                         <Identification
+                          env={env}
                           onSubmit={(values, api) => {
                             setState({
                               formsData: {
@@ -71,20 +76,24 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                             api.setSubmitting(false)
                           }}
                           getTranslation={getTranslation}
-                          formActions={api => (
-                            <FormActions
-                              formsNumber={4}
-                              activeForm={state.activeForm}
-                              disabledReset={!api.dirty || api.isSubmitting}
-                              disabledSubmit={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
-                              onReset={api.handleReset}
-                              onBack={() => {
-                                setState({ activeForm: state.activeForm - 1 })
-                              }}
-                              onSubmit={api.submitForm}
-                              getTranslation={getTranslation}
-                            />
-                          )}
+                          formActions={api => {
+                            const dirty = env.MOCKED ? true : api.dirty
+
+                            return (
+                              <FormActions
+                                formsNumber={4}
+                                activeForm={state.activeForm}
+                                disabledReset={!api.dirty || api.isSubmitting}
+                                disabledSubmit={!dirty || api.isSubmitting || Object.keys(api.errors).length}
+                                onReset={api.handleReset}
+                                onBack={() => {
+                                  setState({ activeForm: state.activeForm - 1 })
+                                }}
+                                onSubmit={api.submitForm}
+                                getTranslation={getTranslation}
+                              />
+                            )
+                          }}
                         />
                       )
                     },
@@ -92,6 +101,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                       id: 3,
                       child: (
                         <Service
+                          env={env}
                           onSubmit={(values, api) => {
                             setState({
                               formsData: {
@@ -103,20 +113,24 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                             api.setSubmitting(false)
                           }}
                           getTranslation={getTranslation}
-                          formActions={api => (
-                            <FormActions
-                              formsNumber={4}
-                              activeForm={state.activeForm}
-                              disabledReset={!api.dirty || api.isSubmitting}
-                              disabledSubmit={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
-                              onReset={api.handleReset}
-                              onBack={() => {
-                                setState({ activeForm: state.activeForm - 1 })
-                              }}
-                              onSubmit={api.submitForm}
-                              getTranslation={getTranslation}
-                            />
-                          )}
+                          formActions={api => {
+                            const dirty = env.MOCKED ? true : api.dirty
+
+                            return (
+                              <FormActions
+                                formsNumber={4}
+                                activeForm={state.activeForm}
+                                disabledReset={!api.dirty || api.isSubmitting}
+                                disabledSubmit={!dirty || api.isSubmitting || Object.keys(api.errors).length}
+                                onReset={api.handleReset}
+                                onBack={() => {
+                                  setState({ activeForm: state.activeForm - 1 })
+                                }}
+                                onSubmit={api.submitForm}
+                                getTranslation={getTranslation}
+                              />
+                            )
+                          }}
                         />
                       )
                     },
@@ -124,6 +138,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                       id: 4,
                       child: (
                         <Scribes
+                          env={env}
                           scribes={scribes}
                           onSubmit={async (values, api) => {
                             const formsData = {
@@ -139,7 +154,8 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                               api,
                               blobToBase64,
                               onSendToScribe,
-                              errorMsg
+                              errorMsg,
+                              env
                             })
 
                             if (proof) {
@@ -157,20 +173,24 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3 }) => (
                             }
                           }}
                           getTranslation={getTranslation}
-                          formActions={api => (
-                            <FormActions
-                              formsNumber={4}
-                              activeForm={state.activeForm}
-                              disabledReset={!api.dirty || api.isSubmitting}
-                              disabledSubmit={!api.dirty || api.isSubmitting || Object.keys(api.errors).length}
-                              onReset={api.handleReset}
-                              onBack={() => {
-                                setState({ activeForm: state.activeForm - 1 })
-                              }}
-                              onSubmit={api.submitForm}
-                              getTranslation={getTranslation}
-                            />
-                          )}
+                          formActions={api => {
+                            const dirty = env.MOCKED ? true : api.dirty
+
+                            return (
+                              <FormActions
+                                formsNumber={4}
+                                activeForm={state.activeForm}
+                                disabledReset={!api.dirty || api.isSubmitting}
+                                disabledSubmit={!dirty || api.isSubmitting || Object.keys(api.errors).length}
+                                onReset={api.handleReset}
+                                onBack={() => {
+                                  setState({ activeForm: state.activeForm - 1 })
+                                }}
+                                onSubmit={api.submitForm}
+                                getTranslation={getTranslation}
+                              />
+                            )
+                          }}
                         />
                       )
                     }
@@ -192,7 +212,8 @@ ProofForm.propTypes = {
   scribes: PropTypes.array,
   signalHub: PropTypes.object,
   accounts: PropTypes.object,
-  web3: PropTypes.object
+  web3: PropTypes.object,
+  env: PropTypes.object
 }
 
 ProofForm.defaultProps = {

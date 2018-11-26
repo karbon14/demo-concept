@@ -5,14 +5,15 @@ import * as Yup from 'yup'
 import style from './style.scss'
 import { FileUploader } from 'Components/FileUploader'
 
-const Service = ({ onSubmit, getTranslation, formActions }) => {
+const Service = ({ onSubmit, getTranslation, formActions, env, mock }) => {
   return (
     <Formik
       validateOnChange
       validateOnSubmit
       initialValues={{
         serviceImage: null,
-        serviceImageUrl: ''
+        serviceImageUrl: '',
+        ...(env.MOCKED ? mock : {})
       }}
       validationSchema={Yup.object().shape({
         serviceImage: Yup.string().required(getTranslation('proofForm.requiredValue'))
@@ -58,7 +59,16 @@ const Service = ({ onSubmit, getTranslation, formActions }) => {
 Service.propTypes = {
   onSubmit: PropTypes.func,
   getTranslation: PropTypes.func,
-  formActions: PropTypes.any
+  formActions: PropTypes.any,
+  env: PropTypes.object,
+  mock: PropTypes.object
+}
+
+Service.defaultProps = {
+  mock: {
+    serviceImage: '/static/icons/plus.svg',
+    serviceImageUrl: '/static/icons/plus.svg'
+  }
 }
 
 export { Service }

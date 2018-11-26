@@ -38,6 +38,15 @@ export const Dashboard = ({
                   hidden: isScribe
                 },
                 {
+                  name: `${getTranslation('navMenu.incomingProof')} (${messages.length})`,
+                  icon: require('/static/icons/incoming.svg'),
+                  iconSelected: require('/static/icons/incoming_selected.svg'),
+                  route: '/incoming-proof',
+                  selected: routerNext.currentRoute.indexOf('incoming-proof') !== -1,
+                  hidden: isScribe,
+                  notifications: messages.length
+                },
+                {
                   name: getTranslation('navMenu.pastProof'),
                   icon: require('/static/icons/calendar.svg'),
                   iconSelected: require('/static/icons/calendar_selected.svg'),

@@ -6,6 +6,7 @@
     "dev": "next",
     "dev:local": "NETWORK=5777 next",
     "dev:ropsten": "NETWORK=3 next",
+    "dev:ropsten:mocked": "NETWORK=3 MOCKED=true next",
     "build": "next build",
     "build:ropsten": "NETWORK=3 next build",
     "start": "next start",

@@ -18,16 +18,16 @@ const Utils = ({ children }) =>
         reader.onloadend = () => resolve(reader.result)
       })
     },
-    prepareData: async ({ formsData, api, blobToBase64, errorMsg }) => {
+    prepareData: async ({ formsData, api, blobToBase64, errorMsg, env }) => {
       const { personal, identification, service, scribes } = formsData
       const { id, idImage, userImage } = identification
       const { serviceImage } = service
       const { selectedScribe } = scribes
 
       try {
-        const idImageBase64 = await blobToBase64(idImage)
-        const userImageBase64 = await blobToBase64(userImage)
-        const serviceImageBase64 = await blobToBase64(serviceImage)
+        const idImageBase64 = env.MOCKED ? '' : await blobToBase64(idImage)
+        const userImageBase64 = env.MOCKED ? '' : await blobToBase64(userImage)
+        const serviceImageBase64 = env.MOCKED ? '' : await blobToBase64(serviceImage)
 
         const proofFormData = {
           ...personal,
@@ -61,8 +61,15 @@ const Utils = ({ children }) =>
           api.setSubmitting(false)
           toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
 
-          const signedHash = res
-          broadcast(channel, { selectedScribe, proof: { address, signedHash, message } })
+          const payload = {
+            selectedScribe,
+            proof: {
+              message,
+              address,
+              signedHash: res
+            }
+          }
+          broadcast(channel, payload)
         }
       })
     }

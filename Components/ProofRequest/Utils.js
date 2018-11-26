@@ -19,7 +19,7 @@ const Utils = ({ children }) =>
       }
     },
     onApprove: async ({ proof, hash, signalHub, accounts, web3, successMsg, errorMsg }) => {
-      const { removeMessage } = signalHub
+      const { removeMessage, channel, broadcast } = signalHub
       const address = accounts.addresses[0]
 
       web3.eth.sign(address, hash, (err, res) => {
@@ -30,6 +30,16 @@ const Utils = ({ children }) =>
         if (res) {
           toast.success(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
           removeMessage({ ...proof, selectedScribe: null })
+
+          const payload = {
+            approvedUser: proof.address,
+            proof: {
+              message: proof.message,
+              address,
+              signedHash: res
+            }
+          }
+          broadcast(channel, payload)
 
           const href = '/proof-request'
           const as = href

@@ -8,13 +8,14 @@ import { Checkbox } from '@react-core/checkbox'
 import { ScribeProfile } from 'Components/CryptoScribes/ScribeProfile'
 import style from './style.scss'
 
-const Scribes = ({ scribes, onSubmit, getTranslation, formActions }) => {
+const Scribes = ({ scribes, onSubmit, getTranslation, formActions, env, mock }) => {
   return (
     <Formik
       validateOnChange
       validateOnSubmit
       initialValues={{
-        selectedScribe: ''
+        selectedScribe: '',
+        ...(env.MOCKED ? mock : {})
       }}
       validationSchema={Yup.object().shape({
         selectedScribe: Yup.string().required(getTranslation('proofForm.requiredValue'))
@@ -65,7 +66,16 @@ Scribes.propTypes = {
   scribes: PropTypes.array,
   onSubmit: PropTypes.func,
   getTranslation: PropTypes.func,
-  formActions: PropTypes.any
+  formActions: PropTypes.any,
+  env: PropTypes.object,
+  mock: PropTypes.object
+}
+
+Scribes.defaultProps = {
+  mock: {
+    '0xcdd79fb57a701463d11c4d34007553c3d5afdcee': true,
+    selectedScribe: '0xcdd79fb57a701463d11c4d34007553c3d5afdcee'
+  }
 }
 
 export { Scribes }

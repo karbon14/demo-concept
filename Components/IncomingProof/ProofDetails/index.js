@@ -7,14 +7,15 @@ import { Button } from '@react-core/button'
 import { Accordion } from './Accordion'
 import style from './style.scss'
 
-const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, getTranslation }) => (
+const ProofDetails = ({ active, signalHub, web3, deployedContracts, ipfs, onSave, getTranslation }) => (
   <Component
     initialState={{
       proof: {},
       message: {},
       values: {},
+      hash: undefined,
       signed: false,
-      hash: undefined
+      saving: false
     }}
     didMount={({ setState }) => {
       const { proof = {} } = active
@@ -43,7 +44,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
 
       setState({ proof, hash, message, values, signed })
     }}
-    render={({ state }) => (
+    render={({ state, setState }) => (
       <div className="details">
         <Accordion
           openStates={[true, false, false, false]}
@@ -53,7 +54,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
               child: (
                 <React.Fragment>
                   <div className="info">
-                    <p>{getTranslation('proofRequest.userAddress')}</p>
+                    <p>{getTranslation('incomingProof.scriveAddress')}</p>
                     <p className="value">{state.proof.address}</p>
                   </div>
 
@@ -141,33 +142,20 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
           <div className="actions__container">
             <Button
               theme={theme}
-              label={getTranslation('proofRequest.reject')}
-              type="secondary"
-              disabled={false}
-              onClick={() =>
-                onReject({
-                  signalHub,
-                  proof: state.proof,
-                  errorMsg: getTranslation('proofRequest.rejectErrorMsg'),
-                  successMsg: getTranslation('proofRequest.rejectSuccessMsg')
-                })
-              }
-            />
-
-            <Button
-              theme={theme}
-              label={getTranslation('proofRequest.approve')}
+              label={getTranslation('incomingProof.save')}
               type="button"
-              disabled={false}
+              disabled={!state.signed || state.saving}
               onClick={() =>
-                onApprove({
+                onSave({
+                  owner: active.approvedUser,
                   proof: state.proof,
                   hash: state.hash,
                   signalHub,
-                  accounts,
-                  web3,
-                  errorMsg: getTranslation('proofRequest.approveErrorMsg'),
-                  successMsg: getTranslation('proofRequest.approveSuccessMsg')
+                  deployedContracts,
+                  ipfs,
+                  setSaving: val => setState({ saving: val }),
+                  errorMsg: getTranslation('incomingProof.saveErrorMsg'),
+                  successMsg: getTranslation('incomingProof.saveSuccessMsg')
                 })
               }
             />
@@ -182,10 +170,10 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
 ProofDetails.propTypes = {
   active: PropTypes.object,
   signalHub: PropTypes.object,
-  accounts: PropTypes.object,
   web3: PropTypes.object,
-  onReject: PropTypes.func,
-  onApprove: PropTypes.func,
+  deployedContracts: PropTypes.object,
+  ipfs: PropTypes.object,
+  onSave: PropTypes.func,
   getTranslation: PropTypes.func
 }
 

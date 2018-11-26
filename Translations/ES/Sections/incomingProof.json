@@ -1,0 +1,8 @@
+{
+  "title": "Pruebas aprobadas entrantes",
+  "receivedMsg": "Nueva Prueba aprobada recivida",
+  "scriveAddress": "Dirección del Escribano",
+  "save": "Gardar",
+  "saveErrorMsg": "Error guardando prueba aprobada!",
+  "saveSuccessMsg": "Prueba aprobada guardando OK!"
+}

@@ -1,6 +1,7 @@
 {
   "newProof": "Nueva Prueba de Vida",
-  "pastProof": "Explora tus pruebas pasadas",
+  "incomingProof": "Pruebas entrantes",
+  "pastProof": "Explora tus pruebas",
   "scribes": "Explora Cripto Escribanías",
   "proofRequest": "Pendientes de aprovación"
 }
