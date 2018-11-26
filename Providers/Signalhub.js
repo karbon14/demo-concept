@@ -33,7 +33,7 @@ const SignalHubProvider = class extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.messages.length > prevState.messages.length) {
-      toast.info(this.state.receivedMsg, { position: toast.POSITION.BOTTOM_LEFT })
+      toast.info(this.state.receivedMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
     }
   }
 

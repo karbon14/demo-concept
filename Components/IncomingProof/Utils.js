@@ -18,11 +18,11 @@ const Utils = ({ children }) =>
         await ProofLife.setProof(ipfsFile[0].path, hash, { from: owner }, err => {
           if (err) {
             setSaving(false)
-            toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+            toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
           } else {
             setSaving(false)
             removeMessage(proof)
-            toast.success(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+            toast.success(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
 
             const href = '/incoming-proof'
             const as = href
@@ -31,7 +31,7 @@ const Utils = ({ children }) =>
         })
       } catch (e) {
         setSaving(false)
-        toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+        toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     }
   })

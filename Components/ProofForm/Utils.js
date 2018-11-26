@@ -40,7 +40,7 @@ const Utils = ({ children }) =>
         return { proofFormData, selectedScribe }
       } catch (e) {
         api.setSubmitting(false)
-        toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+        toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
     onSendToScribe: async ({ proofFormData, selectedScribe, api, signalHub, accounts, web3, successMsg, errorMsg }) => {
@@ -54,12 +54,12 @@ const Utils = ({ children }) =>
       web3.eth.sign(address, hash, (err, res) => {
         if (err) {
           api.setSubmitting(false)
-          toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+          toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
         }
 
         if (res) {
           api.setSubmitting(false)
-          toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+          toast.info(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
 
           const payload = {
             selectedScribe,

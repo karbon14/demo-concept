@@ -28,11 +28,7 @@ const Info = ({ value, label, copiedValueMsg = '', className = '', isLink = fals
       {isLink ? (
         <CopyToClipboard
           text={value}
-          onCopy={() =>
-            toast.info(copiedValueMsg, {
-              position: toast.POSITION.BOTTOM_LEFT
-            })
-          }
+          onCopy={() => toast.info(copiedValueMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })}
         >
           <span className={value ? 'fa fa-clipboard' : ''} />
         </CopyToClipboard>
