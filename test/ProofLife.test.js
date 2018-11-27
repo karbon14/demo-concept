@@ -33,8 +33,8 @@ contract('ProofLife', ([owner, scribe, anotherScribe]) => {
 
   it('should create and get 1 proof', async () => {
     const instance = await ProofLife.deployed()
-    const ipfsHash = 'ipfsHash'
-    const hashProof = 'hashProof'
+    const ipfsHash = 'QmQDmBYQnbJ26gyncBFMMdhceqoQb8Serb47npeWE1qJ2M'
+    const hashProof = '0x12c139337cd234c40a7bca2fda751fafd449d90dff732bb31c3f9938b3d22dd3'
 
     await instance.setProof(ipfsHash, hashProof, { from: owner })
     const index = await instance.getCountProof({ from: owner })
@@ -48,8 +48,8 @@ contract('ProofLife', ([owner, scribe, anotherScribe]) => {
   it('should create and get 2 proofs', async () => {
     const instance = await ProofLife.deployed()
 
-    const ipfsHash = 'ipfsHash'
-    const hashProof = 'hashProof'
+    const ipfsHash = 'QmQDmBYQnbJ26gyncBFMMdhceqoQb8Serb47npeWE1qJ2M'
+    const hashProof = '0x12c139337cd234c40a7bca2fda751fafd449d90dff732bb31c3f9938b3d22dd3'
 
     const ipfsHash2 = 'ipfsHash2'
     const hashProof2 = 'hashProof2'

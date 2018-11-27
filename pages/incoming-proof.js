@@ -10,7 +10,8 @@ const Request = ({
   routerNext,
   signalHub: { messages },
   ethereum: { web3, network, deployedContracts },
-  ipfs
+  ipfs,
+  updateUI
 }) => (
   <Dashboard
     translations={translations}
@@ -26,6 +27,7 @@ const Request = ({
       web3={web3}
       ipfs={ipfs}
       deployedContracts={deployedContracts}
+      updateUI={updateUI}
       getTranslation={translations.getTranslation}
     />
   </Dashboard>
@@ -37,7 +39,8 @@ Request.propTypes = {
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
-  ipfs: PropTypes.object
+  ipfs: PropTypes.object,
+  updateUI: PropTypes.func
 }
 
 export default Request

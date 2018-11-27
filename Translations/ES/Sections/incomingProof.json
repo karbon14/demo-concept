@@ -4,5 +4,6 @@
   "scriveAddress": "Dirección del Escribano",
   "save": "Gardar",
   "saveErrorMsg": "Error guardando prueba aprobada!",
-  "saveSuccessMsg": "Prueba aprobada guardando OK!"
+  "saveSuccessMsg": "Transacción enviada. Esperando la confirmación de la red.",
+  "buySuccessMsg": "Prueba aprobada guardando OK!"
 }

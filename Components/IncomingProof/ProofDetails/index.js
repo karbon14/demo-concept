@@ -7,7 +7,7 @@ import { Button } from '@react-core/button'
 import { Accordion } from './Accordion'
 import style from './style.scss'
 
-const ProofDetails = ({ active, signalHub, web3, deployedContracts, ipfs, onSave, getTranslation }) => (
+const ProofDetails = ({ active, signalHub, web3, deployedContracts, ipfs, onSave, updateUI, getTranslation }) => (
   <Component
     initialState={{
       proof: {},
@@ -152,10 +152,13 @@ const ProofDetails = ({ active, signalHub, web3, deployedContracts, ipfs, onSave
                   hash: state.hash,
                   signalHub,
                   deployedContracts,
+                  web3,
                   ipfs,
                   setSaving: val => setState({ saving: val }),
+                  updateUI,
                   errorMsg: getTranslation('incomingProof.saveErrorMsg'),
-                  successMsg: getTranslation('incomingProof.saveSuccessMsg')
+                  successMsg: getTranslation('incomingProof.saveSuccessMsg'),
+                  successBuyMsg: getTranslation('incomingProof.buySuccessMsg')
                 })
               }
             />
@@ -174,6 +177,7 @@ ProofDetails.propTypes = {
   deployedContracts: PropTypes.object,
   ipfs: PropTypes.object,
   onSave: PropTypes.func,
+  updateUI: PropTypes.func,
   getTranslation: PropTypes.func
 }
 

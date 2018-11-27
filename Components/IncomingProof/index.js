@@ -6,7 +6,7 @@ import { MessageList } from './MessageList'
 import { ProofDetails } from './ProofDetails'
 import style from './style.scss'
 
-const IncomingProof = ({ messages, signalHub, web3, deployedContracts, ipfs, query, getTranslation }) => {
+const IncomingProof = ({ messages, signalHub, web3, deployedContracts, ipfs, query, updateUI, getTranslation }) => {
   const requestLabel = getTranslation('incomingProof.title')
   const requestAmount = `(${messages.length})`
 
@@ -31,12 +31,13 @@ const IncomingProof = ({ messages, signalHub, web3, deployedContracts, ipfs, que
                 web3.sha3 ? (
                   <ProofDetails
                     active={messages.find(_ => _.proof.address === query.scribe)}
-                    getTranslation={getTranslation}
                     signalHub={signalHub}
                     web3={web3}
                     deployedContracts={deployedContracts}
                     ipfs={ipfs}
                     onSave={onSave}
+                    updateUI={updateUI}
+                    getTranslation={getTranslation}
                   />
                 ) : null
               ) : (
@@ -58,6 +59,7 @@ IncomingProof.propTypes = {
   deployedContracts: PropTypes.object,
   ipfs: PropTypes.object,
   query: PropTypes.object,
+  updateUI: PropTypes.func,
   getTranslation: PropTypes.func
 }
 

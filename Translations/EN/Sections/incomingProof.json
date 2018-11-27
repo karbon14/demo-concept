@@ -4,5 +4,6 @@
   "scriveAddress": "Scribe Address",
   "save": "Save",
   "saveErrorMsg": "Error saving approved Proof!",
-  "saveSuccessMsg": "Approved Proof saved OK!"
+  "saveSuccessMsg": "Transaction sended. Waiting for network confirmations.",
+  "buySuccessMsg": "Approved Proof saved OK!"
 }

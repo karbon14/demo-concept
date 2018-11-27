@@ -1,0 +1,59 @@
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  position: absolute;
+  right: 55px;
+  left: 55px;
+
+  .info {
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+
+    p {
+      word-wrap: break-word;
+
+      &.value {
+        color: #1641b5; 
+      }
+
+      i {
+        &.fa-check {
+          color: #14a200;
+        }
+
+        &.fa-times {
+          color: #fe0000;
+        }
+      }
+    }
+
+    &.copyable {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 10px;
+        color: #1641b5;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
+  }
+
+  hr {
+    margin: 20px 0 20px 0;
+    border-color: rgba(63,63,68,0.05);
+    border-width: 0.5px;
+  }
+
+
+  .scribe__container {
+    .info {
+      margin-bottom: 55px;
+    }
+  }
+}
