@@ -2,6 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Component from '@reactions/component'
 
+const getTransactionReceiptMined = function(txHash, interval) {
+  const self = this
+  const transactionReceiptAsync = function(resolve, reject) {
+    self.getTransactionReceipt(txHash, (error, receipt) => {
+      if (error) {
+        reject(error)
+      } else if (receipt == null) {
+        setTimeout(() => transactionReceiptAsync(resolve, reject), interval ? interval : 500)
+      } else {
+        resolve(receipt)
+      }
+    })
+  }
+
+  if (Array.isArray(txHash)) {
+    return Promise.all(txHash.map(oneTxHash => self.getTransactionReceiptMined(oneTxHash, interval)))
+  } else if (typeof txHash === 'string') {
+    return new Promise(transactionReceiptAsync)
+  } else {
+    throw new Error('Invalid Type: ' + txHash)
+  }
+}
+
 const deployContract = async (web3, contract) => {
   return web3.eth.contract(contract.ABI).at(contract.address)
 }
@@ -38,28 +61,7 @@ const EthereumProvider = ({ contracts = [], children }) => (
         didMount={({ state, setState }) => {
           if (window.web3) {
             // getTransactionReceipt Helper
-            window.web3.eth.getTransactionReceiptMined = (txHash, interval) => {
-              const self = this
-              const transactionReceiptAsync = function(resolve, reject) {
-                self.getTransactionReceipt(txHash, (error, receipt) => {
-                  if (error) {
-                    reject(error)
-                  } else if (receipt == null) {
-                    setTimeout(() => transactionReceiptAsync(resolve, reject), interval ? interval : 500)
-                  } else {
-                    resolve(receipt)
-                  }
-                })
-              }
-
-              if (Array.isArray(txHash)) {
-                return Promise.all(txHash.map(oneTxHash => self.getTransactionReceiptMined(oneTxHash, interval)))
-              } else if (typeof txHash === 'string') {
-                return new Promise(transactionReceiptAsync)
-              } else {
-                throw new Error('Invalid Type: ' + txHash)
-              }
-            }
+            window.web3.eth.getTransactionReceiptMined = getTransactionReceiptMined
 
             // Save Web3 State
             const web3State = { connected: true, web3: window.web3 }

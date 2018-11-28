@@ -8,7 +8,7 @@ export const Dashboard = ({
   routerNext,
   translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
   signalHub: { messages },
-  proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded },
+  proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded, proofsCount },
   network
 }) => (
   <div>
@@ -38,12 +38,24 @@ export const Dashboard = ({
                   hidden: isScribe
                 },
                 {
-                  name: getTranslation('navMenu.pastProof'),
+                  name: `${getTranslation('navMenu.incomingProof')} (${messages.length})`,
+                  icon: require('/static/icons/incoming.svg'),
+                  iconSelected: require('/static/icons/incoming_selected.svg'),
+                  route: '/incoming-proof',
+                  selected: routerNext.currentRoute.indexOf('incoming-proof') !== -1,
+                  hidden: isScribe,
+                  notifications: messages.length
+                },
+                {
+                  name: `${getTranslation('navMenu.pastProof')} ${
+                    proofsCount !== '' ? '(' + proofsCount + ')' : proofsCount
+                  }`,
                   icon: require('/static/icons/calendar.svg'),
                   iconSelected: require('/static/icons/calendar_selected.svg'),
                   route: '/history',
-                  selected: routerNext.currentRoute === '/history',
-                  hidden: isScribe
+                  selected: routerNext.currentRoute.indexOf('history') !== -1,
+                  hidden: isScribe,
+                  notifications: proofsCount
                 },
                 {
                   name: `${getTranslation('navMenu.scribes')} (${scribes.length})`,

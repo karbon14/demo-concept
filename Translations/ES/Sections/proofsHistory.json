@@ -1,3 +1,7 @@
 {
-  "title": "Tus pruebas pasadas"
+  "title": "Tus pruebas aprobadas",
+  "ipfsPath": "Ruta de IPFS",
+  "validatedHash": "Hash de Proof of Life",
+  "details": "Detalles",
+  "signedHash": "Hash de la prueba firmado por la escribanía"
 }

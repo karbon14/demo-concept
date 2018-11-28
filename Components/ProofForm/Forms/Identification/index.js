@@ -7,7 +7,7 @@ import { theme } from 'Common/Core'
 import { TextField } from '@react-core/textfield'
 import { FileUploader } from 'Components/FileUploader'
 
-const Identification = ({ onSubmit, getTranslation, formActions }) => {
+const Identification = ({ onSubmit, getTranslation, formActions, env, mock }) => {
   return (
     <Formik
       validateOnChange
@@ -17,7 +17,8 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
         idImage: null,
         idImageUrl: '',
         userImage: null,
-        userImageUrl: ''
+        userImageUrl: '',
+        ...(env.MOCKED ? mock : {})
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
@@ -104,7 +105,19 @@ const Identification = ({ onSubmit, getTranslation, formActions }) => {
 Identification.propTypes = {
   onSubmit: PropTypes.func,
   getTranslation: PropTypes.func,
-  formActions: PropTypes.any
+  formActions: PropTypes.any,
+  env: PropTypes.object,
+  mock: PropTypes.object
+}
+
+Identification.defaultProps = {
+  mock: {
+    id: '35621341',
+    idImage: '/static/icons/plus.svg',
+    idImageUrl: '/static/icons/plus.svg',
+    userImage: '/static/icons/plus.svg',
+    userImageUrl: '/static/icons/plus.svg'
+  }
 }
 
 export { Identification }

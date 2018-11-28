@@ -1,6 +1,7 @@
 {
   "newProof": "New Proof of Life",
-  "pastProof": "Explore your past proofs",
+  "incomingProof": "Incoming Proofs",
+  "pastProof": "Explore your Proofs",
   "scribes": "Explore Crypto Scribes",
   "proofRequest": "Pending Approval"
 }

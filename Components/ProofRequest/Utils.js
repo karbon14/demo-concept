@@ -13,23 +13,33 @@ const Utils = ({ children }) =>
         const as = href
         Router.push(href, as, { shallow: true })
 
-        toast.info(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+        toast.info(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       } catch (e) {
-        toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+        toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
     onApprove: async ({ proof, hash, signalHub, accounts, web3, successMsg, errorMsg }) => {
-      const { removeMessage } = signalHub
+      const { removeMessage, channel, broadcast } = signalHub
       const address = accounts.addresses[0]
 
       web3.eth.sign(address, hash, (err, res) => {
         if (err) {
-          toast.error(errorMsg, { position: toast.POSITION.BOTTOM_LEFT })
+          toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
         }
 
         if (res) {
-          toast.success(successMsg, { position: toast.POSITION.BOTTOM_LEFT })
+          toast.success(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
           removeMessage({ ...proof, selectedScribe: null })
+
+          const payload = {
+            approvedUser: proof.address,
+            proof: {
+              message: proof.message,
+              address,
+              signedHash: res
+            }
+          }
+          broadcast(channel, payload)
 
           const href = '/proof-request'
           const as = href

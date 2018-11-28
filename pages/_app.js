@@ -9,6 +9,17 @@ import ReactionComponent from '@reactions/component'
 import { isEqual } from 'lodash'
 import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
 
+const getProof = async (index, ProofLife) => {
+  return new Promise(resolve => {
+    ProofLife.getProof(index, (err, res = []) => {
+      if (!err) {
+        const [ipfs = '', hash = ''] = res
+        resolve({ ipfs, hash })
+      }
+    })
+  })
+}
+
 const getScribe = async (address, ProofLife) => {
   return new Promise(resolve => {
     ProofLife.getScribe(address, (err, res = []) => {
@@ -28,6 +39,7 @@ const mapScribe = scribes => scribes.map(scribe => ({ address: scribe, firstName
 
 const updateUI = async ({ deployedContracts, accounts, setState }) => {
   const { ProofLife = {} } = deployedContracts
+  const accountsAddress = accounts.addresses[0]
 
   ProofLife.getScribes(async (err, res) => {
     if (!err) {
@@ -40,15 +52,30 @@ const updateUI = async ({ deployedContracts, accounts, setState }) => {
         scribesWithDetails.push(scribeWithDetail)
       }
 
-      const scribeData = scribesWithDetails.find(_ => _.address === accounts.addresses[0]) || {}
+      const scribeData = scribesWithDetails.find(_ => _.address === accountsAddress) || {}
       const isScribe = scribeData.address ? true : false
 
       setState({
         scribes: scribesWithDetails,
         isScribe,
         scribeData,
-        accountsAddress: accounts.addresses[0],
+        accountsAddress,
         contractDataLoaded: true
+      })
+    }
+  })
+
+  await ProofLife.getCountProof({ from: accountsAddress }, async (err, res) => {
+    if (!err) {
+      const proofWithDetails = []
+      for (let x = 0; x < res.toNumber(); x++) {
+        const prrofDetail = await getProof(x, ProofLife)
+        proofWithDetails.push(prrofDetail)
+      }
+
+      setState({
+        proofsCount: res.toNumber(),
+        proofs: proofWithDetails.reverse()
       })
     }
   })
@@ -81,18 +108,25 @@ export default class Karbon14 extends App {
                     scribes: [],
                     isScribe: undefined,
                     scribeData: {},
-                    contractDataLoaded: false,
-                    web3Updater: false
+                    proofsCount: '',
+                    proofs: [],
+                    contractDataLoaded: false
                   }}
                   deployedContracts={deployedContracts}
                   accounts={accounts}
                   didUpdate={({ props, prevProps, state, prevState, setState }) => {
                     if (state.contractDataLoaded !== prevState.contractDataLoaded) {
                       // Set signalHub listener
-                      const receivedMsg = translations.getTranslation('proofRequest.receivedMsg')
-                      signalHub.setReceivedMsg(receivedMsg)
                       signalHub.subscribe(signalHub.channel).on('data', message => {
-                        if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
+                        if (state.isScribe) {
+                          // If is a scribe
+                          signalHub.setReceivedMsg(translations.getTranslation('proofRequest.receivedMsg'))
+                          if (message.selectedScribe === accounts.addresses[0]) signalHub.saveMessage(message)
+                        } else {
+                          // If is not a scribe
+                          signalHub.setReceivedMsg(translations.getTranslation('incomingProof.receivedMsg'))
+                          if (message.approvedUser === accounts.addresses[0]) signalHub.saveMessage(message)
+                        }
                       })
                     }
 
@@ -115,7 +149,7 @@ export default class Karbon14 extends App {
                       }
                     }
                   }}
-                  render={({ state }) => {
+                  render={({ state, setState }) => {
                     const proofLifeContract = { ...state }
 
                     const currentProps = {
@@ -125,6 +159,8 @@ export default class Karbon14 extends App {
                       signalHub,
                       proofLifeContract,
                       ipfs,
+                      env,
+                      updateUI: () => updateUI({ deployedContracts, accounts, setState }),
                       ...pageProps
                     }
                     return <Component {...currentProps} />

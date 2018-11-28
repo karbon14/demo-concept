@@ -1,3 +1,7 @@
 {
-  "title": "Your past proofs"
+  "title": "Your approved proofs",
+  "ipfsPath": "IPFS path",
+  "validatedHash": "Proof of Life hash",
+  "details": "Details",
+  "signedHash": "Proof hash signed by Scribe"
 }
