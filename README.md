@@ -6,7 +6,7 @@
 - Styled-jsx
 - Sass
 - IPFS
-- Socketio
+- Socket.io
 - web3.js
 
 ## Team
