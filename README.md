@@ -5,6 +5,9 @@
 - Next.js
 - Styled-jsx
 - Sass
+- IPFS
+- Socketio
+- web3.js
 
 ## Team
 
