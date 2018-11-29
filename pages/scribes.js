@@ -5,7 +5,7 @@ import { Dashboard } from 'Templates'
 
 const Scribes = ({
   translations,
-  signalHub,
+  socketIO,
   proofLifeContract,
   routerNext,
   proofLifeContract: { scribes },
@@ -13,7 +13,7 @@ const Scribes = ({
 }) => (
   <Dashboard
     translations={translations}
-    signalHub={signalHub}
+    socketIO={socketIO}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
@@ -25,7 +25,7 @@ const Scribes = ({
 Scribes.propTypes = {
   process: PropTypes.object,
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
   ethereum: PropTypes.object

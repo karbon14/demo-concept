@@ -5,15 +5,15 @@ import { ProofRequest } from 'Components/ProofRequest'
 
 const Request = ({
   translations,
-  signalHub,
+  socketIO,
   proofLifeContract,
   routerNext,
-  signalHub: { messages },
+  socketIO: { messages },
   ethereum: { accounts, web3, network }
 }) => (
   <Dashboard
     translations={translations}
-    signalHub={signalHub}
+    socketIO={socketIO}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
@@ -21,7 +21,7 @@ const Request = ({
     <ProofRequest
       query={routerNext.query}
       messages={messages}
-      signalHub={signalHub}
+      socketIO={socketIO}
       accounts={accounts}
       web3={web3}
       getTranslation={translations.getTranslation}
@@ -31,7 +31,7 @@ const Request = ({
 
 Request.propTypes = {
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object

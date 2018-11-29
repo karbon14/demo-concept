@@ -6,7 +6,7 @@ import { MessageList } from './MessageList'
 import { ProofDetails } from './ProofDetails'
 import style from './style.scss'
 
-const ProofRequest = ({ messages, signalHub, accounts, web3, query, getTranslation }) => {
+const ProofRequest = ({ messages, socketIO, accounts, web3, query, getTranslation }) => {
   const requestLabel = getTranslation('proofRequest.title')
   const requestAmount = `(${messages.length})`
 
@@ -32,7 +32,7 @@ const ProofRequest = ({ messages, signalHub, accounts, web3, query, getTranslati
                   <ProofDetails
                     active={messages.find(_ => _.proof.address === query.user)}
                     getTranslation={getTranslation}
-                    signalHub={signalHub}
+                    socketIO={socketIO}
                     accounts={accounts}
                     web3={web3}
                     onReject={onReject}
@@ -53,7 +53,7 @@ const ProofRequest = ({ messages, signalHub, accounts, web3, query, getTranslati
 
 ProofRequest.propTypes = {
   messages: PropTypes.array,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   accounts: PropTypes.object,
   web3: PropTypes.object,
   query: PropTypes.object,

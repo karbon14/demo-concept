@@ -1,27 +1,25 @@
 import React from 'react'
-import signalhub from 'signalhub'
 import PropTypes from 'prop-types'
+import IO from 'socket.io-client'
 import { toast } from 'Components/Toast'
 
-const SignalHubContext = React.createContext({ messages: [], appName: '', channel: '', broadcast: new Function() })
+const SocketIOContext = React.createContext({ messages: [] })
 
-const SignalHubProvider = class extends React.Component {
+const SocketIOProvider = class extends React.Component {
   constructor() {
     super()
 
-    this.broadcast = () => {}
-    this.signalUrls = ['http://localhost:8080']
-    this.appName = 'appName'
-    this.channel = 'karbon14'
-    this.hub = signalhub(this.appName, this.signalUrls)
+    this.socket = IO()
+    this.channel = 'message'
 
     this.state = {
-      broadcast: this.hub.broadcast.bind(this.hub),
-      subscribe: this.hub.subscribe.bind(this.hub),
-      channel: this.channel,
-      appName: this.appName,
       messages: [],
-      receivedMsg: '',
+      channel: this.channel,
+      instance: this.socket,
+      broadcast: (channel, msg) => this.socket.emit(channel, msg),
+      subscribe: (channel, fn) => this.socket.on(channel, fn),
+      connect: this.socket.connect(),
+      disconnect: this.socket.disconnect(),
       setReceivedMsg: receivedMsg => this.setState({ receivedMsg }),
       saveMessage: msg => this.setState({ messages: [...this.state.messages, msg] }),
       removeMessage: proof =>
@@ -37,17 +35,25 @@ const SignalHubProvider = class extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.socket.connect()
+  }
+
+  componentWillUnmount() {
+    this.socket.disconnect()
+  }
+
   render() {
     return (
-      <SignalHubContext.Consumer>
+      <SocketIOContext.Consumer>
         {context => this.props.children({ ...context, ...this.state })}
-      </SignalHubContext.Consumer>
+      </SocketIOContext.Consumer>
     )
   }
 }
 
-SignalHubProvider.propTypes = {
+SocketIOProvider.propTypes = {
   children: PropTypes.func
 }
 
-export { SignalHubProvider }
+export { SocketIOProvider }

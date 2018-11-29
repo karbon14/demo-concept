@@ -6,7 +6,7 @@ import { Dashboard } from 'Templates'
 
 const Index = ({
   translations,
-  signalHub,
+  socketIO,
   routerNext,
   proofLifeContract,
   ethereum: { accounts, web3, network },
@@ -15,14 +15,14 @@ const Index = ({
 }) => (
   <Dashboard
     translations={translations}
-    signalHub={signalHub}
+    socketIO={socketIO}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
   >
     <ProofForm
       getTranslation={translations.getTranslation}
-      signalHub={signalHub}
+      socketIO={socketIO}
       accounts={accounts}
       web3={web3}
       scribes={scribes}
@@ -33,7 +33,7 @@ const Index = ({
 
 Index.propTypes = {
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,

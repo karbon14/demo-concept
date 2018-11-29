@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { ProofsHistory } from 'Components/ProofsHistory'
 import { Dashboard } from 'Templates'
 
-const History = ({ translations, signalHub, proofLifeContract, routerNext, ethereum: { network }, ipfs }) => (
+const History = ({ translations, socketIO, proofLifeContract, routerNext, ethereum: { network }, ipfs }) => (
   <Dashboard
     translations={translations}
-    signalHub={signalHub}
+    socketIO={socketIO}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
@@ -22,7 +22,7 @@ const History = ({ translations, signalHub, proofLifeContract, routerNext, ether
 
 History.propTypes = {
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
   ethereum: PropTypes.object,

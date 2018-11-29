@@ -8,7 +8,7 @@ const Utils = ({ children }) =>
       owner,
       proof,
       hash,
-      signalHub,
+      socketIO,
       ipfs,
       web3,
       deployedContracts,
@@ -20,7 +20,7 @@ const Utils = ({ children }) =>
     }) => {
       const { ProofLife = {} } = deployedContracts
       const { address, signedHash } = proof
-      const { removeMessage } = signalHub
+      const { removeMessage } = socketIO
       const { addData } = ipfs
 
       setSaving(true)
