@@ -4,9 +4,9 @@ import { toast } from 'Components/Toast'
 
 const Utils = ({ children }) =>
   children({
-    onReject: async ({ proof, signalHub, successMsg, errorMsg }) => {
+    onReject: async ({ proof, socketIO, successMsg, errorMsg }) => {
       try {
-        const { removeMessage } = signalHub
+        const { removeMessage } = socketIO
         removeMessage({ ...proof, selectedScribe: null })
 
         const href = '/proof-request'
@@ -18,8 +18,8 @@ const Utils = ({ children }) =>
         toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onApprove: async ({ proof, hash, signalHub, accounts, web3, successMsg, errorMsg }) => {
-      const { removeMessage, channel, broadcast } = signalHub
+    onApprove: async ({ proof, hash, socketIO, accounts, web3, successMsg, errorMsg }) => {
+      const { removeMessage, channel, broadcast } = socketIO
       const address = accounts.addresses[0]
 
       web3.eth.sign(address, hash, (err, res) => {

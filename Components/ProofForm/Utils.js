@@ -43,8 +43,8 @@ const Utils = ({ children }) =>
         toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onSendToScribe: async ({ proofFormData, selectedScribe, api, signalHub, accounts, web3, successMsg, errorMsg }) => {
-      const { channel, broadcast } = signalHub
+    onSendToScribe: async ({ proofFormData, selectedScribe, api, socketIO, accounts, web3, successMsg, errorMsg }) => {
+      const { channel, broadcast } = socketIO
       const proofData = { id: new Date().getTime(), values: JSON.stringify(proofFormData) }
       const message = JSON.stringify(proofData)
 

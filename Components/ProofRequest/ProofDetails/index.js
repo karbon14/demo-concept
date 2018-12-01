@@ -7,7 +7,7 @@ import { Button } from '@react-core/button'
 import { Accordion } from './Accordion'
 import style from './style.scss'
 
-const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, getTranslation }) => (
+const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, getTranslation }) => (
   <Component
     initialState={{
       proof: {},
@@ -146,7 +146,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
               disabled={false}
               onClick={() =>
                 onReject({
-                  signalHub,
+                  socketIO,
                   proof: state.proof,
                   errorMsg: getTranslation('proofRequest.rejectErrorMsg'),
                   successMsg: getTranslation('proofRequest.rejectSuccessMsg')
@@ -163,7 +163,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
                 onApprove({
                   proof: state.proof,
                   hash: state.hash,
-                  signalHub,
+                  socketIO,
                   accounts,
                   web3,
                   errorMsg: getTranslation('proofRequest.approveErrorMsg'),
@@ -181,7 +181,7 @@ const ProofDetails = ({ active, signalHub, accounts, web3, onReject, onApprove, 
 
 ProofDetails.propTypes = {
   active: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   accounts: PropTypes.object,
   web3: PropTypes.object,
   onReject: PropTypes.func,

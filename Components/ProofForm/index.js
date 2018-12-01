@@ -6,7 +6,7 @@ import { Utils } from './Utils'
 import { SwitcherForm, FormActions } from './SwitcherForm'
 import { Personal, Identification, Service, Scribes } from './Forms'
 
-const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3, env }) => (
+const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, env }) => (
   <Utils>
     {({ blobToBase64, prepareData, onSendToScribe }) => (
       <Component
@@ -164,7 +164,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3, env }) 
                                 proofFormData,
                                 selectedScribe,
                                 api,
-                                signalHub,
+                                socketIO,
                                 accounts,
                                 web3,
                                 successMsg,
@@ -210,7 +210,7 @@ const ProofForm = ({ getTranslation, scribes, signalHub, accounts, web3, env }) 
 ProofForm.propTypes = {
   getTranslation: PropTypes.func,
   scribes: PropTypes.array,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   accounts: PropTypes.object,
   web3: PropTypes.object,
   env: PropTypes.object

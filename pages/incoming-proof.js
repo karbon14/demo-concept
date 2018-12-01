@@ -5,17 +5,17 @@ import { IncomingProof } from 'Components/IncomingProof'
 
 const Request = ({
   translations,
-  signalHub,
+  socketIO,
   proofLifeContract,
   routerNext,
-  signalHub: { messages },
+  socketIO: { messages },
   ethereum: { web3, network, deployedContracts },
   ipfs,
   updateUI
 }) => (
   <Dashboard
     translations={translations}
-    signalHub={signalHub}
+    socketIO={socketIO}
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
@@ -23,7 +23,7 @@ const Request = ({
     <IncomingProof
       query={routerNext.query}
       messages={messages}
-      signalHub={signalHub}
+      socketIO={socketIO}
       web3={web3}
       ipfs={ipfs}
       deployedContracts={deployedContracts}
@@ -35,7 +35,7 @@ const Request = ({
 
 Request.propTypes = {
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,

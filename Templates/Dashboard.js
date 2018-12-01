@@ -7,7 +7,7 @@ export const Dashboard = ({
   children,
   routerNext,
   translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
-  signalHub: { messages },
+  socketIO: { messages },
   proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded, proofsCount },
   network
 }) => (
@@ -88,7 +88,7 @@ export const Dashboard = ({
 Dashboard.propTypes = {
   children: PropTypes.node,
   translations: PropTypes.object,
-  signalHub: PropTypes.object,
+  socketIO: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
   network: PropTypes.string
