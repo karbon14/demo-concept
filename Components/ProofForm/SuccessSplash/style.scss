@@ -1,0 +1,22 @@
+section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+
+  img {
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+  }
+
+  p {
+    text-align: center;
+    color: #7a8296;
+    font-size: 15px;
+    margin-bottom: 50px;
+    min-height: 40px;
+  }
+}

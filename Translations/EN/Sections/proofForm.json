@@ -23,5 +23,7 @@
   "selectScribe": "Select scribe and send the form",
   "submitOK": "Proof data signed and sended OK!",
   "submitError": "Proof data submit Error!",
-  "metamaskError": "Ups! Metamask not detected :("
+  "metamaskError": "Ups! Metamask not detected :(",
+  "splashMessage": "Proof data sended to the selected Scribe. <br/>Once approved will be listed under Incoming Proofs section.",
+  "splashSubmitLabel": "Understood"
 }

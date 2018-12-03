@@ -47,7 +47,8 @@ const Utils = ({ children }) =>
       accounts,
       web3,
       successMsg,
-      errorMsg
+      errorMsg,
+      onShowSuccessSplash
     }) => {
       const { channel, broadcast } = socketIO
       const proofData = { id: new Date().getTime(), values: JSON.stringify(proofFormData) }
@@ -76,6 +77,7 @@ const Utils = ({ children }) =>
             proofImages
           }
           broadcast(channel, payload)
+          onShowSuccessSplash()
         }
       })
     }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Component from '@reactions/component'
 import style from './style.scss'
 import { Utils } from './Utils'
+import { SuccessSplash } from './SuccessSplash'
 import { SwitcherForm, FormActions } from './SwitcherForm'
 import { Personal, Identification, Service, Scribes } from './Forms'
 
@@ -16,7 +17,8 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, monitorE
             identification: {},
             service: {},
             scribes: {}
-          }
+          },
+          splashShowed: false
         }}
         render={({ state, setState }) => (
           <section>
@@ -24,7 +26,19 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, monitorE
               <h3>{getTranslation('proofForm.title')}</h3>
 
               <div className="card">
-                {monitorErrors.length ? null : (
+                {monitorErrors.length ? null : state.splashShowed ? (
+                  <SuccessSplash
+                    splashMessage={getTranslation('proofForm.splashMessage', true)}
+                    submitLabel={getTranslation('proofForm.splashSubmitLabel')}
+                    onSubmit={() =>
+                      setState({
+                        activeForm: 1,
+                        formsData: { identification: {}, service: {}, scribes: {} },
+                        splashShowed: false
+                      })
+                    }
+                  />
+                ) : (
                   <SwitcherForm
                     forms={[
                       {
@@ -170,7 +184,8 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, monitorE
                                   accounts,
                                   web3,
                                   successMsg,
-                                  errorMsg
+                                  errorMsg,
+                                  onShowSuccessSplash: () => setState({ splashShowed: true })
                                 })
                               }
                             }}
