@@ -7,6 +7,7 @@ import { ToastContainer } from 'Components/Toast'
 import { theme } from 'Common/Core'
 import ReactionComponent from '@reactions/component'
 import { isEqual } from 'lodash'
+import { toast } from 'Components/Toast'
 import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
 
 const getProof = async (index, ProofLife) => {
@@ -99,7 +100,14 @@ export default class Karbon14 extends App {
 
         <Providers contract={getProofLifeContract(env.NETWORK)} pathname={pathname}>
           {({ translations, ethereum, routerNext, socketIO, ipfs }) => {
-            const { accounts = {}, deployedContracts = {}, web3 } = ethereum
+            const { accounts = {}, deployedContracts = {}, web3, monitorErrors } = ethereum
+
+            if (monitorErrors.length) {
+              toast.error(translations.getTranslation('proofForm.metamaskError'), {
+                pauseOnFocusLoss: false,
+                position: toast.POSITION.BOTTOM_LEFT
+              })
+            }
 
             return (
               <React.Fragment>

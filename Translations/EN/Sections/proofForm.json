@@ -22,5 +22,6 @@
   "submitLabel": "Send to scribe",
   "selectScribe": "Select scribe and send the form",
   "submitOK": "Proof data signed and sended OK!",
-  "submitError": "Proof data submit Error!"
+  "submitError": "Proof data submit Error!",
+  "metamaskError": "Ups! Metamask not detected :("
 }
