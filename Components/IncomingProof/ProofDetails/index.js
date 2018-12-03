@@ -11,6 +11,7 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
   <Component
     initialState={{
       proof: {},
+      proofImages: {},
       message: {},
       values: {},
       hash: undefined,
@@ -18,7 +19,7 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
       saving: false
     }}
     didMount={({ setState }) => {
-      const { proof = {} } = active
+      const { proof = {}, proofImages = {} } = active
       const { address, signedHash } = proof
       const hash = web3.sha3(proof.message)
       let message = {}
@@ -42,7 +43,7 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
         }
       }
 
-      setState({ proof, hash, message, values, signed })
+      setState({ proof, proofImages, hash, message, values, signed })
     }}
     render={({ state, setState }) => (
       <div className="details">
@@ -128,12 +129,31 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
                     <p>{getTranslation('proofRequest.id')}</p>
                     <p className="value">{state.values.id}</p>
                   </div>
+
+                  <div className="double">
+                    <div className="info">
+                      <p>{getTranslation('proofRequest.idImage')}</p>
+                      <img src={state.proofImages.idImageBase64} />
+                    </div>
+
+                    <div className="info right">
+                      <p>{getTranslation('proofRequest.userImage')}</p>
+                      <img src={state.proofImages.userImageBase64} />
+                    </div>
+                  </div>
                 </React.Fragment>
               )
             },
             {
               label: getTranslation('proofRequest.serviceInformation'),
-              child: null
+              child: (
+                <div className="double">
+                  <div className="info service">
+                    <p>{getTranslation('proofRequest.serviceImage')}</p>
+                    <img src={state.proofImages.serviceImageBase64} />
+                  </div>
+                </div>
+              )
             }
           ]}
         />
@@ -149,6 +169,7 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
                 onSave({
                   owner: active.approvedUser,
                   proof: state.proof,
+                  proofImages: state.proofImages,
                   hash: state.hash,
                   socketIO,
                   deployedContracts,

@@ -18,7 +18,7 @@ const Utils = ({ children }) =>
         toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onApprove: async ({ proof, hash, socketIO, accounts, web3, successMsg, errorMsg }) => {
+    onApprove: async ({ proof, proofImages, hash, socketIO, accounts, web3, successMsg, errorMsg }) => {
       const { removeMessage, channel, broadcast } = socketIO
       const address = accounts.addresses[0]
 
@@ -37,7 +37,8 @@ const Utils = ({ children }) =>
               message: proof.message,
               address,
               signedHash: res
-            }
+            },
+            proofImages
           }
           broadcast(channel, payload)
 

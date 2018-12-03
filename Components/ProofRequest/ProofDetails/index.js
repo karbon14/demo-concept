@@ -11,13 +11,14 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
   <Component
     initialState={{
       proof: {},
+      proofImages: {},
       message: {},
       values: {},
       signed: false,
       hash: undefined
     }}
     didMount={({ setState }) => {
-      const { proof = {} } = active
+      const { proof = {}, proofImages = {} } = active
       const { address, signedHash } = proof
       const hash = web3.sha3(proof.message)
       let message = {}
@@ -27,6 +28,7 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
       if (signedHash) {
         message = JSON.parse(proof.message)
         values = JSON.parse(message.values)
+
         try {
           const r = ethUtil.toBuffer(signedHash.slice(0, 66))
           const s = ethUtil.toBuffer('0x' + signedHash.slice(66, 130))
@@ -41,7 +43,7 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
         }
       }
 
-      setState({ proof, hash, message, values, signed })
+      setState({ proof, proofImages, hash, message, values, signed })
     }}
     render={({ state }) => (
       <div className="details">
@@ -127,12 +129,31 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
                     <p>{getTranslation('proofRequest.id')}</p>
                     <p className="value">{state.values.id}</p>
                   </div>
+
+                  <div className="double">
+                    <div className="info">
+                      <p>{getTranslation('proofRequest.idImage')}</p>
+                      <img src={state.proofImages.idImageBase64} />
+                    </div>
+
+                    <div className="info right">
+                      <p>{getTranslation('proofRequest.userImage')}</p>
+                      <img src={state.proofImages.userImageBase64} />
+                    </div>
+                  </div>
                 </React.Fragment>
               )
             },
             {
               label: getTranslation('proofRequest.serviceInformation'),
-              child: null
+              child: (
+                <div className="double">
+                  <div className="info service">
+                    <p>{getTranslation('proofRequest.serviceImage')}</p>
+                    <img src={state.proofImages.serviceImageBase64} />
+                  </div>
+                </div>
+              )
             }
           ]}
         />
@@ -162,6 +183,7 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
               onClick={() =>
                 onApprove({
                   proof: state.proof,
+                  proofImages: state.proofImages,
                   hash: state.hash,
                   socketIO,
                   accounts,

@@ -159,9 +159,10 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, env }) =
                             })
 
                             if (proof) {
-                              const { proofFormData, selectedScribe } = proof
+                              const { proofFormData, proofImages, selectedScribe } = proof
                               onSendToScribe({
                                 proofFormData,
+                                proofImages,
                                 selectedScribe,
                                 api,
                                 socketIO,
