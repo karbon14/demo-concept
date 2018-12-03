@@ -22,5 +22,8 @@
   "submitLabel": "Enviar al notario",
   "selectScribe": "Selecciona la escribanía y envía el formulario",
   "submitOK": "¡Datos de la Prueba firmados y enviados OK!",
-  "submitError": "¡Error enviando la Prueba!"
+  "submitError": "¡Error enviando la Prueba!",
+  "metamaskError": "¡Huy! Metamask no detectado :(",
+  "splashMessage": "Los datos de la Prueba fueron enviados a la escribanía seleccionada. Una vez aprobada será listada en la sección Pruebas entrantes.",
+  "splashSubmitLabel": "Entendido"
 }

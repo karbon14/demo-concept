@@ -9,7 +9,7 @@ const Index = ({
   socketIO,
   routerNext,
   proofLifeContract,
-  ethereum: { accounts, web3, network },
+  ethereum: { accounts, web3, network, monitorErrors },
   proofLifeContract: { scribes },
   env
 }) => (
@@ -25,6 +25,7 @@ const Index = ({
       socketIO={socketIO}
       accounts={accounts}
       web3={web3}
+      monitorErrors={monitorErrors}
       scribes={scribes}
       env={env}
     />

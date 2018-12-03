@@ -29,21 +29,27 @@ const Utils = ({ children }) =>
         const userImageBase64 = env.MOCKED ? '' : await blobToBase64(userImage)
         const serviceImageBase64 = env.MOCKED ? '' : await blobToBase64(serviceImage)
 
-        const proofFormData = {
-          ...personal,
-          id,
-          idImageBase64,
-          userImageBase64,
-          serviceImageBase64
-        }
+        const proofFormData = { ...personal, id }
+        const proofImages = { idImageBase64, userImageBase64, serviceImageBase64 }
 
-        return { proofFormData, selectedScribe }
+        return { proofFormData, proofImages, selectedScribe }
       } catch (e) {
         api.setSubmitting(false)
         toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
       }
     },
-    onSendToScribe: async ({ proofFormData, selectedScribe, api, socketIO, accounts, web3, successMsg, errorMsg }) => {
+    onSendToScribe: async ({
+      proofFormData,
+      proofImages,
+      selectedScribe,
+      api,
+      socketIO,
+      accounts,
+      web3,
+      successMsg,
+      errorMsg,
+      onShowSuccessSplash
+    }) => {
       const { channel, broadcast } = socketIO
       const proofData = { id: new Date().getTime(), values: JSON.stringify(proofFormData) }
       const message = JSON.stringify(proofData)
@@ -67,9 +73,11 @@ const Utils = ({ children }) =>
               message,
               address,
               signedHash: res
-            }
+            },
+            proofImages
           }
           broadcast(channel, payload)
+          onShowSuccessSplash()
         }
       })
     }
