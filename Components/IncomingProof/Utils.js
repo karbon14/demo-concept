@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types'
 import Router from 'next/router'
 import { toast } from 'Components/Toast'
+import { saveAs } from 'file-saver'
 
 const Utils = ({ children }) =>
   children({
+    onDownload: async ({ proof, proofImages, hash, setSaving }) => {
+      setSaving(true)
+
+      try {
+        var blobProof = await new Blob([JSON.stringify({ proof, proofImages }, null, 2)], { type: 'application/json' })
+        saveAs(blobProof, `proof_certificate_${hash}.k14`)
+        setSaving(false)
+      } catch (e) {
+        setSaving(false)
+      }
+    },
     onSave: async ({
       owner,
       proof,

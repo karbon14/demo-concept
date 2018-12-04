@@ -2,7 +2,8 @@
   "title": "Pruebas aprobadas entrantes",
   "receivedMsg": "Nueva Prueba aprobada recivida",
   "scriveAddress": "Dirección del Escribano",
-  "save": "Gardar",
+  "download": "Datos de Prueba",
+  "save": "Grabar en Smart Contract",
   "saveErrorMsg": "Error guardando prueba aprobada!",
   "saveSuccessMsg": "Transacción enviada. Esperando la confirmación de la red.",
   "buySuccessMsg": "Prueba aprobada guardando OK!"

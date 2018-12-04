@@ -3,5 +3,6 @@
   "ipfsPath": "Ruta de IPFS",
   "validatedHash": "Hash de Proof of Life",
   "details": "Detalles",
-  "signedHash": "Hash de la prueba firmado por la escribanía"
+  "signedHash": "Hash de la prueba firmado por la escribanía",
+  "verifyProofData": "Verificar archivo de datos de Prueba"
 }

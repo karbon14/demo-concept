@@ -12,7 +12,7 @@ const IncomingProof = ({ messages, socketIO, web3, deployedContracts, ipfs, quer
 
   return (
     <Utils>
-      {({ onSave }) => (
+      {({ onSave, onDownload }) => (
         <section>
           <div className="container">
             {query.scribe ? (
@@ -36,6 +36,7 @@ const IncomingProof = ({ messages, socketIO, web3, deployedContracts, ipfs, quer
                     deployedContracts={deployedContracts}
                     ipfs={ipfs}
                     onSave={onSave}
+                    onDownload={onDownload}
                     updateUI={updateUI}
                     getTranslation={getTranslation}
                   />

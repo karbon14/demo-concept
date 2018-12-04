@@ -5,7 +5,7 @@ import { ProofsList } from './ProofsList'
 import { ProofDetails } from './ProofDetails'
 import style from './style.scss'
 
-const ProofsHistory = ({ proofLifeContract, query, ipfs, getTranslation }) => {
+const ProofsHistory = ({ proofLifeContract, query, web3, ipfs, getTranslation }) => {
   const { proofsCount, proofs, scribes } = proofLifeContract
   const requestLabel = getTranslation('proofsHistory.title')
   const requestAmount = proofsCount !== '' ? '(' + proofsCount + ')' : proofsCount
@@ -26,7 +26,13 @@ const ProofsHistory = ({ proofLifeContract, query, ipfs, getTranslation }) => {
 
         <div className="card">
           {query.proof ? (
-            <ProofDetails active={proofs[query.proof]} scribes={scribes} ipfs={ipfs} getTranslation={getTranslation} />
+            <ProofDetails
+              active={proofs[query.proof]}
+              scribes={scribes}
+              web3={web3}
+              ipfs={ipfs}
+              getTranslation={getTranslation}
+            />
           ) : (
             <ProofsList
               proofs={proofs}
@@ -43,6 +49,7 @@ const ProofsHistory = ({ proofLifeContract, query, ipfs, getTranslation }) => {
 
 ProofsHistory.propTypes = {
   query: PropTypes.object,
+  web3: PropTypes.object,
   ipfs: PropTypes.object,
   proofLifeContract: PropTypes.object,
   getTranslation: PropTypes.func
