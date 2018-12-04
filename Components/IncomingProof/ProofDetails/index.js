@@ -7,7 +7,17 @@ import { Button } from '@react-core/button'
 import { Accordion } from './Accordion'
 import style from './style.scss'
 
-const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave, updateUI, getTranslation }) => (
+const ProofDetails = ({
+  active,
+  socketIO,
+  web3,
+  deployedContracts,
+  ipfs,
+  onSave,
+  onDownload,
+  updateUI,
+  getTranslation
+}) => (
   <Component
     initialState={{
       proof: {},
@@ -162,6 +172,22 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
           <div className="actions__container">
             <Button
               theme={theme}
+              label={getTranslation('incomingProof.download')}
+              type="secondary"
+              icon="fa-download"
+              disabled={!state.signed || state.saving}
+              onClick={() =>
+                onDownload({
+                  proof: state.proof,
+                  proofImages: state.proofImages,
+                  hash: state.hash,
+                  setSaving: val => setState({ saving: val })
+                })
+              }
+            />
+
+            <Button
+              theme={theme}
               label={getTranslation('incomingProof.save')}
               type="button"
               disabled={!state.signed || state.saving}
@@ -169,7 +195,6 @@ const ProofDetails = ({ active, socketIO, web3, deployedContracts, ipfs, onSave,
                 onSave({
                   owner: active.approvedUser,
                   proof: state.proof,
-                  proofImages: state.proofImages,
                   hash: state.hash,
                   socketIO,
                   deployedContracts,
@@ -198,6 +223,7 @@ ProofDetails.propTypes = {
   deployedContracts: PropTypes.object,
   ipfs: PropTypes.object,
   onSave: PropTypes.func,
+  onDownload: PropTypes.func,
   updateUI: PropTypes.func,
   getTranslation: PropTypes.func
 }

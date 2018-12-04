@@ -3,5 +3,6 @@
   "ipfsPath": "IPFS path",
   "validatedHash": "Proof of Life hash",
   "details": "Details",
-  "signedHash": "Proof hash signed by Scribe"
+  "signedHash": "Proof hash signed by Scribe",
+  "verifyProofData": "Verify Proof Data file"
 }

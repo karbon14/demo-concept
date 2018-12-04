@@ -2,7 +2,8 @@
   "title": "Incoming approved Proofs",
   "receivedMsg": "New approved Proof received",
   "scriveAddress": "Scribe Address",
-  "save": "Save",
+  "download": "Form Data",
+  "save": "Record Proof on Smart Contract",
   "saveErrorMsg": "Error saving approved Proof!",
   "saveSuccessMsg": "Transaction sended. Waiting for network confirmations.",
   "buySuccessMsg": "Approved Proof saved OK!"
