@@ -22,7 +22,7 @@
     "ganache": "ganache-cli",
     "lint": "eslint --ext .js ./",
     "lint:fix": "eslint --ext .js ./ --fix",
-    "now-build": "npm run build:ropsten"
+    "now-build": "next build && npm run build:ropsten"
   },
   "lint-staged": {
     "*.js": [
