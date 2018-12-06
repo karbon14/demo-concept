@@ -9,6 +9,7 @@
     "dev:ropsten:mocked": "NETWORK=3 MOCKED=true node server.js",
     "build": "next build",
     "build:ropsten": "NETWORK=3 next build",
+    "export:ropsten": "npm run build:ropsten && next export",
     "start": "NODE_ENV=production node server.js",
     "start:ropsten": "NODE_ENV=production NETWORK=3 node server.js",
     "precommit": "lint-staged",
