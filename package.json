@@ -24,6 +24,11 @@
     "lint:fix": "eslint --ext .js ./ --fix",
     "now-build": "next build && npm run build:ropsten"
   },
+  "bin": "server.js",
+  "pkg": {
+    "assets": [".next/**/*"],
+    "scripts": [".next/dist/**/*.js"]
+  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
