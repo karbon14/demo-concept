@@ -4,5 +4,6 @@
   "features": {
     "cloud": "v1"
   },
-  "alias": ["demo.karbon14.org", "demo.karbon14.org"]
+  "name": "karbon14-demo",
+  "alias": ["karbon14-demo"]
 }
