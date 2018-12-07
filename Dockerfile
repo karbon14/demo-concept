@@ -1,9 +1,9 @@
 FROM node:9-alpine
 
 ENV NODE_ENV production
-ENV PORT 3000
+ENV PORT 443
 
-EXPOSE 3000
+EXPOSE 443
 
 RUN mkdir /app
 WORKDIR /app
