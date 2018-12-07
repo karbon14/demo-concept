@@ -99,7 +99,6 @@
     "lint-staged": "7.3.0",
     "node-sass": "4.9.4",
     "prettier": "1.14.3",
-    "truffle": "4.1.14",
-    "truffle-hdwallet-provider": "0.0.6"
+    "truffle": "4.1.14"
   }
 }
