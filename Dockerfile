@@ -2,9 +2,9 @@ FROM node:10.14.1
 
 WORKDIR /usr/src
 COPY package-lock.json package.json
-RUN npm install
 
 COPY . .
+RUN npm install
 
 EXPOSE 3000
 ENV NODE_ENV production
