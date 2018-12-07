@@ -17,7 +17,7 @@ nextApp.prepare().then(() => {
     return nextHandler(req, res)
   })
 
-  server.listen(3000, err => {
+  server.listen(443, err => {
     if (err) throw err
   })
 })

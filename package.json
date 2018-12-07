@@ -22,7 +22,7 @@
     "ganache": "ganache-cli",
     "lint": "eslint --ext .js ./",
     "lint:fix": "eslint --ext .js ./ --fix",
-    "now-build": "next build && npm run build:ropsten"
+    "deploy": "now --docker -e 443"
   },
   "lint-staged": {
     "*.js": [
@@ -99,6 +99,7 @@
     "lint-staged": "7.3.0",
     "node-sass": "4.9.4",
     "prettier": "1.14.3",
-    "truffle": "4.1.14"
+    "truffle": "4.1.14",
+    "truffle-hdwallet-provider": "0.0.6"
   }
 }

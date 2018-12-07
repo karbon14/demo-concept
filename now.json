@@ -1,7 +1,12 @@
 {
-  "version": 2,
-  "name": "nextjs",
-  "builds": [
-      { "src": "next.config.js", "use": "@now/next" }
-  ]
+  "version": 1,
+  "name": "karbon14-demo",
+  "type": "docker",
+  "build": {
+    "env": {
+      "NODE_ENV": "production",
+      "NETWORK": "3",
+      "HOME_URL": "https://karbon14.org"
+    }
+  }
 }
