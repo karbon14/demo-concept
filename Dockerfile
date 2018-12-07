@@ -6,9 +6,15 @@ COPY package-lock.json package.json
 COPY . .
 RUN npm install
 
-EXPOSE 3000
-ENV NODE_ENV production
+ENV NODE_ENV=production \
+  HOME_URL=https://karbon14.org \
+  NETWORK=3 \
+  PORT=3000
 
-RUN npm run build:ropsten
+RUN echo "NODE_ENV = $NODE_ENV | HOME_URL = $HOME_URL | NETWORK = $NETWORK | PORT = $PORT"
 
-CMD ["npm", "run", "start:ropsten"]
+EXPOSE $PORT
+
+RUN npm run build
+
+CMD ["npm", "run", "start"]
