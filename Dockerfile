@@ -11,5 +11,6 @@ EXPOSE 3000
 ENV NODE_ENV production
 
 RUN npm run build:ropsten
+RUN npm prune
 
 CMD ["npm", "run", "dev:ropsten"]
