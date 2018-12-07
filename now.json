@@ -5,5 +5,5 @@
     "cloud": "v1"
   },
   "name": "karbon14-demo",
-  "alias": ["karbon14-demo"]
+  "alias": ["karbon14-demo", "demo.karbon14.org"]
 }
