@@ -6,6 +6,7 @@ const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
+const PORT = process.env.PORT || 3000
 
 // socket.io server
 io.on('connection', socket => {
@@ -17,7 +18,7 @@ nextApp.prepare().then(() => {
     return nextHandler(req, res)
   })
 
-  server.listen(3000, err => {
+  server.listen(PORT, err => {
     if (err) throw err
   })
 })
