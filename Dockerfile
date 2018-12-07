@@ -2,8 +2,7 @@ FROM node:10.14.1
 
 WORKDIR /usr/src
 COPY package-lock.json package.json
-RUN npm install --production
-RUN npm i -g next
+RUN npm install
 
 COPY . .
 
