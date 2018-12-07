@@ -21,17 +21,7 @@
     "truffle:development": "rimraf build && npm run migrate -- --network=development",
     "ganache": "ganache-cli",
     "lint": "eslint --ext .js ./",
-    "lint:fix": "eslint --ext .js ./ --fix",
-    "now-build": "next build && npm run build:ropsten"
-  },
-  "bin": "server.js",
-  "pkg": {
-    "assets": [
-      ".next/**/*"
-    ],
-    "scripts": [
-      ".next/dist/**/*.js"
-    ]
+    "lint:fix": "eslint --ext .js ./ --fix"
   },
   "lint-staged": {
     "*.js": [
