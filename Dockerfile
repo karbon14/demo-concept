@@ -11,4 +11,4 @@ ENV NODE_ENV production
 
 RUN npm run build:ropsten
 
-CMD ["npm", "run", "dev:ropsten"]
+CMD ["npm", "run", "start:ropsten"]
