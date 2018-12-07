@@ -26,8 +26,12 @@
   },
   "bin": "server.js",
   "pkg": {
-    "assets": [".next/**/*"],
-    "scripts": [".next/dist/**/*.js"]
+    "assets": [
+      ".next/**/*"
+    ],
+    "scripts": [
+      ".next/dist/**/*.js"
+    ]
   },
   "lint-staged": {
     "*.js": [

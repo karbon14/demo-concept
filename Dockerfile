@@ -1,19 +1,16 @@
 FROM node:9-alpine
 
-ENV NODE_ENV production
-ENV PORT 443
+ENV PORT 3000
 
-EXPOSE 443
+EXPOSE 3000
 
-RUN mkdir /app
-WORKDIR /app
-
+WORKDIR /usr/src
 COPY package-lock.json package.json
 
 RUN npm install
 
 COPY . .
 
-RUN build:ropsten
+RUN npm run build:ropsten
 
 CMD ["npm", "run", "dev:ropsten"]
