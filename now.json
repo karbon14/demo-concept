@@ -4,6 +4,6 @@
   "features": {
     "cloud": "v1"
   },
-  "name": "karbon14-demo",
-  "alias": ["karbon14-demo"]
+  "name": "karbon14-demo-rsk",
+  "alias": ["karbon14-demo-rsk"]
 }

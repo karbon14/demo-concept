@@ -10,7 +10,8 @@ const getEtherscanScanURL = () => {
   const etherscanURLs = {
     '1': 'https://etherscan.io',
     '3': 'https://ropsten.etherscan.io',
-    '5777': ''
+    '5777': '',
+    '31': 'https://explorer.testnet.rsk.co'
   }
 
   return etherscanURLs[process.env.NETWORK]
