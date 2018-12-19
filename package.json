@@ -6,6 +6,7 @@
     "dev": "node server.js",
     "dev:local": "NETWORK=5777 node server.js",
     "dev:ropsten": "NETWORK=3 node server.js",
+    "dev:rsk": "NETWORK=31 node server.js",
     "dev:ropsten:mocked": "NETWORK=3 MOCKED=true node server.js",
     "build": "next build",
     "build:ropsten": "NETWORK=3 next build",
@@ -18,6 +19,7 @@
     "truffle:migrate": "truffle smigrate",
     "truffle:ropsten": "rimraf build && npm run migrate -- --network=ropsten",
     "truffle:development": "rimraf build && npm run migrate -- --network=development",
+    "truffle:rsk:testnet": "rimraf build && npm run migrate -- --network=RSKtestnet",
     "ganache": "ganache-cli",
     "lint": "eslint --ext .js ./",
     "lint:fix": "eslint --ext .js ./ --fix"
