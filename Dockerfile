@@ -8,7 +8,7 @@ RUN npm install
 
 ENV NODE_ENV=production \
   HOME_URL=https://karbon14.org \
-  NETWORK=3 \
+  NETWORK=31 \
   PORT=3000
 
 RUN echo "NODE_ENV = $NODE_ENV | HOME_URL = $HOME_URL | NETWORK = $NETWORK | PORT = $PORT"
