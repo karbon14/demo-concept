@@ -30,6 +30,7 @@ const Utils = ({ children }) =>
         if (res) {
           toast.success(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
           removeMessage({ ...proof, selectedScribe: null })
+          broadcast('removeMessage', { type: 'selectedScribe', account: address })
 
           const payload = {
             approvedUser: proof.address,
