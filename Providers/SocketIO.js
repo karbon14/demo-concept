@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import IO from 'socket.io-client'
+import fetch from 'isomorphic-fetch'
 import { toast } from 'Components/Toast'
 
 const SocketIOContext = React.createContext({ messages: [] })
@@ -20,6 +21,7 @@ const SocketIOProvider = class extends React.Component {
       subscribe: (channel, fn) => this.socket.on(channel, fn),
       connect: this.socket.connect(),
       disconnect: this.socket.disconnect(),
+      getMessages: (account, isScribe) => this.getMessages(account, isScribe),
       setReceivedMsg: receivedMsg => this.setState({ receivedMsg }),
       saveMessage: msg => this.setState({ messages: [...this.state.messages, msg] }),
       removeMessage: proof =>
@@ -43,6 +45,12 @@ const SocketIOProvider = class extends React.Component {
     this.socket.disconnect()
   }
 
+  async getMessages(account, isScribe) {
+    const response = await fetch(`${document.location.origin}/messages?account=${account}&isScribe=${isScribe}`)
+    const messages = await response.json()
+    this.setState({ messages })
+  }
+
   render() {
     return (
       <SocketIOContext.Consumer>
@@ -53,7 +61,8 @@ const SocketIOProvider = class extends React.Component {
 }
 
 SocketIOProvider.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.func,
+  messages: PropTypes.array
 }
 
 export { SocketIOProvider }
