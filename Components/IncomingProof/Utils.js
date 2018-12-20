@@ -32,7 +32,7 @@ const Utils = ({ children }) =>
     }) => {
       const { ProofLife = {} } = deployedContracts
       const { address, signedHash } = proof
-      const { removeMessage } = socketIO
+      const { removeMessage, broadcast } = socketIO
       const { addData } = ipfs
 
       setSaving(true)
@@ -49,6 +49,7 @@ const Utils = ({ children }) =>
           if (res) {
             setSaving(false)
             removeMessage(proof)
+            broadcast('removeMessage', { type: 'approvedUser', account: owner })
             toast.warning(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
 
             const href = '/incoming-proof'

@@ -155,6 +155,8 @@ export default class Karbon14 extends App {
                       } else if (!state.isScribe && isScribeRoute) {
                         Router.push('/', '/', { shallow: true })
                       }
+
+                      socketIO.getMessages(accounts.addresses[0], state.isScribe)
                     }
                   }}
                   render={({ state, setState }) => {
