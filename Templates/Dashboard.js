@@ -8,7 +8,15 @@ export const Dashboard = ({
   routerNext,
   translations: { langs, selectedLanguage, registerTranslations, toggleSelected, getTranslation },
   socketIO: { messages },
-  proofLifeContract: { scribes, isScribe, scribeData, accountsAddress, contractDataLoaded, proofsCount },
+  proofLifeContract: {
+    scribes,
+    isScribe,
+    scribeData,
+    accountsAddress,
+    contractDataLoaded,
+    proofsCount,
+    deployedContracts
+  },
   network
 }) => (
   <div>
@@ -26,6 +34,10 @@ export const Dashboard = ({
 
     <div className="contentWrapper">
       <NavMenu
+        network={network}
+        scribes={scribes}
+        deployedContracts={contractDataLoaded ? deployedContracts : {}}
+        getTranslation={getTranslation}
         items={
           contractDataLoaded
             ? [

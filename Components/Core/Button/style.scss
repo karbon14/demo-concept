@@ -73,6 +73,7 @@ div.react__core__button  {
       }
       &:disabled {
         cursor: initial;
+        z-index: initial;
         background: #e5e9f2 !important;
         &:before,
         &:after {

@@ -3,5 +3,10 @@
   "incomingProof": "Incoming Proofs",
   "pastProof": "Explore your Proofs",
   "scribes": "Explore Crypto Scribes",
-  "proofRequest": "Pending Approval"
+  "proofRequest": "Pending Approval",
+  "network": "Network",
+  "scribesNumber": "Number of Scribes",
+  "contractAddress": "Smart Contract Address",
+  "getInvolved": "Get Involved:",
+  "about": "About..."
 }
