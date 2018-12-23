@@ -2,11 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import style from './style.scss'
 import classnames from 'classnames'
-import { theme } from 'Common/Core'
-import { Button } from '@react-core/button'
+import { Button } from 'Components/Core/Button'
 
 const SwitcherForm = ({ forms, activeForm }) => (
-  <section>
+  <section className={style.SwitcherForm}>
     <div className="top__content">
       <div className="current__container">
         {forms.map(({ id }) => (
@@ -28,7 +27,6 @@ const SwitcherForm = ({ forms, activeForm }) => (
         </div>
       ))}
     </div>
-    <style jsx>{style}</style>
   </section>
 )
 
@@ -47,15 +45,14 @@ const FormActions = ({
   onSubmit,
   getTranslation
 }) => (
-  <section className="bottom">
+  <section className={style.SwitcherFormBottom}>
     <div className="actions__container">
       <div className="back">
-        <Button theme={theme} type="button" icon="fa-chevron-left" disabled={activeForm === 1} onClick={onBack} />
+        <Button type="button" icon="fa-chevron-left" disabled={activeForm === 1} onClick={onBack} />
       </div>
 
       <div className="right">
         <Button
-          theme={theme}
           label={getTranslation('proofForm.resetLabel')}
           type="secondary"
           disabled={disabledReset}
@@ -63,7 +60,6 @@ const FormActions = ({
         />
 
         <Button
-          theme={theme}
           label={getTranslation(activeForm === formsNumber ? 'proofForm.submitLabel' : 'proofForm.nextFormLabel')}
           type="button"
           disabled={disabledSubmit}
@@ -71,7 +67,6 @@ const FormActions = ({
         />
       </div>
     </div>
-    <style jsx>{style}</style>
   </section>
 )
 

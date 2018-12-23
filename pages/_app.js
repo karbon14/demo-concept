@@ -3,12 +3,12 @@ import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Router from 'next/router'
 import { Providers } from 'Providers'
-import { ToastContainer } from 'Components/Toast'
-import { theme } from 'Common/Core'
 import ReactionComponent from '@reactions/component'
 import { isEqual } from 'lodash'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
+import { ToastContainer } from 'Components/Core/Toast'
 import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
+import 'Common/index.scss'
 
 const getProof = async (index, ProofLife) => {
   return new Promise(resolve => {
@@ -177,7 +177,7 @@ export default class Karbon14 extends App {
                   }}
                 />
 
-                <ToastContainer theme={theme} hideProgressBar />
+                <ToastContainer hideProgressBar />
               </React.Fragment>
             )
           }}

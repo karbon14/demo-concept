@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import style from './style.scss'
 
 const ProofsList = ({ proofs, labelIpfs, labelHash }) => (
-  <ul>
+  <ul className={style.ProofsList}>
     {proofs.map(({ ipfs, hash }, i) => (
       <Link href={`/history?proof=${i}`} key={i}>
         <li key={i}>
@@ -16,7 +16,6 @@ const ProofsList = ({ proofs, labelIpfs, labelHash }) => (
         </li>
       </Link>
     ))}
-    <style jsx>{style}</style>
   </ul>
 )
 

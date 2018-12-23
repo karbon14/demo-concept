@@ -4,7 +4,7 @@ import style from './style.scss'
 import { Info } from './Info'
 
 const ScribeProfile = ({ scribe, getTranslation }) => (
-  <section>
+  <section className={style.ScribeProfile}>
     <div className="picture">
       <span>{scribe.firstName.slice(0, 1)}</span>
     </div>
@@ -22,7 +22,6 @@ const ScribeProfile = ({ scribe, getTranslation }) => (
         isLink={true}
       />
     </div>
-    <style jsx>{style}</style>
   </section>
 )
 

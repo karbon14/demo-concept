@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 import Router from 'next/router'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 
 const Utils = ({ children }) =>
   children({
-    onReject: async ({ proof, socketIO, successMsg, errorMsg }) => {
+    onReject: async ({ proof, socketIO, accounts, successMsg, errorMsg }) => {
       try {
-        const { removeMessage } = socketIO
+        const { removeMessage, broadcast } = socketIO
+        const address = accounts.addresses[0]
         removeMessage({ ...proof, selectedScribe: null })
+        broadcast('removeMessage', { type: 'selectedScribe', account: address })
 
         const href = '/proof-request'
         const as = href

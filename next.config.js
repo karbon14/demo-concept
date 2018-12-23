@@ -1,52 +1,37 @@
-const path = require('path')
+// next.config.js
+const withPlugins = require('next-compose-plugins')
+const withImages = require('next-images')
+const withFonts = require('next-fonts')
+const withSass = require('@zeit/next-sass')
+const withCSS = require('@zeit/next-css')
 
-module.exports = {
-  webpack(config, { defaultLoaders }) {
-    config.module.rules.push({
-      test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot|otf|ico)$/i,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: `static/[path][name].[ext]`,
-            publicPath: `/_next/`
-          }
-        }
-      ]
-    })
+module.exports = withPlugins([
+  [
+    withSass,
+    {
+      cssModules: true,
+      cssLoaderOptions: {
+        importLoaders: 1,
+        localIdentName: '[local]'
+      }
+    }
+  ],
+  [
+    withCSS,
+    {
+      cssModules: true,
+      cssLoaderOptions: {
+        importLoaders: 1,
+        localIdentName: '[local]'
+      }
+    }
+  ],
 
-    config.module.rules.push({
-      test: /\.css/,
-      use: [
-        defaultLoaders.babel,
-        {
-          loader: 'styled-jsx-css-loader',
-          options: {
-            type: 'scoped'
-          }
-        }
-      ]
-    })
-
-    config.module.rules.push({
-      test: /\.scss/,
-      include: [
-        path.resolve(__dirname, 'Common'),
-        path.resolve(__dirname, 'Components'),
-        path.resolve(__dirname, './node_modules')
-      ],
-      use: [
-        {
-          loader: 'emit-file-loader',
-          options: {
-            name: 'dist/[path][name].[ext]'
-          }
-        },
-        'babel-loader',
-        'styled-jsx-css-loader'
-      ]
-    })
-
-    return config
-  }
-}
+  [
+    withImages,
+    {
+      inlineImageLimit: 0
+    }
+  ],
+  withFonts
+])

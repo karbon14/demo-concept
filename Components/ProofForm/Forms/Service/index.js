@@ -21,7 +21,7 @@ const Service = ({ onSubmit, getTranslation, formActions, env, mock }) => {
       onSubmit={(values, api) => onSubmit(values, api)}
     >
       {api => (
-        <form onSubmit={api.handleSubmit}>
+        <form className={style.Service} onSubmit={api.handleSubmit}>
           <div className="form__container">
             <FileUploader
               label={getTranslation('proofForm.serviceImage')}
@@ -49,7 +49,6 @@ const Service = ({ onSubmit, getTranslation, formActions, env, mock }) => {
           </div>
 
           {formActions(api)}
-          <style jsx>{style}</style>
         </form>
       )}
     </Formik>

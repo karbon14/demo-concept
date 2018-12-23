@@ -1,7 +1,7 @@
 import React from 'react'
 import { Error404 } from './Error404'
-import style from './style.scss'
 import PropTypes from 'prop-types'
+import style from './style.scss'
 
 const ErrorComponent = ({ statusCode = 'unknown' }) => {
   const statusHandler = () => {
@@ -14,12 +14,7 @@ const ErrorComponent = ({ statusCode = 'unknown' }) => {
     }
   }
 
-  return (
-    <div className="container">
-      {statusHandler()}
-      <style jsx>{style}</style>
-    </div>
-  )
+  return <div className={style.error_container}>{statusHandler()}</div>
 }
 
 ErrorComponent.propTypes = {

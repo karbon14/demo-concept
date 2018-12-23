@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import classnames from 'classnames'
-import { theme } from 'Common/Core'
-import { Checkbox } from '@react-core/checkbox'
+import { Checkbox } from 'Components/Core/Checkbox'
 import { ScribeProfile } from 'Components/CryptoScribes/ScribeProfile'
 import style from './style.scss'
 
@@ -23,7 +22,7 @@ const Scribes = ({ scribes, onSubmit, getTranslation, formActions, env, mock }) 
       onSubmit={(values, api) => onSubmit(values, api)}
     >
       {api => (
-        <form onSubmit={api.handleSubmit}>
+        <form className={style.Scribes} onSubmit={api.handleSubmit}>
           <div className="form__container">
             <label>{getTranslation('proofForm.selectScribe')}</label>
 
@@ -36,7 +35,6 @@ const Scribes = ({ scribes, onSubmit, getTranslation, formActions, env, mock }) 
                 })}
               >
                 <Checkbox
-                  theme={theme}
                   name={scribe.address}
                   label={getTranslation('intro.USAInvestDisclaimer')}
                   onBlur={api.handleBlur}
@@ -55,7 +53,6 @@ const Scribes = ({ scribes, onSubmit, getTranslation, formActions, env, mock }) 
           </div>
 
           {formActions(api)}
-          <style jsx>{style}</style>
         </form>
       )}
     </Formik>

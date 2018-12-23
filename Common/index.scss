@@ -1,7 +1,7 @@
-@import 'Common/normalize.scss';
+@import '../node_modules/normalize.css/normalize.css';
+@import '../node_modules/font-awesome/css/font-awesome.css';
+@import '../node_modules/react-toastify/dist/ReactToastify.css';
 @import 'Common/fonts.scss';
-@import 'Common/fa.scss';
-@import 'Common/toastify.scss';
 
 html,
 body {

@@ -21,7 +21,7 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, monitorE
           splashShowed: false
         }}
         render={({ state, setState }) => (
-          <section>
+          <section className={style.ProofForm}>
             <div className="container">
               <h3>{getTranslation('proofForm.title')}</h3>
 
@@ -217,7 +217,6 @@ const ProofForm = ({ getTranslation, scribes, socketIO, accounts, web3, monitorE
                 )}
               </div>
             </div>
-            <style jsx>{style}</style>
           </section>
         )}
       />

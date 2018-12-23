@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import ethUtil from 'ethereumjs-util'
 import Component from '@reactions/component'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 import { ScribeProfile } from 'Components/CryptoScribes/ScribeProfile'
 import { ProofUploader } from 'Components/ProofUploader'
-import { Accordion } from 'Components/IncomingProof/ProofDetails/Accordion'
+import { Accordion } from 'Components/Accordion'
 import style from './style.scss'
 
 const GetBlob = async blob => {
@@ -51,7 +51,7 @@ const ProofDetails = ({ active, scribes, web3, ipfs, getTranslation }) => (
       }
     }}
     render={({ state, setState }) => (
-      <div className="details">
+      <section className={style.ProofDetails}>
         <React.Fragment>
           <div className="info">
             <p>{getTranslation('proofsHistory.validatedHash')}</p>
@@ -266,8 +266,7 @@ const ProofDetails = ({ active, scribes, web3, ipfs, getTranslation }) => (
             ) : null}
           </div>
         </React.Fragment>
-        <style jsx>{style}</style>
-      </div>
+      </section>
     )}
   />
 )

@@ -1,4 +1,4 @@
-.nav-menu {
+.nav__menu {
   z-index: 2;
   width: 280px;
   display: flex;
@@ -62,7 +62,7 @@
 }
 
 @media (max-width: 1280px) {
-  .nav-menu {
+  .nav__menu {
     width: 55px;
 
     ul {

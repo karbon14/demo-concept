@@ -73,17 +73,14 @@ const FileUploader = class extends React.Component {
 
   renderUploader() {
     return (
-      <div className="fileUploader">
+      <div className={style.fileUploader}>
         <section className="topSection">
           <label>{this.props.label}</label>
           <label htmlFor="file" className="upload">
             <i className="fa fa-picture-o" />
           </label>
         </section>
-        <div
-          ref={this.dzRef}
-          className={` droppable ${this.state.isOnDrag ? 'onDrag' : ''}`}
-        >
+        <div ref={this.dzRef} className={` droppable ${this.state.isOnDrag ? 'onDrag' : ''}`}>
           <div className="noFiles">
             <input
               className="hiddenFileUpload"
@@ -98,14 +95,13 @@ const FileUploader = class extends React.Component {
             </p>
           </div>
         </div>
-        <style jsx>{style}</style>
       </div>
     )
   }
 
   renderPreview() {
     return (
-      <div className="fileUploader">
+      <div className={style.fileUploader}>
         <section className="topSection">
           <label className="name">{this.props.preview.name}</label>
           <i
@@ -116,7 +112,6 @@ const FileUploader = class extends React.Component {
           />
         </section>
         <img src={this.props.preview.url} className="preview" />
-        <style jsx>{style}</style>
       </div>
     )
   }

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import style from './style.scss'
-import { theme } from 'Common/Core'
-import { Select } from 'Components/Select'
-import { TextField } from '@react-core/textfield'
+import { Select } from 'Components/Core/Select'
+import { TextField } from 'Components/Core/TextField'
 
 const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
   const countries = getTranslation('countries') || []
@@ -45,7 +44,7 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
       onSubmit={(values, api) => onSubmit(values, api)}
     >
       {api => (
-        <form onSubmit={api.handleSubmit}>
+        <form className={style.Personal} onSubmit={api.handleSubmit}>
           <div className="form__container">
             <div className="line">
               <div className="item">
@@ -54,7 +53,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
                   name="firstName"
                   label={getTranslation('proofForm.firstName')}
                   placeholder={api.errors.firstName}
-                  theme={theme}
                   value={api.values.firstName}
                   onKeyUp={new Function()}
                   onChange={api.handleChange}
@@ -69,7 +67,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
                   name="lastName"
                   label={getTranslation('proofForm.lastName')}
                   placeholder={api.errors.lastName}
-                  theme={theme}
                   value={api.values.lastName}
                   onKeyUp={new Function()}
                   onChange={api.handleChange}
@@ -84,7 +81,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
               name="email"
               label={getTranslation('proofForm.email')}
               placeholder={api.errors.email}
-              theme={theme}
               value={api.values.email}
               onKeyUp={new Function()}
               onChange={api.handleChange}
@@ -97,7 +93,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
               name="address"
               label={getTranslation('proofForm.address')}
               placeholder={api.errors.address}
-              theme={theme}
               value={api.values.address}
               onKeyUp={new Function()}
               onChange={api.handleChange}
@@ -109,7 +104,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
               <div className="item">
                 <Select
                   name="country"
-                  theme={theme}
                   value={api.values.country}
                   data-invalid={api.touched.country && !!api.errors.country}
                   defaultLabel={getTranslation('proofForm.country')}
@@ -141,7 +135,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
               <div className="item">
                 <Select
                   name="state"
-                  theme={theme}
                   value={api.values.state}
                   data-invalid={api.touched.state && !!api.errors.state}
                   defaultLabel={getTranslation('proofForm.state')}
@@ -163,7 +156,6 @@ const Personal = ({ onSubmit, getTranslation, formActions, env, mock }) => {
           </div>
 
           {formActions(api)}
-          <style jsx>{style}</style>
         </form>
       )}
     </Formik>

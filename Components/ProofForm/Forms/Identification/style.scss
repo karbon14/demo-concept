@@ -1,4 +1,4 @@
-form {
+form.Identification {
   width: 100%;
 
   .form__container {
@@ -13,7 +13,7 @@ form {
       .item {
         width: 50%;
 
-        :global(.fileUploader) {
+        :global(section.fileUploader) {
           margin-top: 20px;
         }
       }

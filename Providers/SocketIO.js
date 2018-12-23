@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import IO from 'socket.io-client'
 import fetch from 'isomorphic-fetch'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 
 const SocketIOContext = React.createContext({ messages: [] })
 

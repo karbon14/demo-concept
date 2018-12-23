@@ -50,7 +50,7 @@ const RouterNextProvider = class extends React.Component {
   callback = eventRoute => (url, err) => {
     if (this._mounted) {
       const query = this.getQueryParams(document.location.search)
-      this.setState({ currentRoute: url, eventRoute, err, query, pp: 8 })
+      this.setState({ currentRoute: url, eventRoute, err, query })
     }
   }
 

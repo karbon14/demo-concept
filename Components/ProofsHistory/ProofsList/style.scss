@@ -1,4 +1,4 @@
-ul {
+ul.ProofsList {
   width: 100%;
   list-style: none;
 
@@ -38,7 +38,7 @@ ul {
 }
 
 @media (min-width: 992px) {
-  ul {
+  ul.ProofsList {
     li {
       h2 {
         font-size: 0.9em;
@@ -48,7 +48,7 @@ ul {
 }
 
 @media (min-width: 1200px) {
-  ul {
+  ul.ProofsList {
     li {
       h2 {
         font-size: 1em;
@@ -58,7 +58,7 @@ ul {
 }
 
 @media only screen and (max-width: 991px) {
-  ul {
+  ul.ProofsList {
     li {
       h2 {
         font-size: 0.9em;

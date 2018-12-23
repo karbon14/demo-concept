@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Router from 'next/router'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 import { saveAs } from 'file-saver'
 
 const Utils = ({ children }) =>

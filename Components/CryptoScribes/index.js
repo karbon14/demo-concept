@@ -8,7 +8,7 @@ const CryptoScribes = ({ scribes, getTranslation }) => {
   const scribesAmount = `(${scribes.length})`
 
   return (
-    <section>
+    <section className={style.CryptoScribes}>
       <div className="container">
         <h3>{`${scribesLabel} ${scribesLabel ? scribesAmount : ''}`}</h3>
 
@@ -18,7 +18,6 @@ const CryptoScribes = ({ scribes, getTranslation }) => {
           ))}
         </div>
       </div>
-      <style jsx>{style}</style>
     </section>
   )
 }

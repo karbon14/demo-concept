@@ -8,7 +8,7 @@ const Accordion = ({ openStates, options }) => (
   <Component
     initialState={{ openStates }}
     render={({ state, setState }) => (
-      <div className="accordion__container">
+      <div className={style.accordion__container}>
         {options.map((option, index) => (
           <React.Fragment key={index}>
             <button
@@ -33,8 +33,6 @@ const Accordion = ({ openStates, options }) => (
             </div>
           </React.Fragment>
         ))}
-
-        <style jsx>{style}</style>
       </div>
     )}
   />
