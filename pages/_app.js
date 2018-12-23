@@ -160,7 +160,7 @@ export default class Karbon14 extends App {
                     }
                   }}
                   render={({ state, setState }) => {
-                    const proofLifeContract = { ...state }
+                    const proofLifeContract = { ...state, deployedContracts }
 
                     const currentProps = {
                       translations,

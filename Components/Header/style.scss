@@ -54,6 +54,10 @@ header.header {
           display: block;
           height: 100px;
           margin-bottom: 6px;
+
+          &.rsk {
+            margin-right: 10px;
+          }
         }
       }
     }

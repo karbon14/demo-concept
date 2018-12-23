@@ -4,12 +4,14 @@ import { Translations } from 'Translations'
 import { Dropdown } from 'Components/Core/Dropdown'
 import Component from '@reactions/component'
 import logo from './Assets/K14-Logo.svg'
+import rsk from './Assets/rsk-logo-header.png'
 import style from './style.scss'
 
 const getEtherscanScanURL = () => {
   const etherscanURLs = {
     '1': 'https://etherscan.io',
     '3': 'https://ropsten.etherscan.io',
+    '31': 'https://explorer.testnet.rsk.co',
     '5777': ''
   }
 
@@ -35,6 +37,11 @@ const Header = ({
     <div className="container">
       <div className="logo__area">
         <div className="flex__area">
+          {process.env.NETWORK == '31' ? (
+            <a rel="noopener noreferrer" href="https://www.rsk.co/" target="_blank">
+              <img className="rsk" src={rsk} alt="RSK Logo" />
+            </a>
+          ) : null}
           <a rel="noopener noreferrer" href={process.env.HOME_URL} target="_blank">
             <img src={logo} alt="Karbon14 Logo" />
           </a>
