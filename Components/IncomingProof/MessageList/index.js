@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import style from './style.scss'
 
 const MessageList = ({ messages, label }) => (
-  <ul>
+  <ul className={style.MessageList}>
     {messages.map((m, i) => (
       <Link href={`/incoming-proof?scribe=${m.proof.address}`} key={i}>
         <li key={i}>
@@ -13,7 +13,6 @@ const MessageList = ({ messages, label }) => (
         </li>
       </Link>
     ))}
-    <style jsx>{style}</style>
   </ul>
 )
 

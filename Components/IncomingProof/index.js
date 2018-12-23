@@ -13,7 +13,7 @@ const IncomingProof = ({ messages, socketIO, web3, deployedContracts, ipfs, quer
   return (
     <Utils>
       {({ onSave, onDownload }) => (
-        <section>
+        <section className={style.IncomingProof}>
           <div className="container">
             {query.scribe ? (
               <Link href="incoming-proof">
@@ -46,7 +46,6 @@ const IncomingProof = ({ messages, socketIO, web3, deployedContracts, ipfs, quer
               )}
             </div>
           </div>
-          <style jsx>{style}</style>
         </section>
       )}
     </Utils>

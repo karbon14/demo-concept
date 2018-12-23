@@ -29,7 +29,7 @@ const ProofUploader = class extends React.Component {
 
   render() {
     return (
-      <div className="fileUploader">
+      <div className={style.proofUploader}>
         <section className="topSection">
           <label>{this.props.label}</label>
           <label htmlFor="file" className="upload">
@@ -41,7 +41,6 @@ const ProofUploader = class extends React.Component {
             <input className="hiddenFileUpload" onChange={this._handleFileUpload} type="file" id="file" accept=".k14" />
           </div>
         </div>
-        <style jsx>{style}</style>
       </div>
     )
   }

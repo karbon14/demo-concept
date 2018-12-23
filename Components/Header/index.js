@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Translations } from 'Translations'
-import { Dropdown } from 'Components/Dropdown'
+import { Dropdown } from 'Components/Core/Dropdown'
 import Component from '@reactions/component'
 import logo from './Assets/K14-Logo.svg'
 import style from './style.scss'
@@ -31,14 +31,14 @@ const Header = ({
   contractDataLoaded,
   network
 }) => (
-  <header>
+  <header className={style.header}>
     <div className="container">
       <div className="logo__area">
-        <div className="flex-area">
+        <div className="flex__area">
           <a rel="noopener noreferrer" href={process.env.HOME_URL} target="_blank">
             <img src={logo} alt="Karbon14 Logo" />
           </a>
-          <div className="container-dropdown">
+          <div className="container__dropdown">
             <Component
               initialState={{
                 isOpen: false
@@ -81,7 +81,6 @@ const Header = ({
         ) : null}
       </div>
     </div>
-    <style jsx>{style}</style>
   </header>
 )
 

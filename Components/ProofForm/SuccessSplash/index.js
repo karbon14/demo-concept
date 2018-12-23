@@ -1,17 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import style from './style.scss'
-import { theme } from 'Common/Core'
-import { Button } from '@react-core/button'
+import { Button } from 'Components/Core/Button'
 import Success from '/static/icons/success.svg'
 
 const SuccessSplash = ({ splashMessage, submitLabel, onSubmit }) => (
-  <section>
+  <section className={style.SuccessSplash}>
     <img src={Success} />
     <p>{splashMessage}</p>
-    <Button theme={theme} label={submitLabel} type="primary" onClick={onSubmit} />
-
-    <style jsx>{style}</style>
+    <Button label={submitLabel} type="primary" onClick={onSubmit} />
   </section>
 )
 

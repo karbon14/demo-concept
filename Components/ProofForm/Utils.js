@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 
 const Utils = ({ children }) =>
   children({

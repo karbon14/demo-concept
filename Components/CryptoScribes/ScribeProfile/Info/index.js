@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { toast } from 'Components/Toast'
+import { toast } from 'Components/Core/Toast'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import style from './style.scss'
 
@@ -15,28 +15,29 @@ const getEtherscanScanURL = () => {
 }
 
 const Info = ({ value, label, copiedValueMsg = '', className = '', isLink = false }) => (
-  <div className={`side ${className}`}>
-    <div>
-      {isLink ? (
-        <a rel="noopener noreferrer" target="_blank" href={`${getEtherscanScanURL()}/address/${value}`}>
-          {value}
-        </a>
-      ) : (
-        <h2>{value}</h2>
-      )}
+  <section className={style.Info}>
+    <div className={`side ${className}`}>
+      <div>
+        {isLink ? (
+          <a rel="noopener noreferrer" target="_blank" href={`${getEtherscanScanURL()}/address/${value}`}>
+            {value}
+          </a>
+        ) : (
+          <h2>{value}</h2>
+        )}
 
-      {isLink ? (
-        <CopyToClipboard
-          text={value}
-          onCopy={() => toast.info(copiedValueMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })}
-        >
-          <span className={value ? 'fa fa-clipboard' : ''} />
-        </CopyToClipboard>
-      ) : null}
+        {isLink ? (
+          <CopyToClipboard
+            text={value}
+            onCopy={() => toast.info(copiedValueMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })}
+          >
+            <span className={value ? 'fa fa-clipboard' : ''} />
+          </CopyToClipboard>
+        ) : null}
+      </div>
+      <p>{label}</p>
     </div>
-    <p>{label}</p>
-    <style jsx>{style}</style>
-  </div>
+  </section>
 )
 
 Info.propTypes = {

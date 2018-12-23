@@ -11,7 +11,7 @@ const ProofsHistory = ({ proofLifeContract, query, web3, ipfs, getTranslation })
   const requestAmount = proofsCount !== '' ? '(' + proofsCount + ')' : proofsCount
 
   return (
-    <section>
+    <section className={style.ProofsHistory}>
       <div className="container">
         {query.proof ? (
           <Link href="history">
@@ -42,7 +42,6 @@ const ProofsHistory = ({ proofLifeContract, query, web3, ipfs, getTranslation })
           )}
         </div>
       </div>
-      <style jsx>{style}</style>
     </section>
   )
 }

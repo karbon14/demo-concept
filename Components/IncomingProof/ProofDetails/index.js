@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ethUtil from 'ethereumjs-util'
 import Component from '@reactions/component'
-import { theme } from 'Common/Core'
-import { Button } from '@react-core/button'
-import { Accordion } from './Accordion'
+import { Button } from 'Components/Core/Button'
+import { Accordion } from 'Components/Accordion'
 import style from './style.scss'
 
 const ProofDetails = ({
@@ -56,7 +55,7 @@ const ProofDetails = ({
       setState({ proof, proofImages, hash, message, values, signed })
     }}
     render={({ state, setState }) => (
-      <div className="details">
+      <section className={style.ProofDetails}>
         <Accordion
           openStates={[true, false, false, false]}
           options={[
@@ -171,7 +170,6 @@ const ProofDetails = ({
         <section className="bottom">
           <div className="actions__container">
             <Button
-              theme={theme}
               label={getTranslation('incomingProof.download')}
               type="secondary"
               icon="fa-download"
@@ -187,7 +185,6 @@ const ProofDetails = ({
             />
 
             <Button
-              theme={theme}
               label={getTranslation('incomingProof.save')}
               type="button"
               disabled={!state.signed || state.saving}
@@ -210,8 +207,7 @@ const ProofDetails = ({
             />
           </div>
         </section>
-        <style jsx>{style}</style>
-      </div>
+      </section>
     )}
   />
 )

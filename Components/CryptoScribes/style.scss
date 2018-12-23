@@ -1,4 +1,4 @@
-section {
+section.CryptoScribes {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -32,10 +32,6 @@ section {
       height: 100%;
       min-height: calc(100vh - 200px);
       overflow-y: scroll;
-
-      :global(section:not(:first-of-type)) {
-        margin-top: 70px;
-      }
     }
   }
 }

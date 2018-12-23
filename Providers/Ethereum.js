@@ -78,7 +78,14 @@ const EthereumProvider = ({ contracts = [], children }) => (
 
             // Get network by netId
             window.web3.version.getNetwork((err, netId) => {
-              const networks = { '1': 'Mainnet', '2': 'Morden', '3': 'Ropsten', '4': 'Rinkevy', '42': 'Kovan' }
+              const networks = {
+                '1': 'Mainnet',
+                '2': 'Morden',
+                '3': 'Ropsten',
+                '4': 'Rinkevy',
+                '42': 'Kovan',
+                '31': 'RSK Testnet'
+              }
               if (!err && netId) setState({ network: networks[netId] })
             })
           } else {

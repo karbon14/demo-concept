@@ -1,14 +1,10 @@
-section {
+section.SwitcherForm,
+section.SwitcherFormBottom {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-
-  &.bottom {
-    position: absolute;
-    bottom: 0;
-  }
 
   .top__content {
     display: flex;
@@ -101,4 +97,9 @@ section {
       }
     }
   }
+}
+
+section.SwitcherFormBottom {
+  position: absolute;
+  bottom: 0;
 }

@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ethUtil from 'ethereumjs-util'
 import Component from '@reactions/component'
-import { theme } from 'Common/Core'
-import { Button } from '@react-core/button'
-import { Accordion } from './Accordion'
+import { Button } from 'Components/Core/Button'
+import { Accordion } from 'Components/Accordion'
 import style from './style.scss'
 
 const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, getTranslation }) => (
@@ -46,7 +45,7 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
       setState({ proof, proofImages, hash, message, values, signed })
     }}
     render={({ state }) => (
-      <div className="details">
+      <section className={style.ProofDetails}>
         <Accordion
           openStates={[true, false, false, false]}
           options={[
@@ -161,13 +160,13 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
         <section className="bottom">
           <div className="actions__container">
             <Button
-              theme={theme}
               label={getTranslation('proofRequest.reject')}
               type="secondary"
               disabled={false}
               onClick={() =>
                 onReject({
                   socketIO,
+                  accounts,
                   proof: state.proof,
                   errorMsg: getTranslation('proofRequest.rejectErrorMsg'),
                   successMsg: getTranslation('proofRequest.rejectSuccessMsg')
@@ -176,7 +175,6 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
             />
 
             <Button
-              theme={theme}
               label={getTranslation('proofRequest.approve')}
               type="button"
               disabled={false}
@@ -195,8 +193,7 @@ const ProofDetails = ({ active, socketIO, accounts, web3, onReject, onApprove, g
             />
           </div>
         </section>
-        <style jsx>{style}</style>
-      </div>
+      </section>
     )}
   />
 )

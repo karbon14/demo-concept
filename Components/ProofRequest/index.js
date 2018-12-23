@@ -13,7 +13,7 @@ const ProofRequest = ({ messages, socketIO, accounts, web3, query, getTranslatio
   return (
     <Utils>
       {({ onReject, onApprove }) => (
-        <section>
+        <section className={style.ProofRequest}>
           <div className="container">
             {query.user ? (
               <Link href="proof-request">
@@ -44,7 +44,6 @@ const ProofRequest = ({ messages, socketIO, accounts, web3, query, getTranslatio
               )}
             </div>
           </div>
-          <style jsx>{style}</style>
         </section>
       )}
     </Utils>
