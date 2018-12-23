@@ -1,4 +1,5 @@
 {
+  "contractName": "ProofLife",
   "abi": [
     {
       "constant": true,
@@ -142,11 +143,11 @@
     }
   ],
   "networks": {
-    "3": {
+    "31": {
       "events": {},
       "links": {},
-      "address": "0xfDd5EfA1e625Ef62B34AfA0cD1BB4394bD18894B",
-      "transactionHash": "0x747f82e8c4b159b33abb5d9e8b016a98ae186decdb48aaa5d207e690b6608351"
+      "address": "0xb33cdFE57e806F66819722680324E55D0Cd18441",
+      "transactionHash": "0x4dccf0c2516b43f7b9117574bb46b33637b1d54b24db39dcb34c9be0d2f09bac"
     }
   }
 }
