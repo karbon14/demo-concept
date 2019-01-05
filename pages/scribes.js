@@ -9,7 +9,8 @@ const Scribes = ({
   proofLifeContract,
   routerNext,
   proofLifeContract: { scribes },
-  ethereum: { network }
+  ethereum: { web3, network },
+  updateUI
 }) => (
   <Dashboard
     translations={translations}
@@ -17,6 +18,8 @@ const Scribes = ({
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
+    web3={web3}
+    updateUI={updateUI}
   >
     <CryptoScribes getTranslation={translations.getTranslation} scribes={scribes} />
   </Dashboard>
@@ -28,7 +31,8 @@ Scribes.propTypes = {
   socketIO: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
-  ethereum: PropTypes.object
+  ethereum: PropTypes.object,
+  updateUI: PropTypes.func
 }
 
 export default Scribes

@@ -7,7 +7,7 @@ import ReactionComponent from '@reactions/component'
 import { isEqual } from 'lodash'
 import { toast } from 'Components/Core/Toast'
 import { ToastContainer } from 'Components/Core/Toast'
-import { abi as ProofLifeABI, networks as ProofLifeNetworks } from 'build/contracts/ProofLife.json'
+import { abi as ProofLifeABI, networks as ProofLifeNetworks } from '../build/contracts/ProofLife.json'
 import 'Common/index.scss'
 
 const getProof = async (index, ProofLife) => {
@@ -40,7 +40,7 @@ const mapScribe = scribes => scribes.map(scribe => ({ address: scribe, firstName
 
 const updateUI = async ({ deployedContracts, accounts, setState }) => {
   const { ProofLife = {} } = deployedContracts
-  const accountsAddress = accounts.addresses[0]
+  const accountAddress = accounts.addresses[0]
 
   ProofLife.getScribes(async (err, res) => {
     if (!err) {
@@ -53,20 +53,20 @@ const updateUI = async ({ deployedContracts, accounts, setState }) => {
         scribesWithDetails.push(scribeWithDetail)
       }
 
-      const scribeData = scribesWithDetails.find(_ => _.address === accountsAddress) || {}
+      const scribeData = scribesWithDetails.find(_ => _.address === accountAddress) || {}
       const isScribe = scribeData.address ? true : false
 
       setState({
         scribes: scribesWithDetails,
         isScribe,
         scribeData,
-        accountsAddress,
+        accountAddress,
         contractDataLoaded: true
       })
     }
   })
 
-  await ProofLife.getCountProof({ from: accountsAddress }, async (err, res) => {
+  await ProofLife.getCountProof({ from: accountAddress }, async (err, res) => {
     if (!err) {
       const proofWithDetails = []
       for (let x = 0; x < res.toNumber(); x++) {
@@ -87,6 +87,18 @@ export default class Karbon14 extends App {
     let pageProps = {}
     if (Component.getInitialProps) pageProps = await Component.getInitialProps(ctx)
     return { pageProps, pathname: router.pathname, env: process.env, query: router.query }
+  }
+
+  componentDidMount() {
+    // TODO: workaround to fix Next.js version 7 issue
+    // https://github.com/zeit/next-plugins/issues/282#issuecomment-446379427
+    Router.events.on('routeChangeComplete', () => {
+      if (process.env.NODE_ENV !== 'production') {
+        const els = document.querySelectorAll('link[href*="/_next/static/chunks/styles.chunk.css"]')
+        const timestamp = new Date().valueOf()
+        els[0].href = '/_next/static/chunks/styles.chunk.css?v=' + timestamp
+      }
+    })
   }
 
   render() {

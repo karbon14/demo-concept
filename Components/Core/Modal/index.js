@@ -37,11 +37,11 @@ const Modal = class extends React.Component {
   onEscape = ({ keyCode }) => keyCode === 27 && this.props.onClose(false)
 
   render() {
-    const { onClose, children, contentStyle = {}, ...props } = this.props
+    const { onClose, children, ...props } = this.props
 
     return (
-      <div className={style.overlay}>
-        <div style={contentStyle} className="content" ref={this._ref}>
+      <div className={style.react__core__modal}>
+        <div className="content" ref={this._ref}>
           {cloneElement(children, { props, onClose })}
         </div>
       </div>

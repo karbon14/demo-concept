@@ -1,153 +1,152 @@
 {
   "abi": [
     {
-       "constant":true,
-       "inputs":[
-          {
-             "name":"_index",
-             "type":"uint256"
-          }
-       ],
-       "name":"getProof",
-       "outputs":[
-          {
-             "name":"ipfsHash",
-             "type":"string"
-          },
-          {
-             "name":"hashProof",
-             "type":"string"
-          }
-       ],
-       "payable":false,
-       "stateMutability":"view",
-       "type":"function"
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "scribesAccounts",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x7a81de04"
     },
     {
-       "constant":true,
-       "inputs":[
- 
-       ],
-       "name":"getCountProof",
-       "outputs":[
-          {
-             "name":"",
-             "type":"uint256"
-          }
-       ],
-       "payable":false,
-       "stateMutability":"view",
-       "type":"function"
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "name": "_firstName",
+          "type": "string"
+        },
+        {
+          "name": "_lastName",
+          "type": "string"
+        }
+      ],
+      "name": "setScribe",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xa1465b88"
     },
     {
-       "constant":true,
-       "inputs":[
-          {
-             "name":"_address",
-             "type":"address"
-          }
-       ],
-       "name":"getScribe",
-       "outputs":[
-          {
-             "name":"",
-             "type":"string"
-          },
-          {
-             "name":"",
-             "type":"string"
-          }
-       ],
-       "payable":false,
-       "stateMutability":"view",
-       "type":"function"
+      "constant": true,
+      "inputs": [],
+      "name": "getScribes",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xeb4a2935"
     },
     {
-       "constant":true,
-       "inputs":[
-          {
-             "name":"",
-             "type":"uint256"
-          }
-       ],
-       "name":"scribesAccounts",
-       "outputs":[
-          {
-             "name":"",
-             "type":"address"
-          }
-       ],
-       "payable":false,
-       "stateMutability":"view",
-       "type":"function"
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "getScribe",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        },
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x57e528b5"
     },
     {
-       "constant":false,
-       "inputs":[
-          {
-             "name":"_address",
-             "type":"address"
-          },
-          {
-             "name":"_firstName",
-             "type":"string"
-          },
-          {
-             "name":"_lastName",
-             "type":"string"
-          }
-       ],
-       "name":"setScribe",
-       "outputs":[
- 
-       ],
-       "payable":false,
-       "stateMutability":"nonpayable",
-       "type":"function"
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_ipfsHash",
+          "type": "string"
+        },
+        {
+          "name": "_hashProof",
+          "type": "string"
+        }
+      ],
+      "name": "setProof",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xaea31fc7"
     },
     {
-       "constant":false,
-       "inputs":[
-          {
-             "name":"_ipfsHash",
-             "type":"string"
-          },
-          {
-             "name":"_hashProof",
-             "type":"string"
-          }
-       ],
-       "name":"setProof",
-       "outputs":[
- 
-       ],
-       "payable":false,
-       "stateMutability":"nonpayable",
-       "type":"function"
+      "constant": true,
+      "inputs": [],
+      "name": "getCountProof",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x2177a36f"
     },
     {
-       "constant":true,
-       "inputs":[
- 
-       ],
-       "name":"getScribes",
-       "outputs":[
-          {
-             "name":"",
-             "type":"address[]"
-          }
-       ],
-       "payable":false,
-       "stateMutability":"view",
-       "type":"function"
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProof",
+      "outputs": [
+        {
+          "name": "ipfsHash",
+          "type": "string"
+        },
+        {
+          "name": "hashProof",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x11149ada"
     }
   ],
   "networks": {
     "3": {
       "events": {},
       "links": {},
-      "address": "0xbd959f24b3530f8dc9b96e7ef71dd9f63d501adf",
-      "transactionHash": "0x90ca92b8328ed47f3ecabb6be8ff29ece6d398bbee9c3846890c5b6428a95b0b"
+      "address": "0xfDd5EfA1e625Ef62B34AfA0cD1BB4394bD18894B",
+      "transactionHash": "0x747f82e8c4b159b33abb5d9e8b016a98ae186decdb48aaa5d207e690b6608351"
     }
   }
 }

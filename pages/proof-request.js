@@ -9,7 +9,8 @@ const Request = ({
   proofLifeContract,
   routerNext,
   socketIO: { messages },
-  ethereum: { accounts, web3, network }
+  ethereum: { accounts, web3, network },
+  updateUI
 }) => (
   <Dashboard
     translations={translations}
@@ -17,6 +18,8 @@ const Request = ({
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
+    web3={web3}
+    updateUI={updateUI}
   >
     <ProofRequest
       query={routerNext.query}
@@ -34,7 +37,8 @@ Request.propTypes = {
   socketIO: PropTypes.object,
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
-  routerNext: PropTypes.object
+  routerNext: PropTypes.object,
+  updateUI: PropTypes.func
 }
 
 export default Request

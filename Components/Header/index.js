@@ -29,7 +29,7 @@ const Header = ({
   toggleSelected,
   isScribe,
   scribeData,
-  accountsAddress,
+  accountAddress,
   contractDataLoaded,
   network
 }) => (
@@ -77,8 +77,8 @@ const Header = ({
           <p>
             {contractDataLoaded ? `${buildLabel({ isScribe, scribeData })} ${network ? `| ${network}` : ''}` : null}
           </p>
-          <a rel="noopener noreferrer" target="_blank" href={`${getEtherscanScanURL()}/address/${accountsAddress}`}>
-            {accountsAddress}
+          <a rel="noopener noreferrer" target="_blank" href={`${getEtherscanScanURL()}/address/${accountAddress}`}>
+            {accountAddress}
           </a>
         </div>
         {isScribe ? (
@@ -99,7 +99,7 @@ Header.propTypes = {
   toggleSelected: PropTypes.func,
   isScribe: PropTypes.bool,
   scribeData: PropTypes.object,
-  accountsAddress: PropTypes.string,
+  accountAddress: PropTypes.string,
   contractDataLoaded: PropTypes.bool,
   network: PropTypes.string
 }

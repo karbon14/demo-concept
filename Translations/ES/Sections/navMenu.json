@@ -8,5 +8,11 @@
   "scribesNumber": "Número de Escribanías",
   "contractAddress": "Dirección del Contrato Inteligente",
   "getInvolved": "Acompañanos:",
-  "about": "Acerca de..."
+  "about": "Acerca de...",
+  "aboutTabLabel": "Acerca de",
+  "scribesTabLabel": "Hazte escribano",
+  "submitScribeLabel": "Proceder",
+  "becomeScribeErrorMsg": "¡Error al volverte escribano!",
+  "becomeScribeSuccessMsg": "Transacción enviada. Esperando la confirmación de la red.",
+  "areScribeSuccessMsg": "Ahora eres Cripto Escribanía, felicitaciones!"
 }

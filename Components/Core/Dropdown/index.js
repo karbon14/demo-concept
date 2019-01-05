@@ -1,16 +1,17 @@
 import React from 'react'
 import noop from 'lodash/noop'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import style from './style.scss'
 
 const Dropdown = ({ onToggling = noop, onSelect, selected, data, isOpen }) => (
-  <div className={style.dropdown}>
-    <div className={'dropdown-container ' + (isOpen ? 'show' : '')}>
-      <div className={'dropdown-display ' + (isOpen ? 'clicked' : '')} onClick={onToggling}>
+  <div className={style.react__core__dropdown}>
+    <div className={classNames({ dropdown__container: true, show: isOpen })}>
+      <div className={classNames({ dropdown__display: true, clicked: isOpen })} onClick={onToggling}>
         <span>{selected ? selected : ''}</span>
         <i className="fa fa-angle-down arrow-down" />
       </div>
-      <div className="dropdown-list">
+      <div className="dropdown__list">
         {data.length ? (
           <div>
             {data

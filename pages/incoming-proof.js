@@ -19,6 +19,8 @@ const Request = ({
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
+    web3={web3}
+    updateUI={updateUI}
   >
     <IncomingProof
       query={routerNext.query}
