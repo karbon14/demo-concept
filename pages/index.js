@@ -11,6 +11,7 @@ const Index = ({
   proofLifeContract,
   ethereum: { accounts, web3, network, monitorErrors },
   proofLifeContract: { scribes },
+  updateUI,
   env
 }) => (
   <Dashboard
@@ -19,6 +20,8 @@ const Index = ({
     proofLifeContract={proofLifeContract}
     routerNext={routerNext}
     network={network}
+    web3={web3}
+    updateUI={updateUI}
   >
     <ProofForm
       getTranslation={translations.getTranslation}
@@ -38,7 +41,8 @@ Index.propTypes = {
   ethereum: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
-  env: PropTypes.object
+  env: PropTypes.object,
+  updateUI: PropTypes.func
 }
 
 export default Index

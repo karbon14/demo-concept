@@ -1,0 +1,28 @@
+.BecomeSribeForm {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  .form__container {
+    width: 100%;
+
+    :global(div.react__core__textfield) {
+      margin: 5px 5px 10px 5px;
+    }
+  }
+
+  .submit__container {
+    width: calc(100% - 40px);
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+  
+    :global(button) {
+      min-width: 176px;
+    }
+  }
+}

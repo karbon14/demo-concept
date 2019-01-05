@@ -1,4 +1,4 @@
-.dropdown {
+div.react__core__dropdown {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -7,12 +7,12 @@
   margin-top: 4px;
 
   .show {
-    .dropdown-list {
+    .dropdown__list {
       transform: scale(1, 1);
     }
   }
 
-  .dropdown-display {
+  .dropdown__display {
     float:left;
     cursor:pointer;
     color: #fff;
@@ -20,7 +20,7 @@
     text-align: center;
   }
 
-  .dropdown-container {
+  .dropdown__container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@
     font-size: 15px;
   }
 
-  .dropdown-list {
+  .dropdown__list {
     top: 20px;
     text-align: center;
     float:left;

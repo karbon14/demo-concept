@@ -12,12 +12,14 @@ export const Dashboard = ({
     scribes,
     isScribe,
     scribeData,
-    accountsAddress,
+    accountAddress,
     contractDataLoaded,
     proofsCount,
     deployedContracts
   },
-  network
+  network,
+  web3,
+  updateUI
 }) => (
   <div>
     <Header
@@ -27,7 +29,7 @@ export const Dashboard = ({
       registerTranslations={registerTranslations}
       isScribe={isScribe}
       scribeData={scribeData}
-      accountsAddress={accountsAddress}
+      accountAddress={accountAddress}
       contractDataLoaded={contractDataLoaded}
       network={network}
     />
@@ -38,8 +40,12 @@ export const Dashboard = ({
         scribes={scribes}
         deployedContracts={contractDataLoaded ? deployedContracts : {}}
         getTranslation={getTranslation}
+        web3={web3}
+        accountAddress={accountAddress}
+        isScribe={isScribe}
+        updateUI={updateUI}
         items={
-          contractDataLoaded
+          contractDataLoaded && routerNext?.currentRoute?.indexOf
             ? [
                 {
                   name: getTranslation('navMenu.newProof'),
@@ -103,5 +109,7 @@ Dashboard.propTypes = {
   socketIO: PropTypes.object,
   proofLifeContract: PropTypes.object,
   routerNext: PropTypes.object,
-  network: PropTypes.string
+  network: PropTypes.string,
+  web3: PropTypes.object,
+  updateUI: PropTypes.func
 }

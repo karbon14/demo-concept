@@ -4,7 +4,7 @@
   "scriveAddress": "Dirección del Escribano",
   "download": "Datos de Prueba",
   "save": "Grabar en Smart Contract",
-  "saveErrorMsg": "Error guardando prueba aprobada!",
+  "saveErrorMsg": "¡Error guardando prueba aprobada!",
   "saveSuccessMsg": "Transacción enviada. Esperando la confirmación de la red.",
-  "buySuccessMsg": "Prueba aprobada guardando OK!"
+  "buySuccessMsg": "¡Prueba aprobada guardando OK!"
 }
