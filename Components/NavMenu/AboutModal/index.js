@@ -135,7 +135,6 @@ const AboutModal = ({
                         name: getTranslation('navMenu.scribesTabLabel'),
                         content: (
                           <BecomeSribeForm
-                            scribes={scribes}
                             contract={ProofLife}
                             getTranslation={getTranslation}
                             web3={web3}

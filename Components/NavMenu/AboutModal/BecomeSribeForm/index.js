@@ -7,7 +7,7 @@ import { TextField } from 'Components/Core/TextField'
 import { Button } from 'Components/Core/Button'
 import style from './style.scss'
 
-const BecomeSribeForm = ({ scribes, contract, getTranslation, web3, accountAddress, onClose, updateUI }) => (
+const BecomeSribeForm = ({ contract, getTranslation, web3, accountAddress, onClose, updateUI }) => (
   <Utils>
     {({ onSubmit }) => (
       <Formik
@@ -49,7 +49,7 @@ const BecomeSribeForm = ({ scribes, contract, getTranslation, web3, accountAddre
                 onKeyUp={new Function()}
                 onChange={api.handleChange}
                 onBlur={api.handleBlur}
-                disabled={!scribes.length}
+                disabled={!accountAddress}
                 data-invalid={api.touched.firstName && !!api.errors.firstName}
               />
 
@@ -62,7 +62,7 @@ const BecomeSribeForm = ({ scribes, contract, getTranslation, web3, accountAddre
                 onKeyUp={new Function()}
                 onChange={api.handleChange}
                 onBlur={api.handleBlur}
-                disabled={!scribes.length}
+                disabled={!accountAddress}
                 data-invalid={api.touched.lastName && !!api.errors.lastName}
               />
             </div>
@@ -71,7 +71,7 @@ const BecomeSribeForm = ({ scribes, contract, getTranslation, web3, accountAddre
               <Button
                 type="button"
                 label={getTranslation('navMenu.submitScribeLabel')}
-                disabled={!scribes.length || !api.dirty || api.isSubmitting || Object.keys(api.errors).length}
+                disabled={!accountAddress || !api.dirty || api.isSubmitting || Object.keys(api.errors).length}
                 onClick={api.submitForm}
               />
             </div>
@@ -83,7 +83,6 @@ const BecomeSribeForm = ({ scribes, contract, getTranslation, web3, accountAddre
 )
 
 BecomeSribeForm.propTypes = {
-  scribes: PropTypes.array,
   contract: PropTypes.object,
   web3: PropTypes.object,
   accountAddress: PropTypes.string,
