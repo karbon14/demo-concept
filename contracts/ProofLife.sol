@@ -1,4 +1,4 @@
-pragma solidity ^0.4.25;
+pragma solidity 0.5.0;
 
 contract ProofLife {
 
@@ -17,7 +17,7 @@ contract ProofLife {
 
     mapping (address => Proof[]) proofs;
 
-    function setScribe(address _address, string _firstName, string _lastName) public {
+    function setScribe(address _address, string memory _firstName, string memory _lastName) public {
         Scribe storage scribe = scribes[_address];
 
         scribe.firstName = _firstName;
@@ -26,15 +26,15 @@ contract ProofLife {
         scribesAccounts.push(_address);
     }
 
-    function getScribes() public view returns(address[]) {
+    function getScribes() public view returns(address[] memory) {
         return scribesAccounts;
     }
 
-    function getScribe(address _address) public view returns (string, string) {
+    function getScribe(address _address) public view returns (string memory, string memory) {
         return (scribes[_address].firstName, scribes[_address].lastName);
     }
 
-    function setProof(string _ipfsHash, string _hashProof) public {
+    function setProof(string memory _ipfsHash, string memory _hashProof) public {
         Proof memory proof = Proof(_ipfsHash, _hashProof);
         proofs[msg.sender].push(proof);
     }
@@ -43,7 +43,7 @@ contract ProofLife {
         return proofs[msg.sender].length;
     }
 
-    function getProof(uint256 _index) public view returns (string ipfsHash, string hashProof) {
+    function getProof(uint256 _index) public view returns (string memory ipfsHash, string memory hashProof) {
         return (proofs[msg.sender][_index].ipfsHash, proofs[msg.sender][_index].hashProof);
     }
 }

@@ -40,7 +40,7 @@ contract('ProofLife', ([owner, scribe, anotherScribe]) => {
     const index = await instance.getCountProof({ from: owner })
 
     const actual = await instance.getProof(parseInt(index - 1))
-    const expected = [ipfsHash, hashProof]
+    const expected = { '0': ipfsHash, '1': hashProof, ipfsHash, hashProof }
 
     assert.deepEqual(actual, expected)
   })
@@ -48,8 +48,8 @@ contract('ProofLife', ([owner, scribe, anotherScribe]) => {
   it('should create and get 2 proofs', async () => {
     const instance = await ProofLife.deployed()
 
-    const ipfsHash = 'QmQDmBYQnbJ26gyncBFMMdhceqoQb8Serb47npeWE1qJ2M'
-    const hashProof = '0x12c139337cd234c40a7bca2fda751fafd449d90dff732bb31c3f9938b3d22dd3'
+    let ipfsHash = 'QmQDmBYQnbJ26gyncBFMMdhceqoQb8Serb47npeWE1qJ2M'
+    let hashProof = '0x12c139337cd234c40a7bca2fda751fafd449d90dff732bb31c3f9938b3d22dd3'
 
     const ipfsHash2 = 'ipfsHash2'
     const hashProof2 = 'hashProof2'
@@ -57,12 +57,17 @@ contract('ProofLife', ([owner, scribe, anotherScribe]) => {
     await instance.setProof(ipfsHash2, hashProof2, { from: owner })
 
     const actual1 = await instance.getProof(0)
-    const expected1 = [ipfsHash, hashProof]
+    const expected1 = { '0': ipfsHash, '1': hashProof, ipfsHash, hashProof }
 
     assert.deepEqual(actual1, expected1)
 
     const actual2 = await instance.getProof(1)
-    const expected2 = [ipfsHash2, hashProof2]
+    const expected2 = {
+      '0': ipfsHash2,
+      '1': hashProof2,
+      ipfsHash: ipfsHash2,
+      hashProof: hashProof2
+    }
 
     assert.deepEqual(actual2, expected2)
   })
