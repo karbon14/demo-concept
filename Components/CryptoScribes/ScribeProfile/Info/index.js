@@ -12,7 +12,7 @@ const getEtherscanScanURL = () => {
     '31': 'https://explorer.testnet.rsk.co'
   }
 
-  return etherscanURLs[process.env.NETWORK]
+  return etherscanURLs[Number(process.env.NETWORK)]
 }
 
 const Info = ({ value, label, copiedValueMsg = '', className = '', isLink = false }) => (

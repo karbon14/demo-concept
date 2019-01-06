@@ -15,7 +15,7 @@ const getEtherscanScanURL = () => {
     '5777': ''
   }
 
-  return etherscanURLs[process.env.NETWORK]
+  return etherscanURLs[Number(process.env.NETWORK)]
 }
 
 const buildLabel = ({ isScribe, scribeData: { firstName, lastName } }) => {
