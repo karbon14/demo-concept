@@ -36,36 +36,46 @@ const Utils = ({ children }) =>
       const { addData } = ipfs
 
       setSaving(true)
+
+      const onRes = res => {
+        setSaving(false)
+        removeMessage(proof)
+        broadcast('removeMessage', { type: 'approvedUser', account: owner })
+        toast.warning(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
+
+        const href = '/incoming-proof'
+        const as = href
+        Router.push(href, as, { shallow: true })
+
+        web3.eth.getTransactionReceiptMined(res).then(async () => {
+          // Mining is finished
+          await updateUI()
+          toast.success(successBuyMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
+        })
+      }
+
+      const onErr = () => {
+        setSaving(false)
+        toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
+      }
+
       try {
         const payload = { address, hash: `'${signedHash}'` }
         const ipfsFile = await addData(payload)
 
-        await ProofLife.setProof(ipfsFile[0].path, hash, { from: owner }, (err, res) => {
-          if (err) {
-            setSaving(false)
-            toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
-          }
-
-          if (res) {
-            setSaving(false)
-            removeMessage(proof)
-            broadcast('removeMessage', { type: 'approvedUser', account: owner })
-            toast.warning(successMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
-
-            const href = '/incoming-proof'
-            const as = href
-            Router.push(href, as, { shallow: true })
-
-            web3.eth.getTransactionReceiptMined(res).then(async () => {
-              // Mining is finished
-              await updateUI()
-              toast.success(successBuyMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
-            })
-          }
-        })
+        if (process.env.NETWORK == 3) {
+          await ProofLife.setProof(ipfsFile[0].path, hash, { from: owner }, (err, res) => {
+            if (err) onErr()
+            if (res) onRes(res)
+          })
+        } else if (process.env.NETWORK == 31) {
+          await ProofLife.setProof(ipfsFile[0].path, hash, (err, res) => {
+            if (err) onErr()
+            if (res) onRes(res)
+          })
+        }
       } catch (e) {
-        setSaving(false)
-        toast.error(errorMsg, { pauseOnFocusLoss: false, position: toast.POSITION.BOTTOM_LEFT })
+        onErr()
       }
     }
   })

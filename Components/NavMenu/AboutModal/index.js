@@ -40,7 +40,7 @@ const AboutModal = ({
         <div className="modal">
           <section className="header">
             <div>
-              <h2>{`Karbon 14 | Demo ${process.env.NETWORK == '31' ? 'RSK (Testnet)' : 'ETH (Ropsten)'}`}</h2>
+              <h2>{`Karbon 14 | Demo ${process.env.NETWORK == 31 ? 'RSK (Testnet)' : 'ETH (Ropsten)'}`}</h2>
             </div>
             <i onClick={() => onClose()} className="fa fa-close" />
           </section>
@@ -54,12 +54,12 @@ const AboutModal = ({
                     <React.Fragment>
                       <div className="top">
                         <div className="logos">
-                          {process.env.NETWORK == '31' ? (
+                          {process.env.NETWORK == 31 ? (
                             <a rel="noopener noreferrer" href="https://www.rsk.co/" target="_blank">
                               <img src={logoRsk} alt="RSK Logo" />
                             </a>
                           ) : null}
-                          {process.env.NETWORK == '3' ? (
+                          {process.env.NETWORK == 3 ? (
                             <a rel="noopener noreferrer" href="https://www.ethereum.org/" target="_blank">
                               <img src={logoEth} alt="ETH Logo" />
                             </a>

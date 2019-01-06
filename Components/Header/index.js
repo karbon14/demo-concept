@@ -37,7 +37,7 @@ const Header = ({
     <div className="container">
       <div className="logo__area">
         <div className="flex__area">
-          {process.env.NETWORK == '31' ? (
+          {process.env.NETWORK == 31 ? (
             <a rel="noopener noreferrer" href="https://www.rsk.co/" target="_blank">
               <img className="rsk" src={rsk} alt="RSK Logo" />
             </a>
